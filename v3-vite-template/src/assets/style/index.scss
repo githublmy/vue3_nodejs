@@ -1,0 +1,40 @@
+@import "./elementPlus.scss";
+@import "./lu.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+    Microsoft YaHei, Arial, sans-serif;
+}
+
+/* 修改根标签为替代(IE)盒模型 */
+html {
+  box-sizing: border-box;
+}
+
+/* 所有标签继承替代(IE)盒模型 */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+// 基本样式
+.baseStyle {
+  padding: $px-20;
+  overflow: hidden;
+}
+
+// 去掉浏览器默认的聚焦边框轮廓
+:focus-visible {
+  outline: none !important;
+}
