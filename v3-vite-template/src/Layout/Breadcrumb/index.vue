@@ -11,7 +11,7 @@
         <transition-group name="breadcrumb">
           <el-breadcrumb-item
             v-for="item in pathList"
-            :to="item.meta.showNav ? item.path : ''"
+            :to="item.meta.isBreadcrumb ? item.path : ''"
             :key="item.path"
             >{{ item.meta.title }}</el-breadcrumb-item
           >

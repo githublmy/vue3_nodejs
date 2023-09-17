@@ -4,7 +4,6 @@
       ref="uploadRef"
       style="width: 100%"
       :action="url"
-      :on-preview="handlePreview"
       :before-upload="beforeUpload"
       :before-remove="beforeRemove"
       drag
@@ -21,11 +20,21 @@
       <!-- <template #tip>
         <div class="el-upload__tip">任意文件</div>
       </template> -->
+      <!-- <el-button v-blur type="success" @click="pickFiles"> 选择文件 </el-button> -->
     </el-upload>
+
     <ElTableCommon :tableTitle="tableTitle" :tableData="fileList">
       <template #operate="{ row, index }">
-        <el-button
+        <!-- <el-button
           type="primary"
+          :icon="row.status === 'ready' ? 'VideoPlay' : 'VideoPause'"
+          plain
+          v-blur
+          size="small"
+          @click="cancleUpload(row)"
+        ></el-button> -->
+        <el-button
+          type="danger"
           icon="Delete"
           plain
           v-blur
@@ -39,12 +48,15 @@
     </el-button>
   </div>
 </template>
+
 <script lang="ts" setup>
-import type { UploadProps, UploadUserFile, UploadFile } from "element-plus";
-import type { UploadInstance } from "element-plus";
+import type { UploadInstance, UploadProps, UploadFile } from "element-plus";
+import { useFileListStore } from "@/store/modules/fileList";
 import type { IElPlusMsgFun } from "@/utils/elPlusMessage/type";
 const elMsg = inject("elMsg") as IElPlusMsgFun;
 const url = "/files/upload" || import.meta.env.VITE_UPLOAD_URL;
+const { fileList } = storeToRefs(useFileListStore());
+
 const tableTitle = ref([
   {
     prop: "name",
@@ -56,7 +68,7 @@ const tableTitle = ref([
   },
   {
     prop: "percentage",
-    label: "上传进度",
+    label: "上传进度(%)",
   },
   {
     prop: "operate",
@@ -64,30 +76,37 @@ const tableTitle = ref([
     slot: "operate",
   },
 ]);
-const fileList = ref<UploadUserFile[]>([]);
-const percent = ref(0);
+// const fileList = ref<UploadUserFile[]>([]);
 
 const uploadRef = ref<UploadInstance>();
+
 const deleteFile = (file: UploadFile, index: number) => {
-  console.log(file);
   uploadRef.value!.handleRemove(file);
   fileList.value.splice(index, 1);
 };
+// const cancleUpload = (file: UploadFile) => {
+//   uploadRef.value!.abort(file);
+//   file.status = "ready";
+//   file.percentage = 0;
+// };
+// const pickFiles = () => {
+//   // uploadRef.value!.handleStart();
+// };
 const submitUpload = () => {
   uploadRef.value!.submit();
 };
-const handleChange: UploadProps["onChange"] = (uploadFile, uploadFiles) => {
-  console.log(uploadFile, uploadFiles, "数据zhgon");
+const handleChange: UploadProps["onChange"] = (uploadFile, _) => {
+  // console.log(fileList, uploadFiles, "数据zhgon");
   if (uploadFile.status === "ready") {
-    fileList.value.push(uploadFile);
+    fileList.value.unshift(uploadFile);
   }
 };
-const handleSuccess: UploadProps["onSuccess"] = (response, file, fileList) => {
-  console.log(response, file, fileList, "上传成功");
+const handleSuccess: UploadProps["onSuccess"] = (_, __, ___) => {
+  // uploadRef.value!.clearFiles(["success"]);
   elMsg.success("上传成功");
+  console.log(uploadRef, "最后结果");
 };
 const beforeUpload: UploadProps["beforeUpload"] = (file) => {
-  console.log(file);
   const totalSize = file.size; //总文件大小
   const fileSize = 1024 * 1024 * 5; //5M一份文件  18
   const num = Math.ceil(totalSize / fileSize); //分成几份 4
@@ -105,12 +124,8 @@ const beforeUpload: UploadProps["beforeUpload"] = (file) => {
   // console.log(size, fileSize, num, fList, fileList);
 };
 const handleProgress: UploadProps["onProgress"] = (event, file, _) => {
-  console.log(file);
-  percent.value = event.percent;
+  console.log(file, event);
   // console.log(percent);
-};
-const handlePreview: UploadProps["onPreview"] = (uploadFile) => {
-  console.log(uploadFile);
 };
 
 const handleExceed: UploadProps["onExceed"] = (files, uploadFiles) => {

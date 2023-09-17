@@ -25,7 +25,6 @@ export default defineConfig(({ mode }) => {
   const getPath = (url: string) => {
     return fileURLToPath(new URL(url, import.meta.url));
   };
-  console.log(env.VITE_FILE_UPLOAD);
 
   return {
     base: "/",
