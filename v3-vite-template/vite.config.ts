@@ -12,8 +12,6 @@ import { createHtmlPlugin } from "vite-plugin-html";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 // 打包压缩插件
 import VitePluginCompression from "vite-plugin-compression";
-// mockjs
-import { viteMockServe } from "vite-plugin-mock";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -45,22 +43,6 @@ export default defineConfig(({ mode }) => {
           // 重写路由
           rewrite: (path) => path.replace(new RegExp(`^/api`), "/api"),
         },
-        "^/upload.do": {
-          target: env.VITE_FILE_UPLOAD,
-          // ws:true,//websockets
-          changeOrigin: true, //允许跨域
-          // 重写路由
-          rewrite: (path) =>
-            path.replace(new RegExp(`^/upload.do`), "/upload.do"),
-        },
-        "^/files/upload": {
-          target: "http://localhost:3000",
-          // ws:true,//websockets
-          changeOrigin: true, //允许跨域
-          // 重写路由
-          rewrite: (path) =>
-            path.replace(new RegExp(`^/files/upload`), "/files/upload"),
-        },
       },
     },
     plugins: [
@@ -80,10 +62,6 @@ export default defineConfig(({ mode }) => {
         //     },
         //   ],
         // },
-      }),
-      //mockjs
-      viteMockServe({
-        mockPath: "./mock", //解析根目录下的mock文件夹
       }),
       // gzip
       VitePluginCompression({
