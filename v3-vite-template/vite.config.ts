@@ -12,6 +12,8 @@ import { createHtmlPlugin } from "vite-plugin-html";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 // 打包压缩插件
 import VitePluginCompression from "vite-plugin-compression";
+// mockjs
+import { viteMockServe } from "vite-plugin-mock";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -62,6 +64,10 @@ export default defineConfig(({ mode }) => {
         //     },
         //   ],
         // },
+      }),
+      //mockjs
+      viteMockServe({
+        mockPath: "./mock", //解析根目录下的mock文件夹
       }),
       // gzip
       VitePluginCompression({

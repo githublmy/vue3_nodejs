@@ -81,6 +81,16 @@ const arr = [
     id: 6,
     sort: 2,
   },
+  {
+    path: "/tool",
+    component: "/tool/index",
+    name: "tool",
+    title: "实用工具",
+    icon: "",
+    pid: 5,
+    id: 11,
+    sort: 3,
+  },
 ];
 
 const userInfo1 = {
