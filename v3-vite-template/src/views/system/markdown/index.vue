@@ -1,5 +1,7 @@
 <template>
-  <Markdown />
+  <div class="baseStyle">
+    <Markdown />
+  </div>
 </template>
 
 <script lang="ts" setup></script>

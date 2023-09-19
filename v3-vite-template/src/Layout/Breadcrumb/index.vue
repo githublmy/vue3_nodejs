@@ -3,10 +3,12 @@
     <div class="left">
       <div @click="changeSidebar">
         <el-icon v-if="isCollapse" size="26" class="iconElIcon"
-          ><Fold
+          ><i-ep-fold
         /></el-icon>
-        <el-icon v-else size="26" class="iconElIcon"><Expand /></el-icon>
+        <el-icon v-else size="26" class="iconElIcon"><i-ep-expand /></el-icon>
       </div>
+
+
       <el-breadcrumb class="app-breadcrumb">
         <transition-group name="breadcrumb">
           <el-breadcrumb-item
