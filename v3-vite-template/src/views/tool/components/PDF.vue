@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%">
-    <VuePdfApp style="height: calc(100vh - 80px)" :pdf="pd"></VuePdfApp>
+    <VuePdfApp :pdf="pd"></VuePdfApp>
   </div>
 </template>
 
@@ -11,6 +11,6 @@ import pd from "@/assets/document/test2.pdf";
 </script>
 <style lang="scss" scoped>
 :deep(.pdf-vue3-canvas-container) {
-  height: calc(100vh - 80px);
+  height: $page-height;
 }
 </style>

@@ -35,6 +35,9 @@ dependencies:
   tsparticles-slim:
     specifier: ^2.12.0
     version: 2.12.0
+  vditor:
+    specifier: ^3.9.5
+    version: registry.npmmirror.com/vditor@3.9.5
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -3314,6 +3317,12 @@ packages:
     version: 2.11.7
     dev: false
 
+  registry.npmmirror.com/diff-match-patch@1.0.5:
+    resolution: {integrity: sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/diff-match-patch/-/diff-match-patch-1.0.5.tgz}
+    name: diff-match-patch
+    version: 1.0.5
+    dev: false
+
   registry.npmmirror.com/esbuild@0.18.20:
     resolution: {integrity: sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/esbuild/-/esbuild-0.18.20.tgz}
     name: esbuild
@@ -3363,6 +3372,14 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  registry.npmmirror.com/vditor@3.9.5:
+    resolution: {integrity: sha512-yRFyEOoJ0GQGAjfzDBV9ZKemCleqspSf3Jg3XtKVj8RwnjnF6oScLQCAwSgRzCamYl+F+rIX9at0c3tEsatY/A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vditor/-/vditor-3.9.5.tgz}
+    name: vditor
+    version: 3.9.5
+    dependencies:
+      diff-match-patch: registry.npmmirror.com/diff-match-patch@1.0.5
+    dev: false
 
   registry.npmmirror.com/vue3-pdf-app@1.0.3(vue@3.3.4):
     resolution: {integrity: sha512-qegWTIF4wYKiocZ3KreB70wRXhqSdXWbdERDyyKzT7d5PbjKbS9tD6vaKkCqh3PzTM84NyKPYrQ3iuwJb60YPQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue3-pdf-app/-/vue3-pdf-app-1.0.3.tgz}

@@ -33,6 +33,7 @@ declare module 'vue' {
     ElText: typeof import('element-plus/es')['ElText']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     FileUpload: typeof import('./src/components/FileUpload/index.vue')['default']
+    Markdown: typeof import('./src/components/Markdown/index.vue')['default']
     MonacoEditor: typeof import('./src/components/CodeEdit/MonacoEditor/index.vue')['default']
     Pagination: typeof import('./src/components/Pagination/index.vue')['default']
     RightToolBar: typeof import('./src/components/RightToolBar/index.vue')['default']

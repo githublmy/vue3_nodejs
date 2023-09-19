@@ -36,18 +36,18 @@
 </template>
 
 <script lang="ts" setup>
-import type { UploadProps, UploadUserFile } from "element-plus";
+import type { UploadProps, UploadRawFile } from "element-plus";
 import { genFileId } from "element-plus";
 const upload = ref();
 const handleRemove: UploadProps["onRemove"] = (file, uploadFiles) => {
   console.log(file, uploadFiles);
 };
-function fileToBase64(file) {
+function fileToBase64(file: any) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => "error";
+    reader.onerror = (error) => reject(error);
   });
 }
 const result = ref();
@@ -67,7 +67,7 @@ const handleExceed: UploadProps["onExceed"] = (files) => {
   upload.value!.handleStart(file);
 };
 
-const beforeRemove: UploadProps["beforeRemove"] = (uploadFile, uploadFiles) => {
+const beforeRemove: UploadProps["beforeRemove"] = (uploadFile, _) => {
   return ElMessageBox.confirm(
     `Cancel the transfer of ${uploadFile.name} ?`
   ).then(

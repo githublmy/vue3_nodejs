@@ -91,6 +91,16 @@ const arr = [
     id: 11,
     sort: 3,
   },
+  {
+    path: "/markdown",
+    component: "/system/markdown/index",
+    name: "markdown",
+    title: "Markdown编辑器",
+    icon: "",
+    pid: 5,
+    id: 12,
+    sort: 4,
+  },
 ];
 
 const userInfo1 = {
