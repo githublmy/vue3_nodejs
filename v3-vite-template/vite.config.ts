@@ -4,8 +4,8 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // 自动导入图标
-import Icons from "unplugin-icons/vite";
-import IconsResolver from "unplugin-icons/resolver";
+// import Icons from "unplugin-icons/vite";
+// import IconsResolver from "unplugin-icons/resolver";
 import { fileURLToPath, URL } from "node:url";
 import { createHtmlPlugin } from "vite-plugin-html";
 // svg插件
@@ -98,23 +98,23 @@ export default defineConfig(({ mode }) => {
         resolvers: [
           ElementPlusResolver(),
           // 自动导入图标组件
-          IconsResolver({
-            prefix: "Icon",
-          }),
+          // IconsResolver({
+          //   prefix: "Icon",
+          // }),
         ],
       }),
       Components({
         resolvers: [
           // 自动注册图标组件
-          IconsResolver({
-            enabledCollections: ["ep"],
-          }),
+          // IconsResolver({
+          //   enabledCollections: ["ep"],
+          // }),
           ElementPlusResolver(),
         ],
       }),
-      Icons({
-        autoInstall: true,
-      }),
+      // Icons({
+      //   autoInstall: true,
+      // }),
     ],
     build: {
       // 打包生产环境，清除console和debugger

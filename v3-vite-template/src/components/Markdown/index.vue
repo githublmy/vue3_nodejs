@@ -70,10 +70,10 @@ function clearValue() {
   setValue();
 }
 </script>
-<style lang="scss" scoped>
-// .vditor-preview {
-//   .vditor-reset {
-//     color: #fff !important;
-//   }
-// }
+<style lang="scss">
+.vditor-preview {
+  .vditor-reset {
+    color: var(--textarea-text-color) !important;
+  }
+}
 </style>
