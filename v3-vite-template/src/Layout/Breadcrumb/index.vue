@@ -20,7 +20,19 @@
     </div>
     <div class="right">
       <el-avatar :src="logo" fit="fill" />
-      <span style="margin: 0 10px">{{ "groupName" }}：{{ "userName" }}</span>
+      <span style="margin: 0 10px">{{ "角色" }}：{{ "管理员" }}</span>
+      <!-- 切换主题 -->
+      <el-switch
+        v-model="theme"
+        style="
+          --el-switch-on-color: rgb(158, 158, 158);
+          --el-switch-off-color: rgb(158, 158, 158);
+          --el-switch-border-color: #dcdfe6;
+        "
+        inactive-action-icon="Sunny"
+        active-action-icon="Moon"
+        @change="toggleDark"
+      />
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           个人中心
@@ -42,6 +54,7 @@
 </template>
 
 <script setup lang="ts">
+import { useDark, useToggle } from "@vueuse/core";
 import logo from "@/assets/vite.svg";
 import { useSidebarStore } from "@/store/modules/sidebar";
 import { useUserStore } from "@/store/modules/user";
@@ -49,8 +62,12 @@ import type { IElPlusMsgFun } from "@/utils/elPlusMessage/type";
 const elMsg = inject("elMsg") as IElPlusMsgFun;
 const sidebarStore = useSidebarStore();
 const route = useRoute();
-
 const pathList: Ref = ref([]); //导航菜单
+const isDark = useDark();
+const theme = ref(isDark.value);
+
+const toggleDark = useToggle(isDark);
+
 // // 菜单折叠状态
 const isCollapse = computed(() => sidebarStore.isCollapse);
 const handleCommand = (v: string) => {
@@ -63,9 +80,7 @@ const handleCommand = (v: string) => {
         location.href = "/";
       },
       () => {
-        console.log("====================================");
         console.log("取消");
-        console.log("====================================");
       }
     );
   }

@@ -13,7 +13,8 @@ import "virtual:svg-icons-register";
 import SvgIcon from "@/components/SvgIcon/index.vue";
 //粒子背景插件
 import Particles from "vue3-particles";
-
+// 如果只想导入css变量暗黑主题
+import 'element-plus/theme-chalk/dark/css-vars.css'
 // 引入图标
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 

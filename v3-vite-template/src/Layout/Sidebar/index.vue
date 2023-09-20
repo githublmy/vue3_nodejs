@@ -1,8 +1,4 @@
 <!--
- * @Author: lu
- * @LastEditors: Please set LastEditors
- * @Date: 2022-11-18 10:22:15
- * @LastEditTime: 2023-09-05 15:44:41
  * @Description: 侧边导航
 -->
 <template>
