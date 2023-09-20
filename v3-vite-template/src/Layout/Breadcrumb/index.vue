@@ -29,9 +29,10 @@
           --el-switch-off-color: rgb(158, 158, 158);
           --el-switch-border-color: #dcdfe6;
         "
+        inline-prompt
         inactive-action-icon="Sunny"
         active-action-icon="Moon"
-        @change="toggleDark"
+        @change="changeTheme"
       />
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
@@ -54,7 +55,6 @@
 </template>
 
 <script setup lang="ts">
-import { useDark, useToggle } from "@vueuse/core";
 import logo from "@/assets/vite.svg";
 import { useSidebarStore } from "@/store/modules/sidebar";
 import { useUserStore } from "@/store/modules/user";
@@ -63,11 +63,11 @@ const elMsg = inject("elMsg") as IElPlusMsgFun;
 const sidebarStore = useSidebarStore();
 const route = useRoute();
 const pathList: Ref = ref([]); //导航菜单
-const isDark = useDark();
-const theme = ref(isDark.value);
+const theme = ref(false);
 
-const toggleDark = useToggle(isDark);
-
+const changeTheme = () => {
+  document.documentElement.classList.toggle("dark");
+};
 // // 菜单折叠状态
 const isCollapse = computed(() => sidebarStore.isCollapse);
 const handleCommand = (v: string) => {
