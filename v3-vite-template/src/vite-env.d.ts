@@ -6,3 +6,6 @@ declare module "element-plus/dist/locale/en.mjs";
 // 引入sql语言类型
 declare module "monaco-editor/esm/vs/basic-languages/sql/sql.js";
 declare module "monaco-editor/esm/vs/platform/actions/common/actions";
+
+// pdf
+declare module "vue3-pdf-app";
