@@ -1,17 +1,27 @@
 /*
- * @Author: lu
- * @LastEditors: Please set LastEditors
- * @Date: 2023-08-30 16:43:53
- * @LastEditTime: 2023-09-08 14:21:53
  * @Description: 用户数据
  */
 
 import { defineStore } from "pinia";
-import { getUserInfo } from "@/api/userInfo/index";
+// import { getUserInfo } from "@/api/userInfo/index";
 import { toTree, handleRouter } from "@/utils/commonFun";
 import type { RouteRecordRaw } from "vue-router";
+import { user } from "@/assets/json/user";
+interface IUserInfo {
+  userName: string;
+  password: string;
+  rememberPwd: boolean;
+}
+interface IUser {
+  token: string;
+  userInfo: IUserInfo;
+  permission: any[];
+  userId: number | null;
+  userName: string;
+  role: any;
+}
 export const useUserStore = defineStore("user", {
-  state: () => {
+  state: (): IUser => {
     return {
       token: "",
       userInfo: {
@@ -39,10 +49,10 @@ export const useUserStore = defineStore("user", {
   },
   actions: {
     async getInfo() {
-      const res = await getUserInfo();
-      console.log(res, "数据");
+      // const res = await getUserInfo();
+      console.log(user, "数据");
       this.token = "token";
-      this.permission = res.data.routes;
+      this.permission = user;
     },
   },
   persist: true, //整个数据持久化，

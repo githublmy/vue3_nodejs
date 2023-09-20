@@ -1,5 +1,5 @@
 // 菜单信息
-export default [
+export const user = [
   {
     path: "/index",
     component: "/home/index",
@@ -79,5 +79,25 @@ export default [
     pid: 5,
     id: 6,
     sort: 2,
+  },
+  {
+    path: "/tool",
+    component: "/tool/index",
+    name: "tool",
+    title: "实用工具",
+    icon: "",
+    pid: 5,
+    id: 11,
+    sort: 3,
+  },
+  {
+    path: "/markdown",
+    component: "/system/markdown/index",
+    name: "markdown",
+    title: "Markdown编辑器",
+    icon: "",
+    pid: 5,
+    id: 12,
+    sort: 4,
   },
 ];
