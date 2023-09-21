@@ -67,7 +67,10 @@ export default defineConfig(({ mode }) => {
       }),
       //mockjs
       viteMockServe({
-        mockPath: "./mock", //解析根目录下的mock文件夹
+        mockPath: "./mock", //解析根目录下的mock文件夹,设置模拟.ts 文件的存储文件夹
+        watchFiles: false, //设置是否监视mockPath对应的文件夹内文件中的更改
+        // 根据项目配置。可以配置在.env文件
+        enable: true, //是否启用 mock 功能
       }),
       // gzip
       VitePluginCompression({
