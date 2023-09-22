@@ -70,7 +70,7 @@
 import type { TableOptions } from "@/types/index";
 const headerRowStyle = () => {
   return {
-    background: "#e9f1fa",
+    // background: "#e9f1fa",
   };
 };
 interface IPt {

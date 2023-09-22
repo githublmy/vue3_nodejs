@@ -27,18 +27,13 @@
       }"
       v-if="isShowRefresh"
     >
-      <el-text class="text-cls" @click="refresh" size="small">
+      <el-text class="text-cls" @click="refresh">
         <el-icon>
           <Refresh />
         </el-icon>
         刷新页面
       </el-text>
-      <el-text
-        v-if="indexNum > 1"
-        size="small"
-        class="text-cls"
-        @click="closeLeft"
-      >
+      <el-text v-if="indexNum > 1" class="text-cls" @click="closeLeft">
         <el-icon>
           <Back />
         </el-icon>
@@ -47,7 +42,6 @@
       <el-text
         v-if="indexNum < tagList.length - 1"
         class="text-cls"
-        size="small"
         @click="closeRight"
       >
         <el-icon>
@@ -55,10 +49,15 @@
         </el-icon>
         关闭右侧
       </el-text>
+      <el-text v-if="isCloseOther" class="text-cls" @click="closeOtherTags">
+        <el-icon>
+          <CloseBold />
+        </el-icon>
+        关闭其他
+      </el-text>
       <el-text
-        v-if="tagList.length > 1"
+        v-if="tagList.length !== 1"
         class="text-cls"
-        size="small"
         @click="closeAllTags"
       >
         <el-icon>
@@ -72,9 +71,20 @@
 
 <script lang="ts" setup>
 import useTagsViewStore from "@/store/modules/tagsView";
-import { useSidebarStore } from "@/store/modules/sidebar";
-const useSidebar = useSidebarStore();
+import { useSettingStore } from "@/store/modules/setting";
+const settingStore = useSettingStore();
 const route = useRoute();
+const isCloseOther = ref(true);
+
+const tagList: any = computed({
+  get() {
+    return useTags.tagList;
+  },
+  set(v) {
+    return v;
+  },
+});
+
 const router = useRouter();
 const { proxy } = getCurrentInstance() as any;
 const dtags = ref();
@@ -86,7 +96,7 @@ interface IObj {
   meta?: any;
 }
 const w = computed(() => {
-  if (useSidebar.isCollapse) {
+  if (settingStore.isCollapse) {
     return 64;
   } else return 200;
 });
@@ -95,7 +105,6 @@ const test = ref();
 let curPath: IObj = {};
 let scrollLeft = 0;
 
-const tagList: any = computed(() => useTags.tagList);
 watch(isShowRefresh, (value: any) => {
   if (value) {
     document.body.addEventListener("click", closeMenu);
@@ -155,6 +164,16 @@ const openMenu = (tag: IObj, e: any, index: number) => {
   ofL.value = e.clientX - offsetLeft - e.offsetX;
   isShowRefresh.value = true; // 显示刷新按钮，默认显示。如果不显示则不可以显
   curPath = tag;
+  const ls = useTags.tagList;
+  if (ls.length === 1) {
+    isCloseOther.value = false;
+  } else if (ls.length === 2) {
+    curPath.path !== "/index"
+      ? (isCloseOther.value = false)
+      : (isCloseOther.value = true);
+  } else {
+    isCloseOther.value = true;
+  }
 };
 // 当前右键点击的tag下标
 const indexNum = ref(-1);
@@ -165,7 +184,7 @@ const refresh = () => {
 };
 // 关闭左侧
 const closeLeft = () => {
-  // console.log("关闭左侧", this.indexNum);
+  // console.log("关闭左侧", indexNum);
   tagList.value.splice(1, indexNum.value - 1);
   if (curPath.path !== route.path) {
     refresh();
@@ -173,18 +192,31 @@ const closeLeft = () => {
 };
 // 关闭右侧
 const closeRight = () => {
-  // console.log("关闭右侧", this.indexNum);
+  // console.log("关闭右侧", indexNum);
   tagList.value.splice(indexNum.value + 1);
   if (curPath.path !== route.path) {
     refresh();
   }
 };
-// 关闭所有
+// 关闭其他
+const closeOtherTags = () => {
+  // console.log("关闭其他", curPath, route.path);
+  tagList.value.splice(1);
+  if (curPath.path !== "/index") {
+    tagList.value.push(curPath);
+  }
+  if (curPath.path !== route.path) {
+    refresh();
+  }
+};
+// 关闭其他
 const closeAllTags = () => {
-  // console.log("关闭所有", this.indexNum);
+  // console.log("关闭其他", curPath, route.path);
   tagList.value.splice(1);
   if (curPath.path !== route.path) {
     refresh();
+  } else {
+    router.replace("/redirect" + "/index");
   }
 };
 const deleteTag = (tag: IObj) => {
@@ -246,6 +278,9 @@ const deleteTag = (tag: IObj) => {
       text-decoration: none;
       display: flex;
       align-items: center;
+      &:active {
+        color: inherit;
+      }
       &:visited {
         color: inherit;
       }
@@ -258,20 +293,24 @@ const deleteTag = (tag: IObj) => {
     z-index: 3000;
     border: 1px solid #d8dce5;
     border-radius: 4px;
-    padding: 6px 14px;
-    background-color: #fff;
+    padding: 6px 0;
+    background-color: var(--el-bg-color);
     min-width: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     .text-cls {
+      color: var(--el-table-text-color);
       margin-bottom: 6px;
+      padding: 2px 14px;
+      border-radius: 2px;
       &:last-child {
         margin-bottom: 0;
       }
       &:hover {
-        color: $color-primary;
+        color: #fff;
+        background: $color-primary;
       }
     }
   }

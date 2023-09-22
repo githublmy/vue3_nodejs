@@ -30,12 +30,12 @@
 
 <script setup lang="ts">
 import SiderItem from "./SiderItem.vue";
-import { useSidebarStore } from "@/store/modules/sidebar";
+import { useSettingStore } from "@/store/modules/setting";
 import { useUserStore } from "@/store/modules/user";
 const { routes } = useUserStore();
 const route = useRoute();
-const sidebarStore = useSidebarStore();
-const isCollapse = computed(() => sidebarStore.isCollapse);
+const settingStore = useSettingStore();
+const isCollapse = computed(() => settingStore.isCollapse);
 const ProjectTitle = computed(() => import.meta.env.VITE_TITLE);
 </script>
 <style lang="scss">

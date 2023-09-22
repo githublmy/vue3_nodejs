@@ -1,8 +1,4 @@
 <!--
- * @Author: 455886774@qq.com lu123456
- * @Date: 2022-11-18 10:18:27
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-09-17 11:38:25
  * @Description: 布局页面
 -->
 <template>
@@ -34,9 +30,9 @@
 import Breadcrumb from "./Breadcrumb/index.vue";
 import TagsView from "./TagsView/index.vue";
 import SideBar from "./Sidebar/index.vue";
-import { useSidebarStore } from "@/store/modules/sidebar";
-const sidebarStore = useSidebarStore();
-const isCollapse = computed(() => sidebarStore.isCollapse);
+import { useSettingStore } from "@/store/modules/setting";
+const settingStore = useSettingStore();
+const isCollapse = computed(() => settingStore.isCollapse);
 </script>
 
 <style lang="scss" scoped>

@@ -23,7 +23,7 @@
       <span style="margin: 0 10px">{{ "角色" }}：{{ "管理员" }}</span>
       <!-- 切换主题 -->
       <el-switch
-        v-model="theme"
+        v-model="isDark"
         style="
           --el-switch-on-color: rgb(158, 158, 158);
           --el-switch-off-color: rgb(158, 158, 158);
@@ -56,20 +56,34 @@
 
 <script setup lang="ts">
 import logo from "@/assets/vite.svg";
-import { useSidebarStore } from "@/store/modules/sidebar";
+import { useSettingStore } from "@/store/modules/setting";
 import { useUserStore } from "@/store/modules/user";
 import type { IElPlusMsgFun } from "@/utils/elPlusMessage/type";
 const elMsg = inject("elMsg") as IElPlusMsgFun;
-const sidebarStore = useSidebarStore();
+const settingStore = useSettingStore();
 const route = useRoute();
 const pathList: Ref = ref([]); //导航菜单
-const theme = ref(false);
-
+// 切换主题
+const isDark = computed({
+  get() {
+    return settingStore.isDark;
+  },
+  set(v) {
+    return v;
+  },
+});
+// 监听主题变化，执行修改样式
+watchEffect(() => {
+  isDark.value
+    ? document.documentElement.classList.add("dark")
+    : document.documentElement.classList.remove("dark");
+});
+// 切换主题
 const changeTheme = () => {
-  document.documentElement.classList.toggle("dark");
+  settingStore.toggleTheme();
 };
 // // 菜单折叠状态
-const isCollapse = computed(() => sidebarStore.isCollapse);
+const isCollapse = computed(() => settingStore.isCollapse);
 const handleCommand = (v: string) => {
   if (v === "logOut") {
     elMsg.confirm(
@@ -99,7 +113,7 @@ watch(
 );
 // 折叠菜单方法
 function changeSidebar() {
-  sidebarStore.toggleSidebar();
+  settingStore.toggleSidebar();
 }
 </script>
 <style lang="scss" scoped>
