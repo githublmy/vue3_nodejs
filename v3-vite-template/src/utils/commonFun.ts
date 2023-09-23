@@ -114,14 +114,8 @@ export function arrayToMenuTree(arr: IRouteData[], fatherLayoutId = 1) {
  */
 const modules: any = import.meta.glob("../views/**/*.vue");
 // console.log(modules, "获取所有的");
-/**
- * @description: 树形转路由
- * @param {RouteRecordRaw[]} routers
- * @example
- * handleRouter(routers: RouteRecordRaw[])
- * @return {RouteRecordRaw[]} newRoutes
- */
-interface IRouteData {
+
+export interface IRouteData {
   component: string;
   icon: string;
   id?: number;
@@ -135,6 +129,13 @@ interface IRouteData {
   children?: IRouteData[] | null;
   [proName: string]: any
 }
+/**
+ * @description: 树形转路由
+ * @param {RouteRecordRaw[]} routers
+ * @example
+ * handleRouter(routers: RouteRecordRaw[])
+ * @return {RouteRecordRaw[]} newRoutes
+ */
 export function handleRouter(routers: IRouteData[]) {
   const newRoutes: RouteRecordRaw[] = routers.map((r) => {
     const route: any = {

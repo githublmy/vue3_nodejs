@@ -24,7 +24,7 @@
         :collapse-transition="false"
         router
       >
-        <SiderItem :menuList="routes" />
+        <SiderItem :menuList="menuList" />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -34,7 +34,7 @@
 import SiderItem from "./SiderItem.vue";
 import { useSettingStore } from "@/store/modules/setting";
 import { useUserStore } from "@/store/modules/user";
-const { routes } = useUserStore();
+const { menuList } = useUserStore();
 const route = useRoute();
 const settingStore = useSettingStore();
 const isCollapse = computed(() => settingStore.isCollapse);

@@ -4,26 +4,25 @@
       v-if="!item.children || !item.children.length"
       :index="item.path"
     >
-      <template v-if="item.meta?.icon">
+      <template v-if="item.icon">
         <el-icon>
-          <component :is="item.meta?.icon" />
+          <component :is="item.icon" />
         </el-icon>
         <!-- <SvgIcon v-else :name="item.meta.icon" /> -->
       </template>
       <template #title>
-        <!-- 内置图标，首字母大写为element内置，否则为自定义svg -->
-        <span>{{ item.meta?.title }}</span>
+        <span>{{ item.title }}</span>
       </template>
     </el-menu-item>
     <el-sub-menu v-else :index="item.path">
       <template #title>
-        <template v-if="item.meta?.icon">
+        <template v-if="item.icon">
           <el-icon>
-            <component :is="item.meta?.icon" />
+            <component :is="item.icon" />
           </el-icon>
           <!-- <SvgIcon v-else :name="item.meta.icon" /> -->
         </template>
-        <span>{{ item.meta?.title }}</span>
+        <span>{{ item.title }}</span>
       </template>
       <sider-item :menuList="item.children" />
     </el-sub-menu>
@@ -31,13 +30,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { RouteRecordRaw } from "vue-router";
+// import type { RouteRecordRaw } from "vue-router";
+import type { IRouteData } from "@/utils/commonFun";
 
 // const { menuList } = defineProps({
 //   menuList: Array<RouteRecordRaw>,
 // });
 const props = defineProps<{
-  menuList: RouteRecordRaw[];
+  menuList: IRouteData[];
 }>();
 const { menuList } = toRefs(props);
 </script>
