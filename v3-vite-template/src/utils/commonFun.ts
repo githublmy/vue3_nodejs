@@ -1,10 +1,8 @@
 /*
  * @Description: 方法
  */
-import { RouteRecordRaw } from "vue-router";
-
+import type { RouteRecordRaw } from "vue-router";
 import type { IRouteData } from "@/store/types/userStore"
-import { ImportGlobFunction } from "node_modules/vite/types/importGlob";
 //获取当前时间----年月日时分
 export function getNowTime(type?: any, t2?: string) {
   const d = new Date();
