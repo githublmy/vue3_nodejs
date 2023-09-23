@@ -71,6 +71,27 @@ const { locale } = storeToRefs(useSettingStore());
 // };
 // console.log(name("na"));
 
+let arr = [
+  {
+    id: 1,
+    name: "张三",
+  },
+  {
+    id: 2,
+    name: "张三",
+  },
+  {
+    id: 3,
+    name: "张三",
+  },
+];
+
+function getData(arr: any[], key: string, num: number) {
+  let ls = arr.filter((item) => item[key] === num);
+  return ls;
+}
+getData(arr, "id", 3);
+
 const msgConfig = {
   max: 3, //同时显示的最大的消息提示数量
 };
