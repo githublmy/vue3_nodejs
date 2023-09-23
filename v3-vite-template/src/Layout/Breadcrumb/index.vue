@@ -21,6 +21,22 @@
     <div class="right">
       <el-avatar :src="logo" fit="fill" />
       <span style="margin: 0 10px">{{ "角色" }}：{{ "管理员" }}</span>
+      <el-dropdown style="margin-right: 10px" @command="handleCommandLg">
+        <el-icon :size="28">
+          <SvgIcon name="language" />
+        </el-icon>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item
+              v-for="item in languageList"
+              :key="item.value"
+              :command="item.value"
+              >{{ item.name }}</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+
       <!-- 切换主题 -->
       <el-switch
         v-model="isDark"
@@ -28,6 +44,7 @@
           --el-switch-on-color: rgb(158, 158, 158);
           --el-switch-off-color: rgb(158, 158, 158);
           --el-switch-border-color: #dcdfe6;
+          margin-right: 10px;
         "
         inline-prompt
         inactive-action-icon="Sunny"
@@ -61,8 +78,25 @@ import { useUserStore } from "@/store/modules/user";
 import type { IElPlusMsgFun } from "@/utils/elPlusMessage/type";
 const elMsg = inject("elMsg") as IElPlusMsgFun;
 const settingStore = useSettingStore();
+const { locale } = storeToRefs(useSettingStore());
+
+const languageList = [
+  {
+    name: "简体中文",
+    value: "zh-cn",
+  },
+  {
+    name: "English",
+    value: "en",
+  },
+];
 const route = useRoute();
 const pathList: Ref = ref([]); //导航菜单
+
+const handleCommandLg = (v: string) => {
+  console.log(locale);
+  locale.value = v;
+};
 // 切换主题
 const isDark = computed({
   get() {

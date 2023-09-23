@@ -2,7 +2,7 @@
   <el-config-provider
     :size="config.size"
     :z-index="config.zIndex"
-    :locale="locale"
+    :locale="localeLanguage"
     :button="buttonConfig"
     :message="msgConfig"
   >
@@ -23,9 +23,11 @@
   </el-config-provider>
 </template>
 <script lang="ts" setup>
-// import { useUserStore } from "@/store/modules/user";
+import { useSettingStore } from "@/store/modules/setting";
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 import en from "element-plus/dist/locale/en.mjs";
+const { locale } = storeToRefs(useSettingStore());
+// console.log(locale);
 
 // console.log(elMsg);
 // elMsg.success("测试");
@@ -44,8 +46,10 @@ const config = {
 const buttonConfig = {
   autoInsertSpace: true, //是否在按钮的中文自动添加空格
 };
-const locale = computed(() => (language.value === "zh-cn" ? zhCn : en));
-const language = ref("zh-cn");
+console.log(locale);
+
+// const language = ref("zh-cn");
+const localeLanguage = computed(() => (locale.value === "zh-cn" ? zhCn : en));
 // const elMsg = inject("elPlusMsgFun") as IElPlusMsgFun;
 // const { token } = storeToRefs(useUserStore());
 // token.value = "测试";

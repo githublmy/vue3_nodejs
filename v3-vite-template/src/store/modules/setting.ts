@@ -7,6 +7,7 @@ export const useSettingStore = defineStore("setting", {
   state: () => ({
     isDark: false,
     isCollapse: false,
+    locale: "zh-cn",
   }),
   actions: {
     // 菜单主题
@@ -19,6 +20,6 @@ export const useSettingStore = defineStore("setting", {
     },
   },
   persist: {
-    paths: ["isDark"], //需要持久化的数据 []表示都不持久化
+    paths: ["isDark", "locale"], //需要持久化的数据 []表示都不持久化
   },
 });
