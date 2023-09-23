@@ -1,8 +1,4 @@
 /*
- * @Author: lu
- * @LastEditors: Please set LastEditors
- * @Date: 2023-04-03 14:02:03
- * @LastEditTime: 2023-09-05 13:49:29
  * @Description: 方法
  */
 import { RouteRecordRaw } from "vue-router";

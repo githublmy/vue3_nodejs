@@ -27,6 +27,7 @@ import { useSettingStore } from "@/store/modules/setting";
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 import en from "element-plus/dist/locale/en.mjs";
 const { locale } = storeToRefs(useSettingStore());
+
 // console.log(locale);
 
 // console.log(elMsg);
