@@ -1,8 +1,4 @@
 /*
- * @Author: lu
- * @LastEditors:
- * @Date: 2023-08-30 17:27:23
- * @LastEditTime: 2023-08-31 15:27:33
  * @Description: 自定义指令集合
  */
 import type { App, ComponentOptions } from "vue";
