@@ -30,12 +30,8 @@
 </template>
 
 <script lang="ts" setup>
-// import type { RouteRecordRaw } from "vue-router";
-import type { IRouteData } from "@/utils/commonFun";
+import type { IRouteData } from "@/store/types/userStore";
 
-// const { menuList } = defineProps({
-//   menuList: Array<RouteRecordRaw>,
-// });
 const props = defineProps<{
   menuList: IRouteData[];
 }>();

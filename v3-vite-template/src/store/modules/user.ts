@@ -7,23 +7,10 @@ import { defineStore } from "pinia";
 import { toTree, handleRouter } from "@/utils/commonFun";
 import type { RouteRecordRaw } from "vue-router";
 import { user } from "@/assets/json/user";
-import type { IRouteData } from "@/utils/commonFun"
-interface IUserInfo {
-  userName: string;
-  password: string;
-  rememberPwd: boolean;
-}
-interface IUser {
-  token: string;
-  userInfo: IUserInfo;
-  permission: any[];
-  userId: number | null;
-  userName: string;
-  role: any;
-}
+import type { IRouteData } from "@/store/types/userStore"
 
 export const useUserStore = defineStore("user", {
-  state: (): IUser => {
+  state: () => {
     return {
       token: "",
       userInfo: {
@@ -31,7 +18,7 @@ export const useUserStore = defineStore("user", {
         password: "",
         rememberPwd: false,
       },
-      permission: [] as any, //原始数据
+      permission: [] as IRouteData[], //原始数据
       userId: null,
       userName: "",
       role: null,

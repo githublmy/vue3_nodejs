@@ -2,6 +2,9 @@
  * @Description: 方法
  */
 import { RouteRecordRaw } from "vue-router";
+
+import type { IRouteData } from "@/store/types/userStore"
+import { ImportGlobFunction } from "node_modules/vite/types/importGlob";
 //获取当前时间----年月日时分
 export function getNowTime(type?: any, t2?: string) {
   const d = new Date();
@@ -112,23 +115,9 @@ export function arrayToMenuTree(arr: IRouteData[], fatherLayoutId = 1) {
  * 多层级文件动态导入。 /home/index
  * 注： vite  默认只支持一级文件
  */
-const modules: any = import.meta.glob("../views/**/*.vue");
+const modules = import.meta.glob("../views/**/*.vue");
 // console.log(modules, "获取所有的");
 
-export interface IRouteData {
-  component: string;
-  icon: string;
-  id?: number;
-  name: string;
-  path: string;
-  pid?: number | null;
-  sort?: number;
-  title: string;
-  isBreadcrumb?: boolean;
-  redirect?: string;
-  children?: IRouteData[] | null;
-  [proName: string]: any
-}
 /**
  * @description: 树形转路由
  * @param {RouteRecordRaw[]} routers

@@ -73,7 +73,7 @@ router.beforeEach((to) => {
             // console.log(router.getRoutes());
             router.push(to.fullPath);
           })
-          .catch(() => {});
+          .catch(() => { });
       } else {
         return true;
       }
