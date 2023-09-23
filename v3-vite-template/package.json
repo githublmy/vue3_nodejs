@@ -29,7 +29,7 @@
   "devDependencies": {
     "@iconify-json/ep": "^1.1.12",
     "@types/mockjs": "^1.0.7",
-    "@types/node": "^20.6.0",
+    "@types/node": "^20.6.3",
     "@types/nprogress": "^0.2.0",
     "@vitejs/plugin-vue": "^4.3.4",
     "sass": "^1.66.1",
