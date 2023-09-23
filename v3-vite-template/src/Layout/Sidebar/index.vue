@@ -2,29 +2,31 @@
  * @Description: 侧边导航
 -->
 <template>
-  <div>
+  <div class="sidebar">
     <div class="logo">
-      <img
-        :style="{ marginLeft: !isCollapse ? '20px' : '16px' }"
-        :class="!isCollapse ? 'img2' : ''"
-        src="/vite.svg"
-      />
-      <i class="sidebar-title" :style="{ opacity: !isCollapse ? 1 : '0' }">{{
-        ProjectTitle
-      }}</i>
+      <img src="/vite.svg" />
+      <span
+        class="sidebar-title"
+        :style="{
+          transform: !isCollapse ? 'translateX(0)' : 'translateX(100px)',
+        }"
+        >{{ ProjectTitle }}</span
+      >
     </div>
-    <el-menu
-      class="el-menu-vertical-demo"
-      :default-active="route.path"
-      active-text-color="#00d4ff"
-      background-color="#304156"
-      text-color="#FFFFFFB3"
-      :collapse="isCollapse"
-      :collapse-transition="false"
-      router
-    >
-      <SiderItem :menuList="routes" />
-    </el-menu>
+    <el-scrollbar class="scrollbar">
+      <el-menu
+        class="el-menu-vertical-demo"
+        :default-active="route.path"
+        active-text-color="#00d4ff"
+        background-color="#304156"
+        text-color="#FFFFFFB3"
+        :collapse="isCollapse"
+        :collapse-transition="false"
+        router
+      >
+        <SiderItem :menuList="routes" />
+      </el-menu>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -52,40 +54,39 @@ const ProjectTitle = computed(() => import.meta.env.VITE_TITLE);
     transition: 0.3s;
   }
 }
+.sidebar {
+  .logo {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    img {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+    }
 
-.img2 {
-  margin-left: 16px;
-}
-
-.logo {
-  width: 100%;
-  height: 40px;
-  line-height: 40px;
-  overflow: hidden;
-  position: relative;
-
-  img {
-    width: 32px;
-    height: 32px;
-    vertical-align: middle;
-    transition: margin-left 0.3s;
+    & .sidebar-title {
+      position: absolute;
+      top: 0;
+      left: 49px;
+      z-index: 999;
+      margin: 0;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 40px;
+      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+      vertical-align: middle;
+      transition: all 0.3s;
+    }
   }
-
-  & .sidebar-title {
-    position: absolute;
-    top: 0;
-    left: 52px;
-    z-index: 1;
-    display: inline-block;
-    margin: 0;
-    padding-left: 12px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 50px;
-    font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
-    vertical-align: middle;
-    transition: all 0.3s;
+  .scrollbar {
+    height: calc(100vh - 40px);
   }
 }
 </style>

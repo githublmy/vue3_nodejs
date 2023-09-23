@@ -5,9 +5,7 @@
   <el-container>
     <el-container style="height: 100vh" class="layout-container">
       <el-aside :style="{ width: !isCollapse ? '200px' : '64px' }">
-        <el-scrollbar>
-          <SideBar />
-        </el-scrollbar>
+        <SideBar />
       </el-aside>
       <el-container>
         <el-header style="height: 80px">
