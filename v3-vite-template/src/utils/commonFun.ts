@@ -133,6 +133,7 @@ interface IRouteData {
   isBreadcrumb?: boolean;
   redirect?: string;
   children?: IRouteData[] | null;
+  [proName: string]: any
 }
 export function handleRouter(routers: IRouteData[]) {
   const newRoutes: RouteRecordRaw[] = routers.map((r) => {
@@ -160,22 +161,28 @@ export function handleRouter(routers: IRouteData[]) {
  * @description: 数组转树形，并且排序
  * @return {*}
  */
+interface IP {
+  arrList: IRouteData[],
+  id: string,
+  pid: string
+  order: string
+}
 export function toTree({
   arrList = [],
   id = "id",
   pid = "pid",
   order = "sort",
-}) {
+}: IP) {
   let up: any = arrList
     .filter((x: any) => x[pid] === null)
-    .sort((a: any, b: any) => a[order] - b[order]);
-  let cp: any = arrList.filter((x: { [x: string]: number }) => x[pid]);
+    .sort((a: IRouteData, b: IRouteData) => a[order] - b[order]);
+  let cp: IRouteData[] = arrList.filter((x: IRouteData) => x[pid]);
   getData(up);
   function getData(arr = []) {
     arr.forEach((element: any) => {
       let ar = cp
-        .filter((item: any) => element[id] == item[pid])
-        .sort((a: any, b: any) => a[order] - b[order]);
+        .filter((item: IRouteData) => element[id] == item[pid])
+        .sort((a: IRouteData, b: IRouteData) => a[order] - b[order]);
       if (ar.length) {
         element.children = ar;
         element.redirect = ar[0].path;

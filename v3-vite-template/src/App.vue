@@ -62,14 +62,14 @@ const { locale } = storeToRefs(useSettingStore());
 //   ag: 44,
 // };
 // console.log(name(obj, "na"));
-function name(key: keyof typeof obj) {
-  return obj[key];
-}
-const obj = {
-  na: "z",
-  ag: 44,
-};
-console.log(name("na"));
+// function name(key: keyof typeof obj) {
+//   return obj[key];
+// }
+// const obj = {
+//   na: "z",
+//   ag: 44,
+// };
+// console.log(name("na"));
 
 const msgConfig = {
   max: 3, //同时显示的最大的消息提示数量
