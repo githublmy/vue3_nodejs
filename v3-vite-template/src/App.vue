@@ -29,13 +29,47 @@ import en from "element-plus/dist/locale/en.mjs";
 const { locale } = storeToRefs(useSettingStore());
 
 // console.log(locale);
-
+// enum T {
+//   success = "ceshi",
+//   err = 3,
+//   warning,
+// }
+// let a = T.success;
+// console.log(a);
 // console.log(elMsg);
 // elMsg.success("测试");
 // import type { ComponentInternalInstance } from "vue";
 //// @ts-ignore   //忽略类型提示
 // const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 // console.log(proxy);
+// interface Ia {
+//   length?: number;
+// }
+// function name<T extends Ia>(v: T) {
+//   console.log(v.length);
+
+//   return v;
+// }
+// const r3 = name<number>(444);
+
+// console.log(r3);
+
+// function name<T, K extends keyof T>(obj: T, key: K) {
+//   return obj[key];
+// }
+// const obj = {
+//   na: "z",
+//   ag: 44,
+// };
+// console.log(name(obj, "na"));
+function name(key: keyof typeof obj) {
+  return obj[key];
+}
+const obj = {
+  na: "z",
+  ag: 44,
+};
+console.log(name("na"));
 
 const msgConfig = {
   max: 3, //同时显示的最大的消息提示数量
@@ -47,7 +81,6 @@ const config = {
 const buttonConfig = {
   autoInsertSpace: true, //是否在按钮的中文自动添加空格
 };
-console.log(locale);
 
 // const language = ref("zh-cn");
 const localeLanguage = computed(() => (locale.value === "zh-cn" ? zhCn : en));

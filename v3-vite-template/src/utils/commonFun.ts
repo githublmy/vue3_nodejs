@@ -83,22 +83,22 @@ export function getMounthNum(str: string) {
  * @param {*} fatherLayoutId
  * @return {*}
  */
-export function arrayToMenuTree(arr: any[], fatherLayoutId = 1) {
-  const tree: any = [];
+export function arrayToMenuTree(arr: IRouteData[], fatherLayoutId = 1) {
+  const tree: IRouteData[] = [];
   arr.map((item) => {
-    let children: any = [];
-    const params = {
-      path: item.layoutPath,
+    let children: IRouteData[] = [];
+    const params: IRouteData = {
+      path: item.path,
       title: item.title,
       icon: item.icon,
-      name: item.layoutName,
+      name: item.name,
       component: item.component,
-      isBreadcrumb: item.isBreadcrumb == 1 ? true : false,
+      isBreadcrumb: item.isBreadcrumb,
       children: [],
     };
-    if (item.fatherLayoutId == fatherLayoutId) {
+    if (item.pid == fatherLayoutId) {
       // 找子节点   把自身的item存储到对应的位置中,根据parentId找到
-      children = arrayToMenuTree(arr, item.layoutId);
+      children = arrayToMenuTree(arr, item.id);
       if (children.length) {
         params.children = children;
       }
@@ -121,8 +121,21 @@ const modules: any = import.meta.glob("../views/**/*.vue");
  * handleRouter(routers: RouteRecordRaw[])
  * @return {RouteRecordRaw[]} newRoutes
  */
-export function handleRouter(routers: RouteRecordRaw[]) {
-  const newRoutes: RouteRecordRaw[] = routers.map((r: any) => {
+interface IRouteData {
+  component: string;
+  icon: string;
+  id?: number;
+  name: string;
+  path: string;
+  pid?: number | null;
+  sort?: number;
+  title: string;
+  isBreadcrumb?: boolean;
+  redirect?: string;
+  children?: IRouteData[] | null;
+}
+export function handleRouter(routers: IRouteData[]) {
+  const newRoutes: RouteRecordRaw[] = routers.map((r) => {
     const route: any = {
       path: r.path,
       meta: {
