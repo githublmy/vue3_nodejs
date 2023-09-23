@@ -80,8 +80,8 @@ interface IPt {
 
 const emit = defineEmits<{
   (event: "pagination", obj: IPt): void;
-  (event: "selectTableRow", val: any): void;
-  (event: "selectSingle", selection: any, row: any): void;
+  (event: "selectTableRow", val: TableOptions): void;
+  (event: "selectSingle", selection: TableOptions[], row: TableOptions): void;
   (event: "update:page", id: number): void;
   (event: "update:limit", id: number): void;
 }>();
@@ -165,7 +165,7 @@ const pageSize = computed({
     emit("update:limit", val);
   },
 });
-const handleSelectionChange = (val: any) => {
+const handleSelectionChange = (val: TableOptions) => {
   emit("selectTableRow", val);
 };
 
@@ -174,7 +174,7 @@ const handleSelectionChange = (val: any) => {
  * @param {*} val
  * @return {*}
  */
-const handleSelect = (selection: any, row: any) => {
+const handleSelect = (selection: TableOptions[], row: TableOptions) => {
   emit("selectSingle", selection, row);
 };
 const handleSizeChange = (val: number) => {
