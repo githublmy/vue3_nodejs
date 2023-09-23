@@ -1,6 +1,6 @@
 // 接口类型定义
 interface IRes<T> {
-[x: string]: any;
+  [x: string]: any;
   code: number;
   msg: string;
   payload: T;
@@ -28,16 +28,7 @@ export interface IPageSet {
   [proName: string]: any;
 }
 // 表格数据类型
-interface IBtnList {
-  text?: string;
-  handleEventBtn?: any;
-  type?: any;
-  icon?: string;
-  size?: any;
-  plain?: boolean;
-  link?: boolean;
-  [proName: string]: any;
-}
+
 export interface TableOptions {
   // 字段名称
   prop?: string;
@@ -51,5 +42,4 @@ export interface TableOptions {
   fixed?: string;
   type?: string;
   [proName: string]: any;
-  btnList?: IBtnList[];
 }

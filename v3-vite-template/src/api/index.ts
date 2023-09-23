@@ -4,10 +4,17 @@
 import request from "@/utils/request.ts";
 import type { PromiseRes, IGetList } from "@/types/index";
 
+enum API {
+  getISBNList = "/common/blmsBook/selectPageBookCataloging",
+  getData = "/routes",
+  uploadFile = "/common/blmsBook/uploadFile",
+}
+
+
 export function getISBNList(data: object): PromiseRes<IGetList> {
   return request({
-    url: "/common/blmsBook/selectPageBookCataloging",
-    method: "post",
+    url:API.getISBNList,
+    method: "get",
     data,
   });
 }

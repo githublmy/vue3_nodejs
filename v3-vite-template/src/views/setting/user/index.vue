@@ -77,7 +77,7 @@ const getList = async () => {
   loading.value = true;
   const res = await getDataList(data.formData);
   loading.value = false;
-  console.log(res, "ces");
+  console.log(res.data.content[0].department, "ces");
   tableData.value = res.data.content;
   total.value = res.data.total;
 };
