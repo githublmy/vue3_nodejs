@@ -131,7 +131,7 @@ export default defineConfig(({ mode }) => {
       // outDir: "dist", //打包的文件夹名称 默认 dist
       // assetsDir: "assets", //静态资源打包文件夹名称
       target: ["es2020", "edge88", "firefox78", "chrome87", "safari14"], //打包目标兼容浏览器
-      // chunkSizeWarningLimit: 500,   //打包文件多大警告  默认500kb
+      chunkSizeWarningLimit: 500,   //打包文件多大警告  默认500kb
       rollupOptions: {
         input: {
           main: fileURLToPath(new URL("index.html", import.meta.url)),
