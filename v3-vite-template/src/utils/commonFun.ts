@@ -161,18 +161,13 @@ export function handleRouter(routers: IRouteData[]) {
  * @description: 数组转树形，并且排序
  * @return {*}
  */
-interface IP {
-  arrList: IRouteData[],
-  id: string,
-  pid: string
-  order: string
-}
+
 export function toTree({
   arrList = [],
   id = "id",
   pid = "pid",
   order = "sort",
-}: IP) {
+}) {
   let up: any = arrList
     .filter((x: any) => x[pid] === null)
     .sort((a: IRouteData, b: IRouteData) => a[order] - b[order]);
