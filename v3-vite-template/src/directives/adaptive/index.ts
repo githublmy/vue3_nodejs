@@ -1,8 +1,4 @@
 /*
- * @Author: lu
- * @LastEditors: Please set LastEditors
- * @Date: 2023-09-01 11:04:55
- * @LastEditTime: 2023-09-07 10:00:20
  * @Description: 自适应表格高度 使用方式 v-adaptive={ bottomOffset: 62 }
  */
 import { DirectiveBinding } from "vue";
