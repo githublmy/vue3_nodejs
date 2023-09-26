@@ -1,7 +1,7 @@
 /*
  * @Description: 失去焦点 使用 v-blur
  */
-const fun = (evt: any) => {
+const fun = (evt) => {
   let target = evt.target;
   if (target.nodeName === "SPAN" || target.nodeName === "I") {
     target = evt.target.parentNode;

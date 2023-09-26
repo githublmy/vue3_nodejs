@@ -5,7 +5,10 @@
     :locale="localeLanguage"
     :button="buttonConfig"
     :message="msgConfig"
-  >
+  >   
+
+
+
     <router-view />
     <!-- <router-link to="/home">首页</router-link>
     <router-link to="/home2">下一页</router-link>
@@ -39,7 +42,6 @@ const { locale } = storeToRefs(useSettingStore());
 // console.log(elMsg);
 // elMsg.success("测试");
 // import type { ComponentInternalInstance } from "vue";
-//// @ts-ignore   //忽略类型提示
 // const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 // console.log(proxy);
 // interface Ia {

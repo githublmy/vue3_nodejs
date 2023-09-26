@@ -2,7 +2,7 @@
  * @Description: 方法
  */
 import type { RouteRecordRaw } from "vue-router";
-import type { IRouteData } from "@/store/types/userStore"
+import type { IRouteData } from "@/store/types/userStore";
 //获取当前时间----年月日时分
 export function getNowTime(type?: any, t2?: string) {
   const d = new Date();

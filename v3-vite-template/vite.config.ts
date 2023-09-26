@@ -15,6 +15,7 @@ import VitePluginCompression from "vite-plugin-compression";
 // mockjs
 import { viteMockServe } from "vite-plugin-mock";
 
+import VitePluginEslint from "vite-plugin-eslint"
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // console.log(loadEnv(mode, process.cwd()));
@@ -49,6 +50,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       vue(),
+      VitePluginEslint(),
       //路径指向 .svg 文件夹
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹svg文件

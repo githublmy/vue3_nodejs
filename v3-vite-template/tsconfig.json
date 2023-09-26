@@ -34,6 +34,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "./auto-imports.d.ts",
+    ".eslintrc.js",
     // "./components.d.ts"
   ],
   "references": [

@@ -51,7 +51,7 @@ const warning = (msg: string) => {
   message(msg, "warning");
 };
 
-type Fun = () => {};
+type Fun = () => object;
 /**
  * @description: 确定提示框
  * @param {string} msg 提示消息

@@ -7,7 +7,7 @@ import { defineStore } from "pinia";
 import { toTree, handleRouter } from "@/utils/commonFun";
 import type { RouteRecordRaw } from "vue-router";
 import { user } from "@/assets/json/user";
-import type { IRouteData } from "@/store/types/userStore"
+import type { IRouteData } from "@/store/types/userStore";
 
 export const useUserStore = defineStore("user", {
   state: () => {
