@@ -5,10 +5,7 @@
     :locale="localeLanguage"
     :button="buttonConfig"
     :message="msgConfig"
-  >   
-
-
-
+  >
     <router-view />
     <!-- <router-link to="/home">首页</router-link>
     <router-link to="/home2">下一页</router-link>
@@ -72,7 +69,10 @@ const { locale } = storeToRefs(useSettingStore());
 //   ag: 44,
 // };
 // console.log(name("na"));
-
+interface Iarr {
+  id: number;
+  name: string;
+}
 let arr = [
   {
     id: 1,
@@ -88,8 +88,8 @@ let arr = [
   },
 ];
 
-function getData(arr: any[], key: string, num: number) {
-  let ls = arr.filter((item) => item[key] === num);
+function getData(arr: Iarr[], key: string, num: number) {
+  let ls = arr.filter((item) => item[key as keyof Iarr] === num);
   return ls;
 }
 getData(arr, "id", 3);

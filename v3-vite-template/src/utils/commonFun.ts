@@ -4,7 +4,7 @@
 import type { RouteRecordRaw } from "vue-router";
 import type { IRouteData } from "@/store/types/userStore";
 //获取当前时间----年月日时分
-export function getNowTime(type?: any, t2?: string) {
+export function getNowTime(type?: unknown, t2?: string) {
   const d = new Date();
   const year = d.getFullYear();
   const month =
@@ -22,36 +22,6 @@ export function getNowTime(type?: any, t2?: string) {
     }
   }
   return time;
-}
-/**
- * @description: 获取两个日期之间的月份，返回数组
- * @param {string} start
- * @param {string} end
- * @return {[]} any[] 返回两个日期之间的所有月份，逗号分隔的数组或空数组 或空数组
- */
-export function getMonthBetween(start: string, end: string) {
-  let result = [];
-  let s: any = start.split("-");
-  let e: any = end.split("-");
-  let min = new Date();
-  let max = new Date();
-  min.setFullYear(s[0], s[1]);
-  max.setFullYear(e[0], e[1]);
-  var curr = min;
-  while (curr <= max) {
-    let month = curr.getMonth();
-    let str =
-      (month == 0 ? curr.getFullYear() - 1 : curr.getFullYear()) +
-      "-" +
-      (month == 0 ? 12 : month < 10 ? "0" + month : month);
-    let s = curr.getFullYear() + "-12";
-    if (str == s) {
-      str = curr.getFullYear() + "-12";
-    }
-    result.push(str);
-    curr.setMonth(month + 1);
-  }
-  return result;
 }
 /**
  * @description: 获取某月天数和周几 2022-03
@@ -125,15 +95,16 @@ const modules = import.meta.glob("../views/**/*.vue");
  */
 export function handleRouter(routers: IRouteData[]) {
   const newRoutes: RouteRecordRaw[] = routers.map((r) => {
-    const route: any = {
+    const route = {
       path: r.path,
       meta: {
         title: r.title,
         icon: r.icon,
       },
+      redirect: r.redirect,
       name: r.name,
       component: modules[`../views${r.component}.vue`],
-    };
+    } as RouteRecordRaw;
     // 重定向
     if (r.redirect) {
       route.redirect = r.redirect;

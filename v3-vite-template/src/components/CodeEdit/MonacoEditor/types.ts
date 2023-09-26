@@ -1,8 +1,4 @@
 /*
- * @Author: lu
- * @LastEditors: Please set LastEditors
- * @Date: 2023-09-07 11:01:11
- * @LastEditTime: 2023-09-07 14:37:34
  * @Description: 编辑器的数据类型
  */
 import * as monaco from "monaco-editor";
