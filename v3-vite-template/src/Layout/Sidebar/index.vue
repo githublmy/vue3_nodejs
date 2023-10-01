@@ -48,7 +48,6 @@ const ProjectTitle = computed(() => import.meta.env.VITE_TITLE);
 </style>
 <style lang="scss" scoped>
 .el-menu-vertical-demo {
-  border: none;
   :deep(.el-menu-item.is-active) {
     // background-color: #1890ff;
     transition: 0.3s;
@@ -80,7 +79,12 @@ const ProjectTitle = computed(() => import.meta.env.VITE_TITLE);
       font-size: 14px;
       font-weight: 700;
       line-height: 40px;
-      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+      font-family:
+        Avenir,
+        Helvetica Neue,
+        Arial,
+        Helvetica,
+        sans-serif;
       vertical-align: middle;
       transition: all 0.3s;
     }
