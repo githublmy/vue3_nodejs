@@ -15,7 +15,7 @@ import VitePluginCompression from "vite-plugin-compression";
 // mockjs
 import { viteMockServe } from "vite-plugin-mock";
 
-import VitePluginEslint from "vite-plugin-eslint"
+import VitePluginEslint from "vite-plugin-eslint";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // console.log(loadEnv(mode, process.cwd()));
@@ -75,13 +75,13 @@ export default defineConfig(({ mode }) => {
         enable: true, //是否启用 mock 功能
       }),
       // gzip
-      VitePluginCompression({
-        algorithm: "gzip", //压缩方式 'gzip' | 'brotliCompress' | 'deflate' | 'deflateRaw'默认gzip
-        compressionOptions: { level: 9 }, //压缩等级
-        ext: ".gz", //后缀默认 .gz
-        threshold: 1024 * 300, //多大文件开始启动压缩 500kb
-        deleteOriginFile: false, //是否删除原始文件
-      }),
+      // VitePluginCompression({
+      //   algorithm: "gzip", //压缩方式 'gzip' | 'brotliCompress' | 'deflate' | 'deflateRaw'默认gzip
+      //   compressionOptions: { level: 9 }, //压缩等级
+      //   ext: ".gz", //后缀默认 .gz
+      //   threshold: 1024 * 300, //多大文件开始启动压缩 500kb
+      //   deleteOriginFile: false, //是否删除原始文件
+      // }),
       // 配置标题
       createHtmlPlugin({
         inject: {
@@ -133,7 +133,7 @@ export default defineConfig(({ mode }) => {
       // outDir: "dist", //打包的文件夹名称 默认 dist
       // assetsDir: "assets", //静态资源打包文件夹名称
       target: ["es2020", "edge88", "firefox78", "chrome87", "safari14"], //打包目标兼容浏览器
-      chunkSizeWarningLimit: 500,   //打包文件多大警告  默认500kb
+      chunkSizeWarningLimit: 500, //打包文件多大警告  默认500kb
       rollupOptions: {
         input: {
           main: fileURLToPath(new URL("index.html", import.meta.url)),
@@ -145,9 +145,22 @@ export default defineConfig(({ mode }) => {
             }
           },
           // 用于从入口点创建的块的打包输出格式[name]表示文件名,[hash]表示该文件内容hash值
-          entryFileNames: "assets/js/[name].[hash].js",
+          entryFileNames: "js/[name].[hash].js",
           // 用于输出静态资源的命名，[ext]表示文件扩展名, 默认"assets/[name]-[hash][extname]"
-          assetFileNames: "assets/[ext]/[name].[hash].[ext]",
+          assetFileNames: "[ext]/[name].[hash].[ext]",
+          // assetFileNames(assetsInfo) {
+          //   if (assetsInfo.name.endsWith(".css")) {
+          //     return "css/[name].[hash].js";
+          //   }
+          //   if (
+          //     [".png", ".jpg", ".svg", "webp", "gif", ".jpeg"].some((ext) =>
+          //       assetsInfo.name.endsWith(ext)
+          //     )
+          //   ) {
+          //     return "images/[name].[hash].[ext]";
+          //   }
+          //   return "assets/[name].[hash].[ext]";
+          // },
           // 用于命名代码拆分时创建的共享块的输出命名 默认 "[name]-[hash].js"
           // chunkFileNames: "js/[name].[hash].js",
           // 拆分js到模块文件夹

@@ -1,8 +1,9 @@
 /*
  * @Description: 失去焦点 使用 v-blur
  */
-const fun = (evt) => {
+const fun = (evt: any) => {
   let target = evt.target;
+  // 判断span或者i标签
   if (target.nodeName === "SPAN" || target.nodeName === "I") {
     target = evt.target.parentNode;
   }
