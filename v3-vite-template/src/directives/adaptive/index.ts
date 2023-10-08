@@ -31,7 +31,7 @@ const doResize = (el: ExHTMLElement, binding: DirectiveBinding) => {
 
 export default {
   beforeMount(el: ExHTMLElement, binding: DirectiveBinding) {
-    console.log("挂载前测试", binding);
+    // console.log("挂载前测试", binding);
     el.resizeListener = () => {
       doResize(el, binding);
     };

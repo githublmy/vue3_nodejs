@@ -1,5 +1,6 @@
 <template>
   <div class="baseStyle">
+    {{ $t("message.Hello") }}
     <ElTableCommon
       :config="config"
       :tableTitle="tableTitle"

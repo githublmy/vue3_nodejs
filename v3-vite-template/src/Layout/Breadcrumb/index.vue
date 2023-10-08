@@ -36,7 +36,6 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-
       <!-- 切换主题 -->
       <el-switch
         v-model="isDark"
@@ -75,10 +74,13 @@
 import logo from "@/assets/vite.svg";
 import { useSettingStore } from "@/store/modules/setting";
 import { useUserStore } from "@/store/modules/user";
+import { useI18n } from "vue-i18n";
+// 实例化i18
 import type { IElPlusMsgFun } from "@/utils/elPlusMessage/type";
 const elMsg = inject("elMsg") as IElPlusMsgFun;
 const settingStore = useSettingStore();
-const { locale } = storeToRefs(useSettingStore());
+const { locale } = storeToRefs(settingStore);
+const i18 = useI18n();
 
 const languageList = [
   {
@@ -94,7 +96,7 @@ const route = useRoute();
 const pathList: Ref = ref([]); //导航菜单
 
 const handleCommandLg = (v: string) => {
-  console.log(locale);
+  i18.locale.value = v;
   locale.value = v;
 };
 // 切换主题

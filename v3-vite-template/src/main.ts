@@ -26,11 +26,11 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 
 app
+  .use(i18n)
   .use(router)
   .use(pinia)
   .use(directives)
   .use(Particles)
-  .use(i18n)
   .provide("elMsg", readonly(elMsg))
   .component("svg-icon", SvgIcon)
   .mount("#app");
