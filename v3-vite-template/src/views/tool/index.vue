@@ -14,17 +14,21 @@
       </el-scrollbar>
     </el-col>
     <el-col :span="20">
-      <component :is="currentCom"></component>
+      <el-scrollbar height="calc(100vh - 80px)">
+        <component :is="currentCom"></component>
+      </el-scrollbar>
     </el-col>
   </el-row>
 </template>
 
 <script lang="ts" setup>
+// 异步组件
 const ImgToBase64 = defineAsyncComponent(
   () => import("./components/ImgToBase64.vue")
 );
 const PDF = defineAsyncComponent(() => import("./components/PDF.vue"));
 const Sign = defineAsyncComponent(() => import("./components/Sign.vue"));
+
 const menus = [
   {
     title: "图片转base64",
@@ -50,7 +54,7 @@ const selectMenu = (v: string) => {
   defaultActive.value = v;
   const idx = menus.findIndex((item) => item.id === v);
   currentCom.value = menus[idx].component;
-  console.log(currentCom);
+  // console.log(currentCom);
 };
 </script>
 <style lang="scss" scoped>
