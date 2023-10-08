@@ -3,6 +3,7 @@ import "./assets/style/index.scss";
 import App from "./App.vue";
 import router from "./router";
 import pinia from "./store";
+import i18n from "./language";
 // 自定义指令
 import directives from "./directives";
 // 提示信息函数
@@ -24,13 +25,12 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
 
-
-
 app
   .use(router)
   .use(pinia)
   .use(directives)
   .use(Particles)
+  .use(i18n)
   .provide("elMsg", readonly(elMsg))
   .component("svg-icon", SvgIcon)
   .mount("#app");
