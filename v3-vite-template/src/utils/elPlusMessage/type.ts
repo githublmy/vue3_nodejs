@@ -7,7 +7,7 @@ export interface IElPlusMsgFun {
   error: (msg: string) => void;
   info: (msg: string) => void;
   warning: (msg: string) => void;
-  confirm: (msg: string, ok?: any, cancel?: any) => void;
+  confirm: (msg: string) => Promise<string>;
   prompt: (
     msg: string,
     inputPattern: RegExp,

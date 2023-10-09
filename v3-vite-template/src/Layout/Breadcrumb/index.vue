@@ -122,17 +122,16 @@ const changeTheme = () => {
 const isCollapse = computed(() => settingStore.isCollapse);
 const handleCommand = (v: string) => {
   if (v === "logOut") {
-    elMsg.confirm(
-      "确定退出登录吗？",
-      () => {
+    elMsg
+      .confirm("确定退出登录吗？")
+      .then(() => {
         elMsg.success("退出成功");
         useUserStore().$reset();
         location.href = "/";
-      },
-      () => {
+      })
+      .catch(() => {
         console.log("取消");
-      }
-    );
+      });
   }
 };
 // 监听路由
