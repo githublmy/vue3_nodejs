@@ -200,6 +200,7 @@ const mousemove = (e: MouseEvent) => {
 };
 const changeBgColor = () => {
   setBgColor();
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 };
 onMounted(() => {
   handleCanvas();
