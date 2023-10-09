@@ -50,6 +50,8 @@ declare module 'vue' {
     Markdown: typeof import('./src/components/Markdown/index.vue')['default']
     MonacoEditor: typeof import('./src/components/CodeEdit/MonacoEditor/index.vue')['default']
     Pagination: typeof import('./src/components/Pagination/index.vue')['default']
+    RichEdit: typeof import('./src/components/RichEdit/index.vue')['default']
+    RichEditor: typeof import('./src/components/RichEditor/index.vue')['default']
     RightToolBar: typeof import('./src/components/RightToolBar/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

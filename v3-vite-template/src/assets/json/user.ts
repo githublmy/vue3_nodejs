@@ -100,4 +100,14 @@ export const user = [
     id: 12,
     sort: 4,
   },
+  {
+    path: "/richEdit",
+    component: "/system/richEdit/index",
+    name: "richEdit",
+    title: "富文本编辑器",
+    icon: "",
+    pid: 5,
+    id: 13,
+    sort: 5,
+  },
 ];
