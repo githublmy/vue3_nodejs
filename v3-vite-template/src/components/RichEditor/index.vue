@@ -1,14 +1,54 @@
 <template>
   <div class="editor">
-    <QuillEditor theme="snow" :toolbar="toolbar" />
+    <QuillEditor
+      v-model:content="content"
+      theme="snow"
+      :toolbar="toolbar"
+      :options="options"
+      @ready="onEditorReady($event)"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { QuillEditor } from "@vueup/vue-quill";
+import { Quill, QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 // import '@vueup/vue-quill/dist/vue-quill.bubble.css';
+import { ToolbarConfig } from "./config";
 const toolbar = ref("full");
+const content = ref("content");
+onMounted(() => {});
+const onEditorReady = (e: Quill) => {
+  console.log("editor ready!", e);
+  for (let item of ToolbarConfig) {
+    let tip = document.querySelector(".ql-toolbar " + item.Choice);
+    if (!tip) continue;
+    tip.setAttribute("title", item.title);
+  }
+  e.setText(content.value);
+};
+const options = ref({
+  theme: "snow",
+  // bounds: document.body,
+  // debug: "warn",
+  modules: {
+    // 工具栏配置
+    toolbar: [
+      ["bold", "italic", "underline", "strike"], // 加粗 斜体 下划线 删除线
+      ["blockquote", "code-block"], // 引用  代码块
+      [{ list: "ordered" }, { list: "bullet" }], // 有序、无序列表
+      [{ indent: "-1" }, { indent: "+1" }], // 缩进
+      // [{ size: ["small", false, "large", "huge"] }], // 字体大小
+      [{ size: ["12", "14", "16", "18", "20", "22", "24", "28", "32", "36"] }], // 字体大小
+      [{ header: [1, 2, 3, 4, 5, 6, false] }], // 标题
+      [{ color: [] }, { background: [] }], // 字体颜色、字体背景颜色
+      [{ align: [] }], // 对齐方式
+      ["clean"], // 清除文本格式
+      ["link", "image", "video"], // 链接、图片、视频
+    ],
+  },
+  placeholder: "请输入内容",
+});
 </script>
 <style lang="scss">
 .editor {
@@ -94,5 +134,17 @@ const toolbar = ref("full");
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="monospace"]::before,
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before {
   content: "等宽字体";
+}
+.ql-tooltip {
+  left: 0 !important;
+}
+.ql-snow .ql-tooltip::before {
+  content: "查看链接";
+}
+.ql-snow .ql-tooltip a.ql-action::after {
+  content: "编辑";
+}
+.ql-snow .ql-tooltip a.ql-remove::before {
+  content: "移除";
 }
 </style>

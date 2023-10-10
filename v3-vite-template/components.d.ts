@@ -49,6 +49,7 @@ declare module 'vue' {
     FileUpload: typeof import('./src/components/FileUpload/index.vue')['default']
     Markdown: typeof import('./src/components/Markdown/index.vue')['default']
     MonacoEditor: typeof import('./src/components/CodeEdit/MonacoEditor/index.vue')['default']
+    OfficeEditor: typeof import('./src/components/OfficeEditor/index.vue')['default']
     Pagination: typeof import('./src/components/Pagination/index.vue')['default']
     RichEdit: typeof import('./src/components/RichEdit/index.vue')['default']
     RichEditor: typeof import('./src/components/RichEditor/index.vue')['default']
