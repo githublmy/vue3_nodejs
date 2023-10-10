@@ -55,25 +55,24 @@ router.beforeEach((to) => {
       return "/";
     } else {
       if (router.getRoutes().length <= 3) {
-        userStore
-          .getInfo()
-          .then(() => {
-            // console.log(userStore.routes, "pinia");
-            const rtList = userStore.routes;
-            // 首页重定向为第一个子路由
-            LY.redirect = rtList[0].path;
-            // 添加布局路由
-            router.addRoute(LY);
-            // 添加子路由
-            rtList.forEach((item: RouteRecordRaw) => {
-              router.addRoute("Layout", item);
-            });
-            // 最后添加404
-            router.addRoute(NotFound);
-            // console.log(router.getRoutes());
-            router.push(to.fullPath);
-          })
-          .catch(() => { });
+        userStore.getInfo().then(() => {
+          // console.log(userStore.routes, "pinia");
+          const rtList = userStore.routes;
+          // 首页重定向为第一个子路由
+          LY.redirect = rtList[0].path;
+          // 添加布局路由
+          router.addRoute(LY);
+          // 添加子路由
+          rtList.forEach((item: RouteRecordRaw) => {
+            router.addRoute("Layout", item);
+          });
+          // 最后添加404
+          router.addRoute(NotFound);
+          // console.log(router.getRoutes());
+          router.push(to.fullPath);
+          // console.log(to);
+          // return to.fullPath;
+        });
       } else {
         return true;
       }
@@ -84,9 +83,7 @@ router.beforeEach((to) => {
       // 在免登录白名单，直接进入
       return true;
     } else {
-      return {
-        path: "/login",
-      };
+      return "/login";
     }
   }
 });

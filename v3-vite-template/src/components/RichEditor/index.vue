@@ -13,7 +13,7 @@ const toolbar = ref("full");
 <style lang="scss">
 .editor {
   .ql-editor {
-    height: calc(100vh - 80px - 42px) !important;
+    height: calc(100vh - 80px - 42px - 40px) !important;
   }
 }
 .editor,
