@@ -4,7 +4,7 @@
       v-model:content="content"
       theme="snow"
       :toolbar="toolbar"
-      :options="options"
+      :options="options"   contentType="html"
       @ready="onEditorReady($event)"
     />
   </div>
@@ -15,8 +15,9 @@ import { Quill, QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 // import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import { ToolbarConfig } from "./config";
+
 const toolbar = ref("full");
-const content = ref("content");
+const content = ref("contenttest");
 onMounted(() => {});
 const onEditorReady = (e: Quill) => {
   console.log("editor ready!", e);
@@ -25,7 +26,7 @@ const onEditorReady = (e: Quill) => {
     if (!tip) continue;
     tip.setAttribute("title", item.title);
   }
-  e.setText(content.value);
+  // e.setText(content.value);
 };
 const options = ref({
   theme: "snow",
