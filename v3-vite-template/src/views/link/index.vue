@@ -53,7 +53,9 @@ const list = ref(link);
 const filterText = ref("");
 // 过滤关键字
 watch(filterText, (v) => {
-  list.value = link.filter((item) => item.keywords.indexOf(v) > -1);
+  list.value = link.filter(
+    (item) => item.keywords.toLowerCase().indexOf(v.toLowerCase()) > -1
+  );
 });
 // 获取图片地址
 const getImgUrl = (url: string) => {
