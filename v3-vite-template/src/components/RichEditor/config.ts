@@ -1,4 +1,4 @@
-// 导航栏配置
+// 导航栏提示信息配置
 export const ToolbarConfig = [
   { Choice: ".ql-insertMetric", title: "跳转配置" },
   { Choice: ".ql-bold", title: "加粗" },

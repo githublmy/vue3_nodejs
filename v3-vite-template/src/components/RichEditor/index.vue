@@ -4,7 +4,8 @@
       v-model:content="content"
       theme="snow"
       :toolbar="toolbar"
-      :options="options"   contentType="html"
+      :options="options"
+      contentType="html"
       @ready="onEditorReady($event)"
     />
   </div>
@@ -26,7 +27,6 @@ const onEditorReady = (e: Quill) => {
     if (!tip) continue;
     tip.setAttribute("title", item.title);
   }
-  // e.setText(content.value);
 };
 const options = ref({
   theme: "snow",
