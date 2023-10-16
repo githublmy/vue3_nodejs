@@ -1,0 +1,51 @@
+export default [
+  {
+    title: "vue2",
+    keywords: "vue2",
+    url: "https://v2.cn.vuejs.org",
+    icon: "../../assets/svg/vue.svg",
+    description: "渐进式框架",
+  },
+  {
+    title: "vue3",
+    keywords: "vue3",
+    url: "https://cn.vuejs.org/",
+    icon: "../../assets/svg/vue.svg",
+    description: "渐进式框架",
+  },
+  {
+    title: "element-ui",
+    keywords: "element-ui",
+    url: "https://element.eleme.cn",
+    icon: "../../assets/svg/element.svg",
+    description: "vue2组件库",
+  },
+  {
+    title: "element-plus",
+    keywords: "element-plus",
+    url: "https://element-plus.org",
+    icon: "../../assets/svg/element.svg",
+    description: "vue3组件库",
+  },
+  {
+    title: "vant",
+    keywords: "vant",
+    url: "https://vant-contrib.gitee.io",
+    icon: "../../assets/images/vant.png",
+    description: "移动端组件库",
+  },
+  {
+    title: "Ant Design Vue",
+    keywords: "Ant Design Vue",
+    url: "https://2x.antdv.com/components/overview-cn",
+    icon: "../../assets/svg/antD-vue.svg",
+    description: "Ant Design Vue组件库",
+  },
+  {
+    title: "DataV",
+    keywords: "Vue 大屏数据展示组件库",
+    url: "http://datav.jiaminghi.com/",
+    icon: "../../assets/images/dataV.png",
+    description: "Vue 大屏数据展示组件库",
+  },
+];
