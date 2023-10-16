@@ -51,11 +51,11 @@
 import link from "@/assets/json/link";
 const list = ref(link);
 const filterText = ref("");
+
 // 过滤关键字
 watch(filterText, (v) => {
-  list.value = link.filter(
-    (item) => item.keywords.toLowerCase().indexOf(v.toLowerCase()) > -1
-  );
+  const pattern = new RegExp(v, "i"); // 不区分大小写
+  list.value = link.filter((item) => pattern.test(item.keywords));
 });
 // 获取图片地址
 const getImgUrl = (url: string) => {

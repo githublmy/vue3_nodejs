@@ -57,7 +57,7 @@ export default [
   },
   {
     title: "NProgress.js",
-    keywords: "网站加载进度条插件、工具、优化、项目",
+    keywords: "网站加载进度条插件、工具、优化、项目, NProgress.js",
     url: "https://github.com/rstacruz/nprogress",
     icon: "../../assets/svg/progress.svg",
     description: "网站加载进度条插件",
