@@ -66,13 +66,13 @@
     </el-row>
     <el-row>
       <el-col>
-        <el-button type="primary" size="small" @click="preStep"
+        <el-button v-blur type="primary" size="small" @click="preStep"
           >上一步</el-button
         >
-        <el-button type="primary" size="small" @click="clearCanvas"
+        <el-button v-blur type="primary" size="small" @click="clearCanvas"
           >清空</el-button
         >
-        <el-button type="primary" size="small" @click="save"
+        <el-button v-blur type="primary" size="small" @click="save"
           >保存图片</el-button
         >
       </el-col>
@@ -158,6 +158,7 @@ const preStep = () => {
 };
 // 清空画布
 function clearCanvas() {
+  if (!imgDataArr.length) return;
   imgDataArr = [];
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }

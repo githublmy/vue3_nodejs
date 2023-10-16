@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css"; //这个样式必须引入
-import Layout from "@/layout/index.vue";
+import Layout from "../layout/index.vue";
 import { useUserStore } from "@/store/modules/user";
 
 NProgress.configure({ showSpinner: false }); // 显示右上角螺旋加载提示
@@ -64,7 +64,7 @@ router.beforeEach((to) => {
           router.addRoute(LY);
           // 添加子路由
           rtList.forEach((item: RouteRecordRaw) => {
-            router.addRoute("Layout", item);
+            router.addRoute("layout", item);
           });
           // 最后添加404
           router.addRoute(NotFound);

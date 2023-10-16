@@ -16,6 +16,9 @@ import VitePluginCompression from "vite-plugin-compression";
 import { viteMockServe } from "vite-plugin-mock";
 
 import VitePluginEslint from "vite-plugin-eslint";
+
+// 打包分析
+import visualizer from "rollup-plugin-visualizer";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // console.log(loadEnv(mode, process.cwd()));
@@ -50,11 +53,19 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       vue(),
+      visualizer({
+        // template: 'treemap', // sunburst | treemap | network | raw-data | list
+        open:true,  //注意这里要设置为true，否则无效
+        // filename: "stats.html", //分析图生成的文件名
+        filename: 'visualizer/stats.html',
+        gzipSize: true, // 收集 gzip 大小并将其显示
+        brotliSize: true, // 收集 brotli 大小并将其显示
+      }),
       VitePluginEslint(),
       //路径指向 .svg 文件夹
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹svg文件
-        iconDirs: [getPath("./src/assets/svg")],
+        iconDirs: [getPath("src/assets/svg")],
         // 指定symbolId格式
         symbolId: "[dir]-[name]",
         // svgoOptions: {
@@ -69,7 +80,7 @@ export default defineConfig(({ mode }) => {
       }),
       //mockjs
       viteMockServe({
-        mockPath: "./mock", //解析根目录下的mock文件夹,设置模拟.ts 文件的存储文件夹
+        mockPath: "mock", //解析根目录下的mock文件夹,设置模拟.ts 文件的存储文件夹
         watchFiles: false, //设置是否监视mockPath对应的文件夹内文件中的更改
         // 根据项目配置。可以配置在.env文件
         enable: true, //是否启用 mock 功能

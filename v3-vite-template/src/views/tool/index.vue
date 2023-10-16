@@ -26,7 +26,6 @@
 const ImgToBase64 = defineAsyncComponent(
   () => import("./components/ImgToBase64.vue")
 );
-const PDF = defineAsyncComponent(() => import("./components/PDF.vue"));
 const Sign = defineAsyncComponent(() => import("./components/Sign.vue"));
 
 const menus = [
@@ -34,11 +33,6 @@ const menus = [
     title: "图片转base64",
     id: "base64",
     component: markRaw(ImgToBase64),
-  },
-  {
-    title: "在线预览PDF",
-    id: "PDF",
-    component: markRaw(PDF),
   },
   {
     title: "电子签名",
