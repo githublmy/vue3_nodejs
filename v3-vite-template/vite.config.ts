@@ -55,9 +55,9 @@ export default defineConfig(({ mode }) => {
       vue(),
       visualizer({
         // template: 'treemap', // sunburst | treemap | network | raw-data | list
-        open:true,  //注意这里要设置为true，否则无效
+        // open: true, //注意这里要设置为true，否则无效，自动打开
         // filename: "stats.html", //分析图生成的文件名
-        filename: 'visualizer/stats.html',
+        filename: "visualizer/stats.html",
         gzipSize: true, // 收集 gzip 大小并将其显示
         brotliSize: true, // 收集 brotli 大小并将其显示
       }),
@@ -155,23 +155,20 @@ export default defineConfig(({ mode }) => {
               return "vendor";
             }
           },
-          // 用于从入口点创建的块的打包输出格式[name]表示文件名,[hash]表示该文件内容hash值
+          // 用于从入口点创建的块的打包输出格式[name]表示文件名,[hash]表示该文件内容hash值  默认 "[name].js"
           entryFileNames: "js/[name].[hash].js",
           // 用于输出静态资源的命名，[ext]表示文件扩展名, 默认"assets/[name]-[hash][extname]"
-          assetFileNames: "[ext]/[name].[hash].[ext]",
-          // assetFileNames(assetsInfo) {
-          //   if (assetsInfo.name.endsWith(".css")) {
-          //     return "css/[name].[hash].js";
-          //   }
-          //   if (
-          //     [".png", ".jpg", ".svg", "webp", "gif", ".jpeg"].some((ext) =>
-          //       assetsInfo.name.endsWith(ext)
-          //     )
-          //   ) {
-          //     return "images/[name].[hash].[ext]";
-          //   }
-          //   return "assets/[name].[hash].[ext]";
-          // },
+          // assetFileNames: "[ext]/[name].[hash].[ext]",
+          assetFileNames(assetsInfo) {
+            const extNames = [".png", ".jpg", ".svg", ".webp", ".gif", ".jpeg"];
+            if (assetsInfo.name.endsWith(".css")) {
+              return "css/[name].[hash].[ext]";
+            }
+            if (extNames.some((ext) => assetsInfo.name.endsWith(ext))) {
+              return "images/[name].[hash].[ext]";
+            }
+            return "assets/[ext]/[name].[hash].[ext]";
+          },
           // 用于命名代码拆分时创建的共享块的输出命名 默认 "[name]-[hash].js"
           // chunkFileNames: "js/[name].[hash].js",
           // 拆分js到模块文件夹
@@ -181,7 +178,7 @@ export default defineConfig(({ mode }) => {
               : [];
             const fileName =
               facadeModuleId[facadeModuleId.length - 2] || "[name]";
-            return `assets/js/${fileName}/name.[hash].js`;
+            return `js/${fileName}/name.[hash].js`;
           },
         },
       },
