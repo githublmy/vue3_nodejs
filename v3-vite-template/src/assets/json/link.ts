@@ -32,7 +32,7 @@ export default [
     keywords: "vant",
     url: "https://vant-contrib.gitee.io",
     icon: "../../assets/images/vant.png",
-    description: "移动端组件库",
+    description: "轻量、可定制的移动端 Vue 组件库",
   },
   {
     title: "Ant Design Vue",
@@ -42,10 +42,24 @@ export default [
     description: "Ant Design Vue组件库",
   },
   {
-    title: "DataV",
-    keywords: "Vue 大屏数据展示组件库",
-    url: "http://datav.jiaminghi.com/",
+    title: "DataV-Vue2",
+    keywords: "Vue2 大屏数据展示组件库",
+    url: "http://datav.jiaminghi.com",
     icon: "../../assets/images/dataV.png",
-    description: "Vue 大屏数据展示组件库",
+    description: "Vue2 大屏数据展示组件库",
+  },
+  {
+    title: "DataV-Vue3",
+    keywords: "Vue 大屏数据展示组件库",
+    url: "https://datav-vue3.netlify.app",
+    icon: "../../assets/images/dataV.png",
+    description: "Vue3 大屏数据展示组件库",
+  },
+  {
+    title: "TinyPNG",
+    keywords: "TinyPNG 图片在线批量压缩网站",
+    url: "https://tinify.cn",
+    icon: "../../assets/images/TinyPNG.png",
+    description: "在线压缩图片网站",
   },
 ];

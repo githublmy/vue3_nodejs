@@ -7,10 +7,8 @@
           placeholder="请输入关键字"
           size="large"
           clearable
+          suffix-icon="Search"
         >
-          <template #append>
-            <el-button size="large" icon="Search" />
-          </template>
         </el-input>
         <div>标签：vue</div>
       </el-col>
@@ -28,6 +26,7 @@
           style="display: block"
           :href="item.url"
           target="_blank"
+          :underline="false"
         >
           <el-row class="item">
             <el-col :span="6">
@@ -69,7 +68,9 @@ const getImgUrl = (url: string) => {
       display: block;
     }
     .item {
-      border: 1px solid red;
+      // border: 1px solid red;
+      border-radius: 6px;
+      background-color: rgb(229, 240, 244);
       padding: 10px;
       .el-avatar.el-avatar--square {
         background-color: transparent;
