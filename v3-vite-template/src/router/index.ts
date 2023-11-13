@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw ,createWebHistory} from "vue-router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css"; //这个样式必须引入
 import Layout from "../layout/index.vue";
@@ -37,7 +37,7 @@ const NotFound: RouteRecordRaw = {
   component: () => import("@/views/error/404.vue"),
 };
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.VITE_BASE_URL_PREFIX),
+  history: createWebHistory(import.meta.env.VITE_BASE_URL_PREFIX),
   routes,
 });
 
