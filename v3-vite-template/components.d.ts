@@ -14,6 +14,7 @@ declare module 'vue' {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCol: typeof import('element-plus/es')['ElCol']
+    ElColorPicker: typeof import('element-plus/es')['ElColorPicker']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDialogCommon: typeof import('./src/components/ElDialogCommon/index.vue')['default']
@@ -31,12 +32,21 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
+    ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTableCommon: typeof import('./src/components/ElTableCommon/index.vue')['default']
     ElText: typeof import('element-plus/es')['ElText']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     FileUpload: typeof import('./src/components/FileUpload/index.vue')['default']
     Markdown: typeof import('./src/components/Markdown/index.vue')['default']
     MonacoEditor: typeof import('./src/components/CodeEdit/MonacoEditor/index.vue')['default']
@@ -47,5 +57,8 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     Sign: typeof import('./src/components/Sign/index.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

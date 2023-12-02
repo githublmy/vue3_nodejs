@@ -23,6 +23,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { Engine } from "tsparticles-engine";
 import { loadSlim } from "tsparticles-slim";
 import { line } from "./index";
 import type { IElPlusMsgFun } from "@/utils/elPlusMessage/type";
