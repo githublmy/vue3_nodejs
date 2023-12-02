@@ -74,6 +74,8 @@ const getImgUrl = (url: string) => {
       border-radius: 6px;
       background-color: rgb(229, 240, 244);
       padding: 10px;
+      min-height: 68px;
+
       .el-avatar.el-avatar--square {
         background-color: transparent;
       }

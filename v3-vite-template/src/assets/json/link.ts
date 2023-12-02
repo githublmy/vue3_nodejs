@@ -82,7 +82,7 @@ export default [
     keywords: "Fabric.js是一个强大而简单的Javascript HTML5画布库，canvas",
     url: "http://fabricjs.com",
     icon: "../../assets/svg/fabric.svg",
-    description: "Fabric.js是一个强大而简单的Javascript HTML5画布库",
+    description: "Fabric.js是一个强大而简单的canvas库",
   },
   {
     title: "TinyPNG",
