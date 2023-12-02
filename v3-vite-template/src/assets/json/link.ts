@@ -78,6 +78,13 @@ export default [
     description: "网站加载进度条插件",
   },
   {
+    title: "vue3-particles",
+    keywords: "粒子背景特效库 particles.js vue",
+    url: "https://www.npmjs.com/package/vue3-particles",
+    icon: "../../assets/images/particles.png",
+    description: "粒子背景特效库",
+  },
+  {
     title: "Fabric.js",
     keywords: "Fabric.js是一个强大而简单的Javascript HTML5画布库，canvas",
     url: "http://fabricjs.com",
