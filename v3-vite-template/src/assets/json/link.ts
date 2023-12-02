@@ -1,5 +1,12 @@
 export default [
   {
+    title: "vite",
+    keywords: "vite",
+    url: "https://cn.vitejs.dev",
+    icon: "../../assets/svg/vite.svg",
+    description: "vite 下一代的前端工具链，为开发提供极速响应",
+  },
+  {
     title: "vue2",
     keywords: "vue2",
     url: "https://v2.cn.vuejs.org",
@@ -42,6 +49,14 @@ export default [
     description: "Ant Design Vue组件库",
   },
   {
+    title: "IconPark",
+    keywords: `IconPark 丰富多彩的资源库免费使用
+    2600+基础图标，29种图标分类，提供更多的选择`,
+    url: "https://iconpark.oceanengine.com",
+    icon: "../../assets/svg/icon-park.svg",
+    description: "IconPark 图标库",
+  },
+  {
     title: "DataV-Vue2",
     keywords: "Vue2 大屏数据展示组件库",
     url: "http://datav.jiaminghi.com",
@@ -75,5 +90,55 @@ export default [
     url: "https://tinify.cn",
     icon: "../../assets/images/TinyPNG.png",
     description: "在线压缩图片网站",
+  },
+  {
+    title: "在线生成波浪线svg",
+    keywords: "Make some waves! 在线生成波浪线svg",
+    url: "https://getwaves.io",
+    icon: "../../assets/svg/wave.svg",
+    description: "在线生成波浪线svg",
+  },
+  {
+    title: "纯css动画库",
+    keywords: "纯css动画",
+    url: "https://uiverse.io",
+    icon: "../../assets/svg/logoUI.svg",
+    description: "纯css动画库",
+  },
+  {
+    title: "css加载动画",
+    keywords: "纯css动画库 css Loaders",
+    url: "https://css-loaders.com",
+    icon: "../../assets/svg/css.svg",
+    description: "纯css动画库 css Loaders",
+  },
+  {
+    title: "lottie动画库",
+    keywords: "lottie动画库",
+    url: "https://lottiefiles.com",
+    icon: "../../assets/svg/lottie.svg",
+    description: "高级动画库 lottie动画库",
+  },
+  {
+    title: "driver.js",
+    keywords: "网站引导页js库 driver.js",
+    url: "https://driverjs.com",
+    icon: "../../assets/svg/driver-head.svg",
+    description: "网站引导页js库",
+  },
+  {
+    title: "autofit.js",
+    keywords: "大屏适配 autofit.js",
+    url: "https://www.npmjs.com/package/autofit.js",
+    icon: "../../assets/images/autofit.png",
+    description: "autofit.js 最易用的自适应工具",
+  },
+  {
+    title: "v-scale-screen",
+    keywords:
+      "大屏适配 v-scale-screen 可用于大屏项目开发，实现屏幕自适应，可根据宽度自适应，高度自适应，和宽高等比例自适应，全屏自适应（会存在拉伸问题）",
+    url: "https://www.npmjs.com/package/autofit.js",
+    icon: "../../assets/svg/big-screen.svg",
+    description: "大屏自适应容器组件，可用于大屏项目开发",
   },
 ];

@@ -47,7 +47,7 @@ export default defineConfig(({ mode }) => {
           // ws:true,//websockets
           changeOrigin: true, //允许跨域
           // 重写路由
-          rewrite: (path) => path.replace(new RegExp(`^/api`), "/api"),
+          rewrite: (path) => path.replace(new RegExp(`^/api`), "^/api"),
         },
       },
     },
