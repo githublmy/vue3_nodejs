@@ -43,7 +43,7 @@ export default defineConfig(({ mode }) => {
       host: "0.0.0.0",
       proxy: {
         "/api": {
-          target: "http://localhost:5173",
+          target: "http://localhost:3000",
           // ws:true,//websockets
           changeOrigin: true, //允许跨域
           // 重写路由

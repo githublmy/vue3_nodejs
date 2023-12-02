@@ -54,7 +54,7 @@ import type { UploadInstance, UploadProps, UploadFile } from "element-plus";
 import { useFileListStore } from "@/store/modules/fileList";
 import type { IElPlusMsgFun } from "@/utils/elPlusMessage/type";
 const elMsg = inject("elMsg") as IElPlusMsgFun;
-const url = "/files/upload" || import.meta.env.VITE_UPLOAD_URL;
+const url = "http://localhost:3000/files/upload" || import.meta.env.VITE_UPLOAD_URL;
 const { fileList } = storeToRefs(useFileListStore());
 
 const tableTitle = ref([
