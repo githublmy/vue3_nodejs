@@ -2,6 +2,7 @@
   <div id="home">
     首页
     <span>{{ $t("message.Hello") }}</span>
+    <el-button type="primary" size="small" @click="restart">重新播放</el-button>
   </div>
 </template>
 <script lang="ts" setup>
@@ -12,7 +13,9 @@ const driverObj = driver({
   prevBtnText: "←上一步",
   nextBtnText: "下一步→",
   doneBtnText: "√完成",
-  progressText:"{{current}} / {{total}}",
+  progressText: "{{current}} / {{total}}",
+  popoverClass: "driverjs-theme",
+  overlayColor: "#b3eaff",
   steps: [
     {
       element: "#app",
@@ -87,10 +90,79 @@ const driverObj = driver({
 });
 
 driverObj.drive();
+
+const restart = () => {
+  driverObj.drive();
+};
 </script>
-<style lang="scss" scoped>
-#home {
-  width: 100%;
-  height: 600px;
+<style lang="scss">
+.my-custom-popover-class {
+  color: red;
+}
+
+.driver-popover.driverjs-theme {
+  // background-color: #fde047;
+  // color: #000;
+}
+
+.driver-popover.driverjs-theme .driver-popover-title {
+  font-size: 20px;
+}
+
+.driver-popover.driverjs-theme .driver-popover-title,
+.driver-popover.driverjs-theme .driver-popover-description,
+.driver-popover.driverjs-theme .driver-popover-progress-text {
+  color: #000;
+}
+.driver-popover.driverjs-theme .driver-popover-progress-text {
+  margin-right: 10px;
+}
+.driver-popover.driverjs-theme button {
+  flex: 1;
+  text-align: center;
+  background-color: #000;
+  color: #ffffff;
+  // border: 2px solid #000;
+  text-shadow: none;
+  // font-size: 14px;
+  border-radius: 6px;
+}
+
+.driver-popover.driverjs-theme button:hover {
+  background-color: #000;
+  color: #ffffff;
+}
+
+.driver-popover.driverjs-theme .driver-popover-navigation-btns {
+  justify-content: space-between;
+  gap: 3px;
+}
+
+.driver-popover.driverjs-theme .driver-popover-close-btn {
+  color: #9b9b9b;
+}
+
+.driver-popover.driverjs-theme .driver-popover-close-btn:hover {
+  color: #000;
+}
+
+.driver-popover.driverjs-theme
+  .driver-popover-arrow-side-left.driver-popover-arrow {
+  border-left-color: #fde047;
+}
+
+.driver-popover.driverjs-theme
+  .driver-popover-arrow-side-right.driver-popover-arrow {
+  border-right-color: #fde047;
+}
+
+.driver-popover.driverjs-theme
+  .driver-popover-arrow-side-top.driver-popover-arrow {
+  border-top-color: #fde047;
+}
+
+.driver-popover.driverjs-theme
+  .driver-popover-arrow-side-bottom.driver-popover-arrow {
+  border-bottom-color: #fde047;
 }
 </style>
