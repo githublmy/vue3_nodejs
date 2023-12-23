@@ -16,16 +16,25 @@ import { Quill, QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 // import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import { ToolbarConfig } from "./config";
-
-const toolbar = ref("full");
-const content = ref("contenttest");
+import type { Toolbar } from "./types";
+// 声明一个变量toolbar，并赋值为ref("full")，所有工具
+const toolbar = ref<Toolbar>("full");
+const content = ref("");
+// 声明一个变量content，并赋值为ref("contenttest")
 onMounted(() => {});
+// 当组件挂载完成时，执行onMounted函数
 const onEditorReady = (e: Quill) => {
-  console.log("editor ready!", e);
+  // 声明一个函数onEditorReady，并传入参数e，e的类型为Quill
+  console.log("编辑器准备好了!", e);
+  // 打印出"编辑器准备好了!"，以及e
   for (let item of ToolbarConfig) {
+    // 遍历ToolbarConfig，取出每一项
     let tip = document.querySelector(".ql-toolbar " + item.Choice);
+    // 查询出class为ql-toolbar + item.Choice的元素，赋值给tip
     if (!tip) continue;
+    // 如果tip不存在，则跳过本次循环
     tip.setAttribute("title", item.title);
+    // 给tip添加title属性，值为item.title
   }
 };
 const options = ref({
