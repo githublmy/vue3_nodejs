@@ -19,10 +19,9 @@ import { ToolbarConfig } from "./config";
 import type { Toolbar } from "./types";
 // 声明一个变量toolbar，并赋值为ref("full")，所有工具
 const toolbar = ref<Toolbar>("full");
-const content = ref("");
-// 声明一个变量content，并赋值为ref("contenttest")
-onMounted(() => {});
-// 当组件挂载完成时，执行onMounted函数
+// 声明一个变量content
+const content = ref("") as unknown as string;
+
 const onEditorReady = (e: Quill) => {
   // 声明一个函数onEditorReady，并传入参数e，e的类型为Quill
   console.log("编辑器准备好了!", e);
