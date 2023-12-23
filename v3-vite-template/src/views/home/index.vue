@@ -96,14 +96,7 @@ const restart = () => {
 };
 </script>
 <style lang="scss">
-.my-custom-popover-class {
-  color: red;
-}
-
-.driver-popover.driverjs-theme {
-  // background-color: #fde047;
-  // color: #000;
-}
+$color: #409eff;
 
 .driver-popover.driverjs-theme .driver-popover-title {
   font-size: 20px;
@@ -117,10 +110,10 @@ const restart = () => {
 .driver-popover.driverjs-theme .driver-popover-progress-text {
   margin-right: 10px;
 }
-.driver-popover.driverjs-theme button {
+.driver-popover.driverjs-theme .driver-popover-navigation-btns button {
   flex: 1;
   text-align: center;
-  background-color: #000;
+  background-color: $color;
   color: #ffffff;
   // border: 2px solid #000;
   text-shadow: none;
@@ -128,8 +121,8 @@ const restart = () => {
   border-radius: 6px;
 }
 
-.driver-popover.driverjs-theme button:hover {
-  background-color: #000;
+.driver-popover.driverjs-theme .driver-popover-navigation-btns button:hover {
+  background-color: lighten($color, 10%);
   color: #ffffff;
 }
 
@@ -138,12 +131,12 @@ const restart = () => {
   gap: 3px;
 }
 
-.driver-popover.driverjs-theme .driver-popover-close-btn {
-  color: #9b9b9b;
-}
+// .driver-popover.driverjs-theme .driver-popover-close-btn {
+//   color: #fff;
+// }
 
 .driver-popover.driverjs-theme .driver-popover-close-btn:hover {
-  color: #000;
+  color: lighten(#000, 30%);
 }
 
 .driver-popover.driverjs-theme
