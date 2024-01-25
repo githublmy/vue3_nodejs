@@ -139,5 +139,15 @@ export const user = [
     pid: 5,
     id: 14,
     sort: 6
+  },
+  {
+    path: '/test',
+    component: '/system/test',
+    name: 'test',
+    title: 'test',
+    icon: '',
+    pid: 5,
+    id: 15,
+    sort: 7
   }
 ]
