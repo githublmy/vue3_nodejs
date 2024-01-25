@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import logo from "@/assets/vite.svg";
+import logo from "@/assets/svg/vite.svg";
 import { useSettingStore } from "@/store/modules/setting";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";

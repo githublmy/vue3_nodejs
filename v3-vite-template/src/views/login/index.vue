@@ -23,6 +23,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { Engine } from "tsparticles-engine";
 import { loadSlim } from "tsparticles-slim";
 import { line } from "./index";
 import type { IElPlusMsgFun } from "@/utils/elPlusMessage/type";
@@ -30,12 +31,12 @@ import { encrypt, decrypt } from "@/utils/jsencrypt";
 const router = useRouter();
 import { useUserStore } from "@/store/modules/user";
 const userStore = useUserStore();
-const particlesInit = async (engine: any) => {
+const particlesInit = async (engine: Engine) => {
   //await loadFull(engine);
   await loadSlim(engine);
 };
 const a = ref<number | null>(null);
-console.log(a);/*  */
+console.log(a); /*  */
 a.value = 4;
 const particlesLoaded = async (container: any) => {
   console.log("Particles container loaded", container);

@@ -47,7 +47,7 @@ export default defineConfig(({ mode }) => {
           // ws:true,//websockets
           changeOrigin: true, //允许跨域
           // 重写路由
-          rewrite: (path) => path.replace(new RegExp(`^/api`), "/api"),
+          rewrite: (path) => path.replace(new RegExp(`^/api`), "^/api"),
         },
       },
     },
@@ -151,8 +151,15 @@ export default defineConfig(({ mode }) => {
         },
         output: {
           manualChunks(id) {
+            // if (id.includes("node_modules")) {
+            //   return "vendor";
+            // }
             if (id.includes("node_modules")) {
-              return "vendor";
+              return id
+                .toString()
+                .split("node_modules/")[1]
+                .split("/")[0]
+                .toString();
             }
           },
           // 用于从入口点创建的块的打包输出格式[name]表示文件名,[hash]表示该文件内容hash值  默认 "[name].js"

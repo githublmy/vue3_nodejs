@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw ,createWebHistory} from "vue-router";
+import { createRouter, RouteRecordRaw ,createWebHistory} from "vue-router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css"; //这个样式必须引入
 import Layout from "../layout/index.vue";

@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "vite --host --open",
     "build:stage": "vue-tsc && vite build --mode staging",
-    "build:test": "vue-tsc && vite build --mode test",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },

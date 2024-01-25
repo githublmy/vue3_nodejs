@@ -130,4 +130,14 @@ export const user = [
     id: 13,
     sort: 5,
   },
+  {
+    path: "/aiEditor",
+    component: "/system/aiEditor/index",
+    name: "aiEditor",
+    title: "AiEditor",
+    icon: "",
+    pid: 5,
+    id: 14,
+    sort: 6,
+  },
 ];

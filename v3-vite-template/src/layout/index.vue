@@ -65,6 +65,5 @@ const isCollapse = computed(() => settingStore.isCollapse);
 }
 .layout-container .el-main {
   padding: 0;
-  overflow: hidden;
 }
 </style>

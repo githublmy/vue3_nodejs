@@ -128,7 +128,7 @@ export function toTree({
   order = "sort",
 }) {
   let up: any = arrList
-    .filter((x: any) => x[pid] === null)
+    .filter((x: IRouteData) => x[pid] === null)
     .sort((a: IRouteData, b: IRouteData) => a[order] - b[order]);
   let cp: IRouteData[] = arrList.filter((x: IRouteData) => x[pid]);
   getData(up);
