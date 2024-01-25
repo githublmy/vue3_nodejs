@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import type { PropType } from 'vue'
 
 export type Theme = 'vs' | 'hc-black' | 'vs-dark'
 export type FoldingStrategy = 'auto' | 'indentation'

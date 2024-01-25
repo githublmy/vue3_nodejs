@@ -18,7 +18,7 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import { ToolbarConfig } from './config'
 
 const toolbar = ref('full')
-const content = ref('contenttest')
+const content = ref('')
 onMounted(() => {})
 const onEditorReady = (e: Quill) => {
   console.log('editor ready!', e)

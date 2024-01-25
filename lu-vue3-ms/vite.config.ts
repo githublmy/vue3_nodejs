@@ -123,12 +123,12 @@ export default defineConfig(({ mode }) => {
     build: {
       // 打包生产环境，清除console和debugger
       minify: 'terser',
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true
-        }
-      },
+      // terserOptions: {
+      //   compress: {
+      //     drop_console: true,
+      //     drop_debugger: true
+      //   }
+      // },
       // outDir: "dist", //打包的文件夹名称 默认 dist
       // assetsDir: "assets", //静态资源打包文件夹名称
       target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'], //打包目标兼容浏览器

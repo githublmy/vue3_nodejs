@@ -1,7 +1,7 @@
 /*
  * @Description: 公共接口
  */
-import request from '@/utils/request.ts'
+import request from '@/utils/request'
 import type { PromiseRes, IGetList } from '@/types/index'
 
 enum API {

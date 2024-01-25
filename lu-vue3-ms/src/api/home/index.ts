@@ -1,4 +1,4 @@
-import request from '@/utils/request.ts'
+import request from '@/utils/request'
 // import type { PromiseRes } from "@/types/index";
 import type { IData, IResponse } from './types'
 enum API {

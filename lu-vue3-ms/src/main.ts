@@ -7,7 +7,7 @@ import i18n from './language'
 // 自定义指令
 import directives from './directives'
 // 提示信息函数
-import elMsg from '@/utils/elPlusMessage/index.ts'
+import elMsg from '@/utils/elPlusMessage/index'
 // 引入svg注册脚本
 import 'virtual:svg-icons-register'
 // 引入svg组件
@@ -31,6 +31,6 @@ app
   .use(pinia)
   .use(directives)
   .use(Particles)
-  .provide('elMsg', readonly(elMsg))
+  .provide('elMsg', elMsg)
   .component('svg-icon', SvgIcon)
   .mount('#app')

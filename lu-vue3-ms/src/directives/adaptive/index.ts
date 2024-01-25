@@ -1,7 +1,7 @@
 /*
  * @Description: 自适应表格高度 使用方式 v-adaptive={ bottomOffset: 62 }
  */
-import { DirectiveBinding } from 'vue'
+import type { DirectiveBinding } from 'vue'
 interface ExHTMLElement extends HTMLElement {
   resizeListener: EventListener
 }

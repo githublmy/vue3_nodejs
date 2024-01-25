@@ -21,23 +21,25 @@
         class="link-item"
         style="margin-top: 20px"
       >
-        <el-link
-          type="info"
-          style="display: block"
-          :href="item.url"
-          target="_blank"
-          :underline="false"
-        >
-          <el-row class="item">
-            <el-col :span="6">
-              <el-avatar fit="fill" shape="square" :src="getImgUrl(item.icon)"></el-avatar>
-            </el-col>
-            <el-col :span="16">
-              <h4 style="color: #000">{{ item.title }}</h4>
-              <el-text size="small">{{ item.description }}</el-text>
-            </el-col>
-          </el-row>
-        </el-link>
+        <el-tooltip effect="dark" :content="item.url" placement="top-start">
+          <el-link
+            type="info"
+            style="display: block"
+            :href="item.url"
+            target="_blank"
+            :underline="false"
+          >
+            <el-row class="item">
+              <el-col :span="6">
+                <el-avatar fit="fill" shape="square" :src="getImgUrl(item.icon)"></el-avatar>
+              </el-col>
+              <el-col :span="16">
+                <h4 style="color: #000">{{ item.title }}</h4>
+                <el-text size="small">{{ item.description }}</el-text>
+              </el-col>
+            </el-row>
+          </el-link>
+        </el-tooltip>
       </el-col>
     </el-row>
   </div>
@@ -54,8 +56,8 @@ watch(filterText, (v) => {
   list.value = link.filter((item) => pattern.test(item.keywords))
 })
 // 获取图片地址
-const getImgUrl = (url: string) => {
-  return new URL(url, import.meta.url).href
+const getImgUrl = (name: string) => {
+  return new URL(`../../assets/${name}`, import.meta.url).href
 }
 </script>
 <style lang="scss" scoped>

@@ -11,7 +11,7 @@ console.log(fabric)
 
 function init() {
   canvas = new fabric.Canvas('canvasContainer', {
-    isDrawingMode: false //开启自由绘图模式true | false
+    isDrawingMode: true //开启自由绘图模式true | false
   }) // 这里传入的是canvas的id
   // 设置画笔颜色
   canvas.freeDrawingBrush.color = '#11999e'
