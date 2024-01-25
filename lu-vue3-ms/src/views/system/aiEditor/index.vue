@@ -1,8 +1,6 @@
 <template>
   <div class="baseStyle aiEdit">
-    <el-scrollbar>
-      <AiEditor />
-    </el-scrollbar>
+    <AiEditor />
   </div>
 </template>
 
@@ -18,5 +16,10 @@ import AiEditor from './components/AiEditor/index.vue'
       }
     }
   }
+}
+</style>
+<style lang="scss" scoped>
+.aiEdit {
+  height: 100%;
 }
 </style>
