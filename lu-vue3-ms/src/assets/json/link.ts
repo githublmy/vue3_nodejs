@@ -35,6 +35,13 @@ export default [
     description: 'vue项目分享'
   },
   {
+    title: 'vue特效网站',
+    keywords: 'vue3 vue2 项目 示例',
+    url: 'https://madewithvuejs.com/',
+    icon: 'images/madeWith.png',
+    description: 'vue项目分享'
+  },
+  {
     title: 'aiEditor',
     keywords: 'vue3 aiEditor ts 星火 AI',
     url: 'https://aieditor.dev/',
