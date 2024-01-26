@@ -7,7 +7,7 @@
         @change="changeTheme"
       >
         <el-radio-button label="classic">经典主题</el-radio-button>
-        <el-radio-button label="dark">黑暗主题</el-radio-button>
+        <el-radio-button label="dark">暗黑主题</el-radio-button>
       </el-radio-group>
       <el-button
         v-blur
@@ -18,7 +18,6 @@
         >清空</el-button
       >
     </el-row>
-
     <div id="vditor" />
   </div>
 </template>
