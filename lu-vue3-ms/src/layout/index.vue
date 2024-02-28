@@ -15,9 +15,7 @@
         <el-main>
           <router-view v-slot="{ Component, route }">
             <transition name="page" mode="out-in">
-              <keep-alive>
-                <component :is="Component" :key="route.path" />
-              </keep-alive>
+              <component :is="Component" :key="route.path" />
             </transition>
           </router-view>
         </el-main>

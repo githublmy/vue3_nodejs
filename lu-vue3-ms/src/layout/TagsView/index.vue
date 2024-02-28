@@ -297,7 +297,7 @@ const deleteTag = (tag: IObj) => {
       }
       &:hover {
         color: #fff;
-        background: $color-primary;
+        background: #409eff;
       }
     }
   }

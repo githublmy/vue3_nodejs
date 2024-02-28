@@ -177,9 +177,8 @@ export default defineConfig(({ mode }) => {
       // css预处理器
       preprocessorOptions: {
         scss: {
-          // 引入 variables.scss 这样就可以在全局中使用 variables.scss中预定义的变量了
-          // 给导入的路径最后加上 ;
-          additionalData: "@import '@/assets/style/variables.scss';"
+          // 引入 variables.scss
+          additionalData: `@import "@/assets/style/variables.scss";`,
         }
       }
     }

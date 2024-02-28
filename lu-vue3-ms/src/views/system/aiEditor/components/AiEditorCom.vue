@@ -26,7 +26,7 @@ onMounted(() => {
     element: divRef.value as Element,
     placeholder: '点击输入内容...',
     content: `AiEditor 是一个面向 AI 的开源富文本编辑器。`,
-    editable: false,
+    editable: true,
     ai: {
       models: {
         spark: {
