@@ -138,14 +138,14 @@ export default defineConfig(({ mode }) => {
           main: fileURLToPath(new URL('index.html', import.meta.url))
         },
         output: {
-          // manualChunks(id) {
-          //   // if (id.includes('node_modules')) {
-          //   //   return 'vendor'
-          //   // }
-          //   // if (id.includes('node_modules')) {
-          //   //   return id.toString().split('node_modules/')[1].split('/')[0].toString()
-          //   // }
-          // },
+          manualChunks(id) {
+            // if (id.includes('node_modules')) {
+            //   return 'vendor'
+            // }
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString()
+            }
+          },
           // 用于从入口点创建的块的打包输出格式[name]表示文件名,[hash]表示该文件内容hash值  默认 "[name].js"
           entryFileNames: 'js/[name].[hash].js',
           // 用于输出静态资源的命名，[ext]表示文件扩展名, 默认"assets/[name]-[hash][extname]"

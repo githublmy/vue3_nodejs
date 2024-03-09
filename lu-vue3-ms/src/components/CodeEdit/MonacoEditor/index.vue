@@ -1,18 +1,26 @@
 <template>
   <div>
-    <el-select v-model="language" filterable @change="changeLanguage">
-      <el-option v-for="item in languageOptions" :key="item" :label="item" :value="item">
-      </el-option>
-    </el-select>
-    <el-select v-model="theme" filterable @change="changeTheme">
-      <el-option v-for="item in themeOptions" :key="item" :label="item" :value="item"> </el-option>
-    </el-select>
+    <el-row :gutter="20">
+      <el-col :span="3">
+        <el-select v-model="language" filterable @change="changeLanguage">
+          <el-option v-for="item in languageOptions" :key="item" :label="item" :value="item">
+          </el-option>
+        </el-select>
+      </el-col>
+      <el-col :span="3">
+        <el-select v-model="theme" filterable @change="changeTheme">
+          <el-option v-for="item in themeOptions" :key="item" :label="item" :value="item">
+          </el-option>
+        </el-select>
+      </el-col>
+    </el-row>
+
     <el-button @click="formmatter">格式化</el-button>
     <div
       ref="codeEditBox"
       class="monaco-editor"
       v-adaptive="{ bottomOffset: 0 }"
-      style="width: 100%"
+      style="width: 100%; border: 1px solid #333"
     ></div>
   </div>
 </template>
