@@ -46,7 +46,7 @@ const router = createRouter({
 const whiteList = ['/login']
 
 // 路由守卫
-router.beforeEach((to) => {
+router.beforeEach(async (to, _) => {
   NProgress.start() //开启进度条
   const userStore = useUserStore()
   const token = userStore.token
@@ -56,24 +56,20 @@ router.beforeEach((to) => {
       return '/'
     } else {
       if (router.getRoutes().length <= 3) {
-        userStore.getInfo().then(() => {
-          // console.log(userStore.routes, "pinia");
-          const rtList = userStore.routes
-          // 首页重定向为第一个子路由
-          LY.redirect = rtList[0].path
-          // 添加布局路由
-          router.addRoute(LY)
-          // 添加子路由
-          rtList.forEach((item: RouteRecordRaw) => {
-            router.addRoute('layout', item)
-          })
-          // 最后添加404
-          router.addRoute(NotFound)
-          // console.log(router.getRoutes());
-          router.push(to.fullPath)
-          // console.log(to);
-          // return to.fullPath;
+        await userStore.getInfo()
+        const rtList = userStore.routes
+        // 首页重定向为第一个子路由
+        LY.redirect = rtList[0].path
+        // 添加布局路由
+        router.addRoute(LY)
+        // 添加子路由
+        rtList.forEach((item: RouteRecordRaw) => {
+          router.addRoute('layout', item)
         })
+        // 最后添加404
+        router.addRoute(NotFound)
+        // console.log(router.getRoutes())
+        return to.fullPath
       } else {
         return true
       }
