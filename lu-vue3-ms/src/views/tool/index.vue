@@ -21,6 +21,7 @@
 // 异步组件
 const ImgToBase64 = defineAsyncComponent(() => import('./components/ImgToBase64.vue'))
 const Sign = defineAsyncComponent(() => import('./components/Sign.vue'))
+const CountAnimate = defineAsyncComponent(() => import('./components/CountAnimate.vue'))
 
 const menus = [
   {
@@ -32,6 +33,11 @@ const menus = [
     title: '电子签名',
     id: 'sign',
     component: markRaw(Sign)
+  },
+  {
+    title: '数字动画',
+    id: 'CountAnimate',
+    component: markRaw(CountAnimate)
   }
 ]
 // 默认选择

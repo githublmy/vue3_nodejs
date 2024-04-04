@@ -33,3 +33,33 @@ export function debounce(func: { (): void; apply?: any }, waitTime = 400, immedi
   }
   return debounced
 }
+
+/**
+ * @description 数字动画
+ * @param duration 动画持续时间
+ * @param from 动画起始值
+ * @param to 动画结束值
+ * @param onProgress 动画进行中回调
+ */
+export function animationForCount(
+  duration: number,
+  from: number,
+  to: number,
+  onProgress: { (v: number): void }
+) {
+  let val = from
+  const start = Date.now()
+  const speed = (to - from) / duration
+  const run = () => {
+    const t = Date.now() - start
+    if (t >= duration) {
+      val = to
+      onProgress(val)
+      return
+    }
+    val = from + speed * t
+    onProgress(val)
+    requestAnimationFrame(run)
+  }
+  run()
+}
