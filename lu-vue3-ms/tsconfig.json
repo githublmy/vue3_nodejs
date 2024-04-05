@@ -1,5 +1,4 @@
 {
-  // "files": [],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -38,12 +37,4 @@
     ".eslintrc.cjs",
     "env.d.ts"
   ],
-  // "references": [
-  //   {
-  //     "path": "./tsconfig.node.json"
-  //   },
-  //   {
-  //     "path": "./tsconfig.app.json"
-  //   }
-  // ]
 }
