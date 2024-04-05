@@ -2,8 +2,8 @@
   <div>
     <el-row :gutter="20">
       <el-radio-group style="margin-bottom: 10px" v-model="themeValue" @change="changeTheme">
-        <el-radio-button label="classic">经典主题</el-radio-button>
-        <el-radio-button label="dark">黑暗主题</el-radio-button>
+        <el-radio-button value="classic">经典主题</el-radio-button>
+        <el-radio-button value="dark">黑暗主题</el-radio-button>
       </el-radio-group>
       <el-button v-blur style="margin-left: 10px" type="primary" size="default" @click="clearValue"
         >清空</el-button
