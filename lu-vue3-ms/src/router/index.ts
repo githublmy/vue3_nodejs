@@ -1,10 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css"; //这个样式必须引入
 import Layout from "../layout/index.vue";
 import { useUserStore } from "@/store/modules/user";
-
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 NProgress.configure({ showSpinner: false }); // 显示右上角螺旋加载提示
 
 const routes: Array<RouteRecordRaw> = [
