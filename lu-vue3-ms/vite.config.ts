@@ -15,7 +15,14 @@ import VitePluginCompression from 'vite-plugin-compression'
 
 // 打包分析
 import { visualizer } from 'rollup-plugin-visualizer'
-// https://vitejs.dev/config/
+import fs from "fs"
+import { dayjs } from "element-plus";
+const version = {
+  "latestTime": dayjs().format("YYYY-MM-DD HH:mm:ss"),
+}
+fs.writeFile("./src/utils/buildTime.json", JSON.stringify(version), (err) => {
+  console.log('打包时间更新成功');
+})
 export default defineConfig(({ mode }) => {
   // console.log(loadEnv(mode, process.cwd()));
   const env = loadEnv(mode, process.cwd())
@@ -122,7 +129,7 @@ export default defineConfig(({ mode }) => {
     ],
     build: {
       // 打包生产环境，清除console和debugger
-      minify: 'terser',
+      // minify: 'terser',
       // terserOptions: {
       //   compress: {
       //     drop_console: true,
