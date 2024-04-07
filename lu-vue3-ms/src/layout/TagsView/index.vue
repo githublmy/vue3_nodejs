@@ -120,7 +120,7 @@ watch(isShowRefresh, (value: any) => {
 
 watch(
   route,
-  (v: { path: string | string[]; meta: any }) => {
+  (v) => {
     const obj: any = {
       path: v.path,
       meta: v.meta,
@@ -133,20 +133,20 @@ watch(
       const i = test.value.findIndex((item: any) => item.to === obj.path);
       const parentWidth = dtags.value.offsetWidth;
       // const parentWidth = scrollWrapper.value.wrapRef.offsetWidth
-      console.log(
-        scrollWrapper.value.wrapRef.offsetWidth,
-        parentWidth,
-        "监听数据 ---元素宽度-----"
-      );
+      // console.log(
+      //   scrollWrapper.value.wrapRef.offsetWidth,
+      //   parentWidth,
+      //   "监听数据 ---元素宽度-----"
+      // );
 
       if (i === -1) {
         return;
       }
       const rec = test.value[i].$el.getBoundingClientRect();
       // console.log(parentWidth, "监听数据 ---元素宽度-----");
-      console.log(rec);
+      // console.log(rec);
       let ofl = rec.left - w.value;
-      console.log(ofl, "距离左侧");
+      // console.log(ofl, "距离左侧");
       // 小于左侧滚动
       if (ofl < 0) {
         scrollWrapper.value.setScrollLeft(scrollLeft + ofl - 20);
@@ -162,7 +162,6 @@ watch(
   { immediate: true, deep: true }
 );
 function handleScroll(e: { scrollLeft: number }) {
-  console.log(e);
   scrollLeft = e.scrollLeft;
 }
 
