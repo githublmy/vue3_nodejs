@@ -1,14 +1,29 @@
-const WS_URL = import.meta.env.VITE_APP_WEBSOCKET_URL; // 获取环境变量中的websocket地址
+// 连接地址
+const uuid = "/uuid" + new Date().getTime();
+export let ws_params = {
+  back_url: "ws",
+};
+const WS_URL =
+  import.meta.env.VITE_APP_WEBSOCKET_URL + "/" + ws_params.back_url;
+// console.log(WS_URL);
 let websock = null;
 //断线重连后，延迟5秒重新创建WebSocket连接  rec用来存储延迟请求的代码
 let rec;
 //连接标识 避免重复连接
 let isConnect = false;
 //心跳发送/返回的信息 服务器和客户端收到的信息内容如果如下 就识别为心跳信息 不要做业务处理
-const checkMsg = "heartbeat";
+let checkMsg = "heartbeat";
 //定义外部接收数据的回调函数
 let globalCallback = function (e) {
-  console.log(e, "接收数据socket.js")
+  console.log(e, "接收数据");
+};
+//定义是否连接成功的回调函数
+let isConCallback = function (e) {
+  console.log(e, "连接了？");
+};
+//定义外部错误信息的回调函数
+let reConnectWsCallback = function (e) {
+  console.log(e, "连接了？");
 };
 
 const createWebSocket = () => {
@@ -16,23 +31,25 @@ const createWebSocket = () => {
     initWebSocket(); //初始化websocket连接
   } catch (e) {
     console.log("尝试创建连接失败");
-    reConnect(); //如果无法连接上webSocket 那么重新连接！可能会因为服务器重新部署，或者短暂断网等导致无法创建连接
+    //如果无法连接上webSocket 那么重新连接！可能会因为服务器重新部署，或者短暂断网等导致无法创建连接
+    reConnect();
   }
 };
 
 //定义重连函数
-const reConnect = () => {
+let reConnect = () => {
   console.log("尝试重新连接");
   if (isConnect) return; //如果已经连上就不在重连了
   rec && clearTimeout(rec);
-  rec = setTimeout(function () { // 延迟5秒重连  避免过多次过频繁请求重连
+  rec = setTimeout(function () {
+    // 延迟5秒重连  避免过多次过频繁请求重连
     createWebSocket();
-  }, 5000);
+  }, 2000);
 };
 //设置关闭连接
-const closeWebSocket = () => {
-  websock.close();
+let closeWebSocket = () => {
   console.log("关闭websocket");
+  websock.close();
 };
 //心跳设置
 const heartCheck = {
@@ -48,90 +65,102 @@ const heartCheck = {
   reset: function () {
     clearTimeout(this.timeoutObj);
     this.start();
-  }
+  },
 };
 
 // 初始化websocket
 function initWebSocket() {
-  websock = new WebSocket(WS_URL)
+  console.log(ws_params);
+  const ws_u =
+    import.meta.env.VITE_APP_WEBSOCKET_URL + "/" + ws_params.back_url;
+  console.log(ws_u, "websocket地址");
+  websock = new WebSocket(ws_u);
   websock.onmessage = function (e) {
-    websocketonmessage(e)
-  }
-  websock.onclose = function (e) {
-    websocketclose(e)
-  }
+    websocketonmessage(e);
+  };
+  websock.onclose = function () {
+    websocketclose();
+  };
   websock.onopen = function () {
+    // console.log(e, "连接成功666666666666666666");
     isConnect = true; //连接成功后修改标识
-    websocketOpen()
-  }
-
+    websocketOpen();
+  };
   // 连接发生错误的回调方法
-  websock.onerror = function () {
-    console.log('WebSocket连接失败')
+  websock.onerror = function (e) {
+    console.log("WebSocket连接发生错误");
     isConnect = false; //连接断开修改标识
+    websocketError();
     reConnect(); //连接错误 需要重连
-  }
+  };
 }
 
 // 实际调用的方法
 function sendSock(agentData) {
   if (websock.readyState === websock.OPEN) {
+    // console.log("直接发送数据", websock);
     // 若是ws开启状态
-    websocketsend(agentData)
+    websocketsend(agentData);
   } else if (websock.readyState === websock.CONNECTING) {
     // 若是 正在开启状态，则等待1s后重新调用
+    // console.log("等待100ms", websock);
     setTimeout(function () {
-      sendSock(agentData)
-    }, 1000)
+      sendSock(agentData);
+    }, 100);
   } else {
+    // console.log("重新发");
     // 若未开启 ，则等待1s后重新调用
     setTimeout(function () {
-      sendSock(agentData)
-    }, 1000)
+      sendSock(agentData);
+    }, 100);
   }
 }
 
 function getSock(callback) {
   // console.log(callback, "callback");
-  globalCallback = callback
-  // console.log(globalCallback, "globalCallbackgetSock");
+  globalCallback = callback;
 }
 // 数据接收
 function websocketonmessage(e) {
   // console.log(e)
-  const O_o = JSON.parse(e.data)
+  let O_o = JSON.parse(e.data);
 
   if (!O_o) {
     heartCheck.reset();
   } else {
+    // console.log(O_o);
+    // console.log(globalCallback, "globalCallback传输局");
     globalCallback(O_o);
   }
 }
 
 // 数据发送
 function websocketsend(agentData) {
-  console.log(JSON.stringify(agentData))
-  websock.send(JSON.stringify(agentData))
+  // console.log(agentData, "发送");
+  websock.send(JSON.stringify(agentData));
 }
 
 // 关闭
-function websocketclose(e) {
-  console.log(e, "关闭")
+function websocketclose() {
   isConnect = false; //断开后修改标识
-}
-
-// 创建 websocket 连接
-function websocketOpen(e) {
-  console.log('连接成功')
+  reConnect();
 }
 // 是否连接
 function isConnected(callback) {
-  // console.log(websock, "websock存在就是连接过，连接标识")
-  if (websock) {
-    callback(true)
-  } else {
-    callback(false)
-  }
+  isConCallback = callback;
+}
+// 创建 websocket 连接
+function websocketOpen() {
+  isConCallback(isConnect);
+}
+
+// 重连 websocket 连接, 连接失败
+function connectError(callback) {
+  reConnectWsCallback = callback;
+}
+// 创建 websocket 重连连接
+function websocketError() {
+  reConnectWsCallback("连接失败，正在重新连接......");
 }
 
 // 将方法暴露出去
@@ -140,6 +169,6 @@ export default {
   getSock,
   isConnected,
   createWebSocket,
-  closeWebSocket
-}
-
+  closeWebSocket,
+  connectError,
+};
