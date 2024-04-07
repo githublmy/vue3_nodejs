@@ -80,7 +80,10 @@ import { useSettingStore } from "@/store/modules/setting";
 const settingStore = useSettingStore();
 const route = useRoute();
 const isCloseOther = ref(true);
-
+interface IObj {
+  path?: string;
+  meta?: any;
+}
 const tagList: any = computed({
   get() {
     return useTags.tagList;
@@ -96,10 +99,7 @@ const dtags = ref();
 const useTags = useTagsViewStore();
 const isShowRefresh = ref(false);
 const ofL = ref(0); // offsetLeft 偏移量可以自定义 可选参数：px 或 整数
-interface IObj {
-  path?: string;
-  meta?: any;
-}
+
 const w = computed(() => {
   if (settingStore.isCollapse) {
     return 64;
