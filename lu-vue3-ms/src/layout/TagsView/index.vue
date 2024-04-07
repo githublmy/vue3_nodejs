@@ -1,6 +1,11 @@
 <template>
   <div class="link">
-    <el-scrollbar ref="scrollWrapper" style="padding: 0 20px" :min-size="0" @scroll="handleScroll">
+    <el-scrollbar
+      ref="scrollWrapper"
+      style="padding: 0 20px"
+      :min-size="0"
+      @scroll="handleScroll"
+    >
       <div class="tags" ref="dtags">
         <router-link
           class="lk"
@@ -127,6 +132,13 @@ watch(
     nextTick(() => {
       const i = test.value.findIndex((item: any) => item.to === obj.path);
       const parentWidth = dtags.value.offsetWidth;
+      // const parentWidth = scrollWrapper.value.wrapRef.offsetWidth
+      console.log(
+        scrollWrapper.value.wrapRef.offsetWidth,
+        parentWidth,
+        "监听数据 ---元素宽度-----"
+      );
+
       if (i === -1) {
         return;
       }
