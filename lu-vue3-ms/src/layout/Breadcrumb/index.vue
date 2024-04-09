@@ -2,7 +2,9 @@
   <div class="breadcrumb">
     <div class="left">
       <div @click="changeSidebar">
-        <el-icon v-if="isCollapse" size="26" class="iconElIcon"><Fold /></el-icon>
+        <el-icon v-if="isCollapse" size="26" class="iconElIcon"
+          ><Fold
+        /></el-icon>
         <el-icon v-else size="26" class="iconElIcon"><Expand /></el-icon>
       </div>
       <el-breadcrumb class="app-breadcrumb">
@@ -17,8 +19,16 @@
       </el-breadcrumb>
     </div>
     <div class="right">
+      <el-link
+        style="margin-right: 10px"
+        :underline="false"
+        type="primary"
+        target="_blank"
+        href="/#/bigScreen"
+        >大屏</el-link
+      >
       <el-avatar :src="logo" fit="fill" />
-      <span style="margin: 0 10px">{{ '角色' }}：{{ '管理员' }}</span>
+      <span style="margin: 0 10px">{{ "角色" }}：{{ "管理员" }}</span>
       <el-dropdown style="margin-right: 10px" @command="handleCommandLg">
         <el-icon :size="28">
           <SvgIcon name="language" />
@@ -57,7 +67,9 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item command="changePassword">修改密码</el-dropdown-item>
+            <el-dropdown-item command="changePassword"
+              >修改密码</el-dropdown-item
+            >
             <el-dropdown-item command="logOut">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -67,84 +79,83 @@
 </template>
 
 <script setup lang="ts">
-import logo from '@/assets/svg/vite.svg'
-import { useSettingStore } from '@/store/modules/setting'
-import { useUserStore } from '@/store/modules/user'
-import { useI18n } from 'vue-i18n'
+import logo from "@/assets/svg/vite.svg";
+import { useSettingStore } from "@/store/modules/setting";
+import { useUserStore } from "@/store/modules/user";
+import { useI18n } from "vue-i18n";
 // 实例化i18
-import type { IElPlusMsgFun } from '@/utils/elPlusMessage/type'
-const elMsg = inject('elMsg') as IElPlusMsgFun
-const settingStore = useSettingStore()
-const { locale } = storeToRefs(settingStore)
-const i18 = useI18n()
-
+import type { IElPlusMsgFun } from "@/utils/elPlusMessage/type";
+const elMsg = inject("elMsg") as IElPlusMsgFun;
+const settingStore = useSettingStore();
+const { locale } = storeToRefs(settingStore);
+const i18 = useI18n();
 const languageList = [
   {
-    name: '简体中文',
-    value: 'zh-cn'
+    name: "简体中文",
+    value: "zh-cn",
   },
   {
-    name: 'English',
-    value: 'en'
-  }
-]
-const route = useRoute()
-const pathList: Ref = ref([]) //导航菜单
+    name: "English",
+    value: "en",
+  },
+];
+const route = useRoute();
+const pathList: Ref = ref([]); //导航菜单
 
 const handleCommandLg = (v: string) => {
-  i18.locale.value = v
-  locale.value = v
-}
+  i18.locale.value = v;
+  locale.value = v;
+};
 // 切换主题
 const isDark = computed({
   get() {
-    return settingStore.isDark
+    return settingStore.isDark;
   },
   set(v) {
-    return v
-  }
-})
+    return v;
+  },
+});
 // 监听主题变化，执行修改样式
 watchEffect(() => {
   isDark.value
-    ? document.documentElement.classList.add('dark')
-    : document.documentElement.classList.remove('dark')
-})
+    ? document.documentElement.classList.add("dark")
+    : document.documentElement.classList.remove("dark");
+});
 // 切换主题
 const changeTheme = () => {
-  settingStore.toggleTheme()
-}
+  settingStore.toggleTheme();
+};
 // // 菜单折叠状态
-const isCollapse = computed(() => settingStore.isCollapse)
+const isCollapse = computed(() => settingStore.isCollapse);
 const handleCommand = (v: string) => {
-  if (v === 'logOut') {
+  if (v === "logOut") {
     elMsg
-      .confirm('确定退出登录吗？')
+      .confirm("确定退出登录吗？")
       .then(() => {
-        elMsg.success('退出成功')
-        useUserStore().$reset()
-        location.href = '/'
+        elMsg.success("退出成功");
+        useUserStore().$reset();
+        location.href = "/";
       })
       .catch(() => {
-        console.log('取消')
-      })
+        console.log("取消");
+      });
   }
-}
+};
 // 监听路由
 watch(
   () => route,
   (newValue: { path: string | string[]; matched: string | any[] }) => {
-    if (newValue.path.indexOf('/redirect') > -1) {
-      return
+    if (newValue.path.indexOf("/redirect") > -1) {
+      return;
     }
     // console.log(newValue, "面包屑导航");
-    pathList.value = newValue.matched.slice(1)
+    pathList.value = newValue.matched.slice(1);
   },
   { immediate: true, deep: true }
-)
+);
 // 折叠菜单方法
 function changeSidebar() {
-  settingStore.toggleSidebar()
+  settingStore.toggleSidebar();
 }
 </script>
 <style lang="scss" scoped>
