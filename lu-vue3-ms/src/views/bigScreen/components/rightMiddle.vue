@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%; width: 100%; padding: 20px">
+  <div style="height: 100%; width: 100%; padding: 40px">
     <div ref="mapChart" style="height: 100%; width: 100%"></div>
   </div>
 </template>

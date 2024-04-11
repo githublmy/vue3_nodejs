@@ -59,12 +59,12 @@
 </template>
 
 <script lang="ts" setup>
-import rankList from "./components/rankList.vue";
 import rightTop from "./components/rightTop.vue";
 import rightMiddle from "./components/rightMiddle.vue";
 import capsuleChart from "./components/capsuleChart.vue";
 import activeRingChart from "./components/activeRingChart.vue";
 import mapChart from "./components/mapChart.vue";
+import rankList from "./components/rankList.vue";
 // const dvBorder10 = ref();
 // onMounted(() => {
 //   setTimeout(() => {
@@ -143,7 +143,10 @@ const config2 = ref({
         flex-direction: column;
       }
       .box-item {
-        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
       }
     }
     .box-middle {
