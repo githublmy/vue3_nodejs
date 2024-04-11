@@ -27,7 +27,7 @@
             </div>
           </dv-border-box13>
           <dv-border-box12>
-            <div dv-bg>dv-border-box8</div>
+            <capsuleChart />
           </dv-border-box12>
         </div>
         <div class="box-middle">
@@ -36,24 +36,21 @@
             title="大屏展示"
             :animate="true"
           >
-            <div dv-bg>dv-border-box-11</div>
+            <mapChart />
           </dv-border-box11>
-          <dv-border-box10
-            style="overflow: hidden"
-            class="box-middle-item"
-          >
-            <Rank />
+          <dv-border-box10 style="overflow: hidden" class="box-middle-item">
+            <rankList />
           </dv-border-box10>
         </div>
         <div class="box">
           <dv-border-box8 :dur="5">
-            <div dv-bg>dv-border-box8</div>
+            <rightTop />
           </dv-border-box8>
           <dv-border-box13>
-            <div dv-bg>dv-border-box-11</div>
+            <rightMiddle />
           </dv-border-box13>
           <dv-border-box12>
-            <div dv-bg>dv-border-box8</div>
+            <activeRingChart />
           </dv-border-box12>
         </div>
       </div>
@@ -62,14 +59,19 @@
 </template>
 
 <script lang="ts" setup>
-import Rank from "./components/Rank.vue";
-const dvBorder10 = ref();
-onMounted(() => {
-  setTimeout(() => {
-    console.log(dvBorder10.value);
-    dvBorder10.value?.initWH();
-  }, 500);
-});
+import rankList from "./components/rankList.vue";
+import rightTop from "./components/rightTop.vue";
+import rightMiddle from "./components/rightMiddle.vue";
+import capsuleChart from "./components/capsuleChart.vue";
+import activeRingChart from "./components/activeRingChart.vue";
+import mapChart from "./components/mapChart.vue";
+// const dvBorder10 = ref();
+// onMounted(() => {
+//   setTimeout(() => {
+//     console.log(dvBorder10.value);
+//     dvBorder10.value?.initWH();
+//   }, 500);
+// });
 const config3 = ref({
   header: ["列1", "列2", "列3"],
   data: [
