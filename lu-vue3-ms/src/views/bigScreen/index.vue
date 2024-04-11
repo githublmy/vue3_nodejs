@@ -39,7 +39,7 @@
             <mapChart />
           </dv-border-box11>
           <dv-border-box10 style="overflow: hidden" class="box-middle-item">
-            <rankList />
+            <OrderData />
           </dv-border-box10>
         </div>
         <div class="box">
@@ -64,7 +64,7 @@ import rightMiddle from "./components/rightMiddle.vue";
 import capsuleChart from "./components/capsuleChart.vue";
 import activeRingChart from "./components/activeRingChart.vue";
 import mapChart from "./components/mapChart.vue";
-import rankList from "./components/rankList.vue";
+import OrderData from "./components/OrderData.vue";
 // const dvBorder10 = ref();
 // onMounted(() => {
 //   setTimeout(() => {
