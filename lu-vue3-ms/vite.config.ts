@@ -167,16 +167,16 @@ export default defineConfig(({ mode }) => {
             }
             return 'assets/[ext]/[name].[hash].[ext]'
           },
-          // 用于命名代码拆分时创建的共享块的输出命名 默认 "[name]-[hash].js"
-          // chunkFileNames: "js/[name].[hash].js",
-          // 拆分js到模块文件夹
-          chunkFileNames: (chunkInfo) => {
-            const facadeModuleId = chunkInfo.facadeModuleId
-              ? chunkInfo.facadeModuleId.split('/')
-              : []
-            const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]'
-            return `js/${fileName}/name.[hash].js`
-          }
+          // // 用于命名代码拆分时创建的共享块的输出命名 默认 "[name]-[hash].js"
+        chunkFileNames: "js/[name].[hash].js",
+          // // 拆分js到模块文件夹
+          // chunkFileNames: (chunkInfo) => {
+          //   const facadeModuleId = chunkInfo.facadeModuleId
+          //     ? chunkInfo.facadeModuleId.split('/')
+          //     : []
+          //   const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]'
+          //   return `js/${fileName}/name.[hash].js`
+          // }
         }
       }
     },

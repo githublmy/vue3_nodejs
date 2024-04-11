@@ -9,8 +9,8 @@ declare module "*.mjs";
 // 引入sql语言类型
 declare module "monaco-editor/esm/vs/basic-languages/sql/sql.js";
 declare module "monaco-editor/esm/vs/platform/actions/common/actions";
-declare module '*.vue' {
-  import { DefineComponent } from 'vue'
-  const component: DefineComponent<{}, {}, any>
-  export default component
-}
+// declare module '*.vue' {
+//   import { DefineComponent } from 'vue'
+//   const component: DefineComponent<{}, {}, any>
+//   export default component
+// }

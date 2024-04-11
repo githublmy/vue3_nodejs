@@ -338,9 +338,11 @@ const init = () => {
     myChart.resize();
   });
   var count = 0;
-  var timer: string | number | NodeJS.Timeout | null | undefined = null;
+  let timer: NodeJS.Timeout | number | undefined = undefined;
+  console.log(timer, 3333);
+
   var dataLength = option.series[0].data.length;
-  timer && clearInterval(timer);
+  timer && clearInterval(timer as NodeJS.Timeout | number);
   timer = setInterval(() => {
     myChart.dispatchAction({
       type: "downplay",
@@ -359,7 +361,7 @@ const init = () => {
     count++;
   }, 3000);
   myChart.on("mouseover", function (params) {
-    clearInterval(timer);
+    clearInterval(timer as NodeJS.Timeout | number);
     myChart.dispatchAction({
       type: "downplay",
       seriesIndex: 0,
@@ -376,7 +378,7 @@ const init = () => {
     });
   });
   myChart.on("mouseout", function () {
-    timer && clearInterval(timer);
+    timer && clearInterval(timer as NodeJS.Timeout | number);
     timer = setInterval(function () {
       myChart.dispatchAction({
         type: "downplay",
