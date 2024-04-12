@@ -67,9 +67,9 @@ dependencies:
     version: registry.npmmirror.com/vue3-particles@2.12.0(typescript@5.3.3)
 
 devDependencies:
-  '@tsconfig/node18':
-    specifier: ^18.2.4
-    version: registry.npmmirror.com/@tsconfig/node18@18.2.4
+  '@tsconfig/node20':
+    specifier: ^20.1.4
+    version: 20.1.4
   '@types/fabric':
     specifier: ^5.3.7
     version: registry.npmmirror.com/@types/fabric@5.3.7
@@ -519,6 +519,10 @@ packages:
       '@tiptap/core': registry.npmmirror.com/@tiptap/core@2.2.6(@tiptap/pm@2.2.6)
       '@tiptap/pm': registry.npmmirror.com/@tiptap/pm@2.2.6
     dev: false
+
+  /@tsconfig/node20@20.1.4:
+    resolution: {integrity: sha512-sqgsT69YFeLWf5NtJ4Xq/xAF8p4ZQHlmGW74Nu2tD4+g5fAsposc4ZfaaPixVu4y01BEiDCWLRDCvDM5JOsRxg==}
+    dev: true
 
   /@types/web-bluetooth@0.0.20:
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
@@ -1465,12 +1469,6 @@ packages:
     name: '@trysound/sax'
     version: 0.2.0
     engines: {node: '>=10.13.0'}
-    dev: true
-
-  registry.npmmirror.com/@tsconfig/node18@18.2.4:
-    resolution: {integrity: sha512-5xxU8vVs9/FNcvm3gE07fPbn9tl6tqGGWA9tSlwsUEkBxtRnTsNmwrV8gasZ9F/EobaSv9+nu8AxUKccw77JpQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@tsconfig/node18/-/node18-18.2.4.tgz}
-    name: '@tsconfig/node18'
-    version: 18.2.4
     dev: true
 
   registry.npmmirror.com/@types/estree@1.0.5:

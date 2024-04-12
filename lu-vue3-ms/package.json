@@ -35,7 +35,7 @@
     "vue3-particles": "^2.12.0"
   },
   "devDependencies": {
-    "@tsconfig/node18": "^18.2.4",
+    "@tsconfig/node20": "^20.1.4",
     "@types/fabric": "^5.3.7",
     "@types/node": "^18.19.29",
     "@types/nprogress": "^0.2.3",
