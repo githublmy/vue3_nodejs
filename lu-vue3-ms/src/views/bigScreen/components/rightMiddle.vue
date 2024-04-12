@@ -10,8 +10,7 @@ const mapChart = ref();
 const init = () => {
   const myChart = echarts.init(mapChart.value);
   let option = {
-    //你的代码
-    backgroundColor: "#091636",
+    // backgroundColor: "#091636",
     color: ["#DBB36E", "#33CCCC"],
     tooltip: {
       trigger: "axis",
