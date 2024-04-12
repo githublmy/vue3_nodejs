@@ -4,7 +4,7 @@
       style="height: 100%; width: 100%; background-color: #000; color: #fff"
     >
       <!-- <dv-decoration-11 style="width: 100%; height: 60px">
-        <div color-green font-600 bg="~ dark/0" style="color: #fff">
+        <div style="color: #fff">
           大屏展示
         </div>
       </dv-decoration-11> -->
@@ -93,7 +93,6 @@ const config3 = ref({
 const config = ref({
   value: 66,
 });
-
 </script>
 <style lang="scss" scoped>
 .bigScreen {
