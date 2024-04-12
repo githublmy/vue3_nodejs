@@ -63,7 +63,7 @@ import rightTop from "./components/rightTop.vue";
 import rightMiddle from "./components/rightMiddle.vue";
 import capsuleChart from "./components/capsuleChart.vue";
 import activeRingChart from "./components/activeRingChart.vue";
-import mapChart from "./components/mapChart.vue";
+import mapChart from "./components/mapChart2.vue";
 import OrderData from "./components/OrderData.vue";
 // const dvBorder10 = ref();
 // onMounted(() => {

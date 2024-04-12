@@ -1,10 +1,14 @@
 <template>
-  <div ref="chinaMapRef" style="width: 100%; height: 100%"></div>
+  <div
+    ref="chinaMapRef"
+    style="width: 100%; height: 100%; padding: 60px 10px 10px 10px"
+  ></div>
 </template>
 
 <script lang="ts" setup>
 import * as echarts from "echarts";
 import china from "./china.json";
+import { GeoJSONSourceInput } from "echarts/types/src/coord/geo/geoTypes.js";
 let chinaMapEchart: any;
 let timer: string | number | NodeJS.Timeout | undefined;
 const chinaMapRef = ref();
@@ -44,42 +48,49 @@ const getMap = async () => {
   //   // console.log(arr2, "最后数据2");
   //   // getChinaMap(JSON.parse(JSON.stringify(arr2)));
   // }
-  getChinaMap(JSON.parse(JSON.stringify([])));
+
+  const arr = china.features.map((item) => {
+    return {
+      name: item.properties.name,
+      value: item.properties.adcode,
+    };
+  });
+  console.log(arr);
+
+  getChinaMap(JSON.parse(JSON.stringify(arr)));
 };
 const getChinaMap = (data: any) => {
-  // console.log(china);
-  // chinaMapEchart = this.$echarts.init(this.$refs.chinaMap);
-  echarts.registerMap("china", china);
+  console.log(china);
+  echarts.registerMap("china", china as GeoJSONSourceInput);
   const geoIndex = 0; //地图层级的下标
   let zoom = 1;
-  const getFormmater = (name, data, value) => {
+  const getFormmater = (name: any, data: { value: any }) => {
     return `<div style="box-shadow: 0 0 10px #3BD9D9; padding: 10px; position: absolute; top: 0; left:0;  border-radius: 4px; border: 1px solid #04b9ff; background: linear-gradient(to bottom,  #51bfd4 0%,rgba(35,90,178,.8) 100%);">
                     <div style='color:#F4BD59; font-size: 14px;'>${name}</div>
                     <div style="display: flex; align-items: center;padding-top: 6px;">
                     <div style="height: 6px; width: 6px; border-radius: 50%; background:#F4BD59; margin-right: 10px;"></div>
-                    <span style='color:#fff;font-size: 12px;margin-right: 20px;'>资产数量</span>
-                    <span style="font-size: 12px;font-family: 'PangMenZhengDao'">
+                    <span style='color:#fff;font-size: 12px;margin-right: 20px;'>城市编码</span>
+                    <span style="font-size: 12px;font-family: 'PangMenZhengDao';color:#fff;">
                     ${(data && data.value) || 0}</span>
                     </div>
                 </div>`;
   };
-  const layoutSize = "115%";
+  const layoutSize = "100%";
   const mapName = "china";
   const option = {
-    backgroundColor: "#092261",
+    // backgroundColor: "#092261",
     tooltip: {
       show: true,
       confine: true,
       extraCssText: "z-index:3",
-      formatter: function (params) {
+      formatter: function (params: { name: any; data: { value: any } }) {
         // console.log(params);
         const name = params.name;
         const data = params.data;
-        const value = data && params.data.value;
-        const res = getFormmater(name, data, value);
+        const res = getFormmater(name, data);
         return data ? res : null;
       },
-      position: function (pt) {
+      position: function (pt: number[]) {
         return [pt[0], pt[1] - 120];
       },
     },
@@ -92,7 +103,7 @@ const getChinaMap = (data: any) => {
         layoutSize: layoutSize,
         roam: true, // 是否开启鼠标滚轮缩放
         scaleLimit: {
-          min: 0.8,
+          min: 0.5,
           max: 2,
         },
         // animationDurationUpdate: 0,
@@ -152,7 +163,7 @@ const getChinaMap = (data: any) => {
               fontSize: 12,
               backgroundColor: "transparent",
             },
-            areaColor: new this.$echarts.graphic.LinearGradient(
+            areaColor: new echarts.graphic.LinearGradient(
               0,
               0,
               0,
@@ -289,7 +300,7 @@ const getChinaMap = (data: any) => {
               fontSize: 12,
               backgroundColor: "transparent",
             },
-            areaColor: new this.$echarts.graphic.LinearGradient(
+            areaColor: new echarts.graphic.LinearGradient(
               0,
               0,
               0,
@@ -319,18 +330,18 @@ const getChinaMap = (data: any) => {
       },
     ],
   };
-  chinaMapEchart.on("georoam", (e) => {
+  chinaMapEchart.on("georoam", (e: { zoom: any }) => {
     const ops = chinaMapEchart.getOption();
     // console.log(e, "数据");
     if (e.zoom) {
-      ops.geo.map((item, i) => {
+      ops.geo.map((item: { zoom: any; center: any }, i: number) => {
         if (i > 0) {
           item.zoom = ops.geo[0].zoom;
           item.center = ops.geo[0].center;
         }
       });
     } else {
-      ops.geo.map((item, i) => {
+      ops.geo.map((item: { center: any }, i: number) => {
         if (i > 0) {
           item.center = ops.geo[0].center;
         }
@@ -359,31 +370,34 @@ const getChinaMap = (data: any) => {
     });
     count++;
   }, 2000);
-  chinaMapEchart.on("mouseover", function (params) {
-    timer && clearInterval(timer);
-    chinaMapEchart.dispatchAction({
-      type: "downplay",
-      seriesIndex: 0,
-    });
-    chinaMapEchart.dispatchAction({
-      type: "highlight",
-      seriesIndex: 0,
-      dataIndex: params.dataIndex,
-    });
-    chinaMapEchart.dispatchAction({
-      type: "showTip",
-      seriesIndex: 0,
-      dataIndex: params.dataIndex,
-    });
-    // 如果是 componentSubType是 effectScatter 类型，隐藏所有高亮
-    if (params.componentSubType == "effectScatter") {
-      // console.log(params, "数据");
+  chinaMapEchart.on(
+    "mouseover",
+    function (params: { dataIndex: any; componentSubType: string }) {
+      timer && clearInterval(timer);
       chinaMapEchart.dispatchAction({
         type: "downplay",
         seriesIndex: 0,
       });
+      chinaMapEchart.dispatchAction({
+        type: "highlight",
+        seriesIndex: 0,
+        dataIndex: params.dataIndex,
+      });
+      chinaMapEchart.dispatchAction({
+        type: "showTip",
+        seriesIndex: 0,
+        dataIndex: params.dataIndex,
+      });
+      // 如果是 componentSubType是 effectScatter 类型，隐藏所有高亮
+      if (params.componentSubType == "effectScatter") {
+        // console.log(params, "数据");
+        chinaMapEchart.dispatchAction({
+          type: "downplay",
+          seriesIndex: 0,
+        });
+      }
     }
-  });
+  );
   chinaMapEchart.on("mouseout", function () {
     timer && clearInterval(timer);
     chinaMapEchart.dispatchAction({
@@ -419,3 +433,4 @@ onBeforeUnmount(() => {
   clearTimer();
 });
 </script>
+: { center: any; }: number: { dataIndex: any; componentSubType: string; }
