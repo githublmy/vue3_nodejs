@@ -29,25 +29,6 @@ const getMap = async () => {
     fontSize: 46,
     spinnerRadius: 20,
   });
-  // const res = await getMapData();
-  // // console.log(res.payload, "地图数据");
-  // // console.log(china.features);
-  // if (res.payload) {
-  //   // const arr = china.features.map((item) => {
-  //   //   const obj = res.payload.find((e) => e.areaCode === item.id);
-  //   //   if (obj) {
-  //   //     return {
-  //   //       name: item.properties.name,
-  //   //       value: obj.assetNumber,
-  //   //       companyName: obj.companyName,
-  //   //     };
-  //   //   }
-  //   // });
-  //   // console.log(arr, "最后数据");
-  //   const arr2 = arr.filter((item) => item);
-  //   // console.log(arr2, "最后数据2");
-  //   // getChinaMap(JSON.parse(JSON.stringify(arr2)));
-  // }
 
   const arr = china.features.map((item) => {
     return {
