@@ -1,9 +1,9 @@
 <template>
-  <dv-active-ring-chart :config="conf" style="width: 100%; height: 100%" />
+  <dv-active-ring-chart :config="config" style="width: 100%; height: 100%" />
 </template>
 
 <script lang="ts" setup>
-const conf = reactive({
+const config = ref({
   lineWidth: 24,
   digitalFlopStyle: {
     fill: "pink",
@@ -28,4 +28,3 @@ const conf = reactive({
   ],
 });
 </script>
-<style lang="scss" scoped></style>

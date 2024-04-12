@@ -1,13 +1,56 @@
 <template>
   <div class="bigScreen">
+    <!-- <v-scale-screen width="1920" height="1080" :delay="300">
+      <div class="content">
+        <div class="box">
+          <dv-border-box8 :dur="5">
+            <div class="box-item">
+              <dv-percent-pond
+                :config="config"
+                style="width: 200px; height: 100px"
+              />
+            </div>
+          </dv-border-box8>
+          <dv-border-box13>
+            <div style="width: 100; height: 100%; padding: 20px">
+              <dv-scroll-board
+                :config="config3"
+                style="width: 100%; height: 100%"
+              />
+            </div>
+          </dv-border-box13>
+          <dv-border-box12>
+            <capsuleChart />
+          </dv-border-box12>
+        </div>
+        <div class="box-middle">
+          <dv-border-box11
+            class="box-middle-item"
+            title="大屏展示"
+            :animate="true"
+          >
+            <mapChart />
+          </dv-border-box11>
+          <dv-border-box10 style="overflow: hidden" class="box-middle-item">
+            <OrderData />
+          </dv-border-box10>
+        </div>
+        <div class="box">
+          <dv-border-box8 :dur="5">
+            <rightTop />
+          </dv-border-box8>
+          <dv-border-box13>
+            <rightMiddle />
+          </dv-border-box13>
+          <dv-border-box12>
+            <activeRingChart />
+          </dv-border-box12>
+        </div>
+      </div>
+    </v-scale-screen> -->
     <dv-full-screen-container
       style="height: 100%; width: 100%; background-color: #000; color: #fff"
     >
-      <!-- <dv-decoration-11 style="width: 100%; height: 60px">
-        <div style="color: #fff">
-          大屏展示
-        </div>
-      </dv-decoration-11> -->
       <div class="content">
         <div class="box">
           <dv-border-box8 :dur="5">
@@ -59,6 +102,7 @@
 </template>
 
 <script lang="ts" setup>
+// import VScaleScreen from "v-scale-screen";
 import rightTop from "./components/rightTop.vue";
 import rightMiddle from "./components/rightMiddle.vue";
 import capsuleChart from "./components/capsuleChart.vue";
