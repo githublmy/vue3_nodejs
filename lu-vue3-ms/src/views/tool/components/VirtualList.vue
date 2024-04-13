@@ -49,10 +49,10 @@ setTimeout(() => {
   loading.value = false;
 }, 2000);
 // 虚拟列表
-// 1. 计算列表的高度
 const scrollViewRef = ref();
+// 要渲染的数据列表
 const list: Ref = ref([]);
-
+// 偏移位置
 const scrollHeight = computed(() => {
   return originalData.value.length * itemHeight.value;
 });
@@ -79,8 +79,8 @@ const scroll = () => {
   startOffset.value = start * itemHeight.value;
   list.value = originalData.value.slice(start, end);
 };
-// 防抖
-const onScroll = debounce(scroll, 10);
+// 滚动条防抖
+const onScroll = debounce(scroll, 30);
 </script>
 <style lang="scss" scoped>
 .virtual-list {
@@ -97,9 +97,6 @@ const onScroll = debounce(scroll, 10);
     position: absolute;
     top: 0;
     left: 0;
-    // .item {
-    //   line-height: 30px;
-    // }
   }
 }
 </style>
