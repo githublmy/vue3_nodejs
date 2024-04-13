@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    base: '/lu-vue3-ms/dist/',
+    base: '/',
     resolve: {
       // 路径别名
       alias: {
