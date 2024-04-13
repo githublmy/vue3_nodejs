@@ -1,5 +1,5 @@
 <template>
-  <!--  基本配置
+  <!--  基本配置 vue2 版本
         官方文档  https://vue-treeselect.js.org/
         multiple  是否多选，默认false
         showCount 是否显示选中数量，默认false
