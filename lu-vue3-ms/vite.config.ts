@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    base: '/',
+    base: './',
     resolve: {
       // 路径别名
       alias: {
