@@ -1,1 +1,0 @@
-import e from"./AiEditorCom.J4_Sxacx.js";import{d as t,o,c as a,g as s,an as c}from"./main.nINn9zOE.js";const n={class:"baseStyle aiEdit"},r=t({__name:"index",setup(_){return(d,i)=>(o(),a("div",n,[s(e)]))}}),m=c(r,[["__scopeId","data-v-ff2888e9"]]);export{m as default};
