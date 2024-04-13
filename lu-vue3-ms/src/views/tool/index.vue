@@ -22,17 +22,15 @@
 </template>
 
 <script lang="ts" setup>
-const arr = computed(() =>
-  Array(100000)
-    .fill("")
-    .map((_item, i) => ({ id: i + 1, name: "数据项" + (i + 1) }))
-);
+const arr = Array(100000)
+  .fill("")
+  .map((_item, i) => ({ id: i + 1, name: "数据项" + (i + 1) }));
 const propsObject = ref({
   // 组件参数
   itemHeight: 40,
   boxHeight: 500,
-  originalData: arr.value
-})
+  originalData: arr,
+});
 // 异步组件
 const ImgToBase64 = defineAsyncComponent(
   () => import("./components/ImgToBase64.vue")

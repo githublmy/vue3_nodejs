@@ -27,15 +27,20 @@
 <script lang="ts" setup>
 import { debounce } from "@/utils/tool";
 
+interface p {
+  id: number;
+  name: string;
+  [key: string]: any;
+}
 interface Props {
   itemHeight?: number;
   boxHeight?: number;
-  originalData: any;
+  originalData: p[];
 }
 const props = withDefaults(defineProps<Props>(), {
   itemHeight: 30,
   boxHeight: 300,
-  originalData: [],
+  originalData: () => [],
 });
 const { itemHeight, boxHeight, originalData } = toRefs(props);
 
