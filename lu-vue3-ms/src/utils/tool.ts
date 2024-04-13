@@ -6,31 +6,36 @@
  *
  * @return {*}
  */
-export function debounce(func: { (): void; apply?: any }, waitTime = 400, immediate = false) {
-  let timer: NODEJS.Timeout | null = null, result: any
+export function debounce(
+  func: { (): void; apply?: any },
+  waitTime = 400,
+  immediate = false
+) {
+  let timer: NodeJS.Timeout | null = null,
+    result: any;
   function debounced(this: any) {
     let context = this,
-      args = arguments
-    if (timer) clearTimeout(timer)
+      args = arguments;
+    if (timer) clearTimeout(timer);
     if (immediate) {
-      let callNow = !timer
+      let callNow = !timer;
       timer = setTimeout(function () {
-        result = func.apply(context, args)
-      }, waitTime)
-      if (callNow) result = func.apply(context, args)
+        result = func.apply(context, args);
+      }, waitTime);
+      if (callNow) result = func.apply(context, args);
     } else {
       timer = setTimeout(function () {
-        result = func.apply(context, args)
-      }, waitTime)
+        result = func.apply(context, args);
+      }, waitTime);
     }
-    return result
+    return result;
   }
   //取消防抖
   debounced.cancel = function () {
-    clearTimeout(timer)
-    timer = null
-  }
-  return debounced
+    timer && clearTimeout(timer);
+    timer = null;
+  };
+  return debounced;
 }
 
 /**
@@ -46,19 +51,19 @@ export function animationForCount(
   to: number,
   onProgress: { (v: number): void }
 ) {
-  let val = from
-  const start = Date.now()
-  const speed = (to - from) / duration
+  let val = from;
+  const start = Date.now();
+  const speed = (to - from) / duration;
   const run = () => {
-    const t = Date.now() - start
+    const t = Date.now() - start;
     if (t >= duration) {
-      val = to
-      onProgress(val)
-      return
+      val = to;
+      onProgress(val);
+      return;
     }
-    val = from + speed * t
-    onProgress(val)
-    requestAnimationFrame(run)
-  }
-  run()
+    val = from + speed * t;
+    onProgress(val);
+    requestAnimationFrame(run);
+  };
+  run();
 }

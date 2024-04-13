@@ -55,6 +55,7 @@ declare module 'vue' {
     RightToolBar: typeof import('./src/components/RightToolBar/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SelectTree: typeof import('./src/components/SelectTree/index.vue')['default']
     Sign: typeof import('./src/components/Sign/index.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
   }

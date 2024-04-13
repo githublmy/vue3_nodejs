@@ -1,5 +1,5 @@
-<template>
-  <!--  基本配置 vue2 版本
+<!--<template>
+  <!~~  基本配置 vue2 版本
         官方文档  https://vue-treeselect.js.org/
         multiple  是否多选，默认false
         showCount 是否显示选中数量，默认false
@@ -17,7 +17,7 @@
         appendToBody 是否将下拉树放置于body下，默认false
         :value 绑定值
         :defaultExpandLevel 展开节点的层级 默认1 展开所有设置 Infinity
-  -->
+  ~~>
   <div class="tree-slelect-vue">
     <TreeSelectVue
       ref="treeSelect"
@@ -172,3 +172,4 @@ export default {
   }
 }
 </style>
+-->
