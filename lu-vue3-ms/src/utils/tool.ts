@@ -7,8 +7,7 @@
  * @return {*}
  */
 export function debounce(func: { (): void; apply?: any }, waitTime = 400, immediate = false) {
-  let timer: any, result: any
-  console.log(666)
+  let timer: NODEJS.Timeout | null = null, result: any
   function debounced(this: any) {
     let context = this,
       args = arguments

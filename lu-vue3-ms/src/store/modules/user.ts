@@ -39,7 +39,7 @@ export const useUserStore = defineStore('user', {
   actions: {
     async getInfo() {
       // const res = await getUserInfo();
-      console.log(user, '数据')
+      // console.log(user, '数据')
       this.token = 'token'
       this.permission = user
     }

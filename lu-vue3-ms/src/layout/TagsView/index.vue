@@ -96,7 +96,6 @@ const tagList: any = computed({
 const router = useRouter();
 
 const { proxy } = getCurrentInstance() as any ;
-console.log(proxy);
 
 const dtags = ref();
 const useTags = useTagsViewStore();

@@ -41,7 +41,7 @@ const getMap = async () => {
   getChinaMap(JSON.parse(JSON.stringify(arr)));
 };
 const getChinaMap = (data: any) => {
-  console.log(china);
+  // console.log(china);
   echarts.registerMap("china", china as GeoJSONSourceInput);
   const geoIndex = 0; //地图层级的下标
   let zoom = 1;
@@ -85,7 +85,7 @@ const getChinaMap = (data: any) => {
         roam: true, // 是否开启鼠标滚轮缩放
         scaleLimit: {
           min: 0.5,
-          max: 2,
+          max: 4,
         },
         // animationDurationUpdate: 0,
         label: {
