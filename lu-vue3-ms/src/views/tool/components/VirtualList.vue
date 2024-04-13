@@ -75,8 +75,9 @@ const scroll = () => {
   // 计算当前滚动条距离底部的项的索引，向上取整
   const end = start + Math.ceil(boxHeight.value / itemHeight.value);
   // console.log(end, "end");
-  // 列表移动距离    开始位置 * 项高
+  // 列表滚动到当前滚动条的位置    开始位置 * 项高
   startOffset.value = start * itemHeight.value;
+  // 截取数据源
   list.value = originalData.value.slice(start, end);
 };
 // 滚动条防抖
