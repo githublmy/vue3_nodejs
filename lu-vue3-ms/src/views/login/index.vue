@@ -23,105 +23,109 @@
 </template>
 
 <script lang="ts" setup>
-import { loadSlim } from 'tsparticles-slim'
-import { line } from './index'
-import type { IElPlusMsgFun } from '@/utils/elPlusMessage/type'
-import { encrypt, decrypt } from '@/utils/jsencrypt'
-const router = useRouter()
-import { useUserStore } from '@/store/modules/user'
-const userStore = useUserStore()
+import { loadSlim } from "tsparticles-slim";
+import { line } from "./index";
+import type { IElPlusMsgFun } from "@/utils/elPlusMessage/type";
+import { encrypt, decrypt } from "@/utils/jsencrypt";
+const router = useRouter();
+import { useUserStore } from "@/store/modules/user";
+const userStore = useUserStore();
 const particlesInit = async (engine: any) => {
   //await loadFull(engine);
-  await loadSlim(engine)
-}
-const a = ref<number | null>(null)
-console.log(a) /*  */
-a.value = 4
+  await loadSlim(engine);
+};
+
 const particlesLoaded = async (container: any) => {
-  console.log('Particles container loaded', container)
-}
-const elMsg = inject('elMsg') as IElPlusMsgFun
-const loginForm = ref()
-const loginLoading = ref(false)
-const title = ref(import.meta.env.VITE_TITLE)
+  console.log("Particles container loaded", container);
+};
+const elMsg = inject("elMsg") as IElPlusMsgFun;
+const loginForm = ref();
+const loginLoading = ref(false);
+const title = ref(import.meta.env.VITE_TITLE);
 const data = reactive({
   formData: {
     ...userStore.userInfo,
-    password: decrypt(userStore.userInfo.password)
+    password: decrypt(userStore.userInfo.password),
   },
   config: {
-    labelWidth: ''
+    labelWidth: "",
   },
   list: [
     {
-      key: 'el-input',
-      prop: 'userName',
-      placeholder: '请输入账号',
+      key: "el-input",
+      prop: "userName",
+      placeholder: "随便输",
       style: {
-        width: '100%'
+        width: "100%",
       },
-      prefixIcon: 'User'
+      prefixIcon: "User",
     },
     {
-      key: 'el-input',
-      prop: 'password',
-      placeholder: '请输入密码',
+      key: "el-input",
+      prop: "password",
+      placeholder: "随便输",
       showPassword: true,
-      prefixIcon: 'Lock'
+      prefixIcon: "Lock",
     },
     {
-      key: 'el-checkbox',
-      prop: 'rememberPwd',
-      ckLabel: '记住密码',
+      key: "el-checkbox",
+      prop: "rememberPwd",
+      ckLabel: "记住密码",
       style: {
-        color: '#fff'
-      }
-    }
+        color: "#fff",
+      },
+    },
   ],
   rules: {
-    userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-    password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-  }
-})
+    userName: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+    password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+  },
+});
 
 const loginSystem = () => {
   loginForm.value
     .validateForm()
     .then(() => {
-      loginLoading.value = true
-      elMsg.success('登录成功！')
+      loginLoading.value = true;
+      elMsg.success("登录成功！");
       // 是否记住密码
       if (data.formData.rememberPwd) {
         userStore.userInfo = {
           ...data.formData,
-          password: encrypt(data.formData.password)
-        }
+          password: encrypt(data.formData.password),
+        };
       } else {
         userStore.userInfo = {
-          userName: '',
-          password: '',
-          rememberPwd: data.formData.rememberPwd
-        }
+          userName: "",
+          password: "",
+          rememberPwd: data.formData.rememberPwd,
+        };
       }
       userStore
         .getInfo()
         .then(() => {
           setTimeout(() => {
-            loginLoading.value = false
-            router.push('/')
-          }, 1000)
+            loginLoading.value = false;
+            router.push("/");
+          }, 1000);
         })
         .catch(() => {
-          loginLoading.value = false
-        })
+          loginLoading.value = false;
+        });
     })
-    .catch(() => {})
-}
+    .catch(() => {});
+};
 </script>
 <style lang="scss" scoped>
 .login {
   height: 100%;
-  background-image: linear-gradient(to right, #0a3e8d, #003283, #051ca3, #0a3e8d);
+  background-image: linear-gradient(
+    to right,
+    #0a3e8d,
+    #003283,
+    #051ca3,
+    #0a3e8d
+  );
   background-color: #0d47a1;
   display: flex;
   justify-content: center;
