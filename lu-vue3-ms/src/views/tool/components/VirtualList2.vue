@@ -1,27 +1,29 @@
 <template>
-  <div
-    class="virtual-list"
+  <el-scrollbar
+    ref="virtualRef"
+    :height="boxHeight"
+    noresize
+    @scroll="handleScroll"
     v-loading="loading"
-    :style="{ height: boxHeight + 'px' }"
+    always
+    style="width: 200px"
   >
-    <div class="scrollView" @scroll="onScroll" ref="scrollViewRef">
+    <div class="virtual" :style="{ height: scrollHeight + 'px' }">
       <div
-        class="virtualScroller"
-        :style="{ height: scrollHeight + 'px' }"
-      ></div>
-
-      <div class="list" :style="{ transform: `translateY(${startOffset}px)` }">
+        class="reList"
+        :style="{ transform: 'translateY(' + startOffset + 'px)' }"
+      >
         <div
-          class="item"
+          class="Vitem"
+          :style="{ height: itemHeight + 'px' }"
           v-for="item in list"
-          :key="item"
-          :style="{ height: itemHeight + 'px', lineHeight: itemHeight + 'px' }"
+          :key="item.id"
         >
           {{ item.name }}
         </div>
       </div>
     </div>
-  </div>
+  </el-scrollbar>
 </template>
 
 <script lang="ts" setup>
@@ -48,8 +50,6 @@ const loading = ref(true);
 setTimeout(() => {
   loading.value = false;
 }, 2000);
-// 虚拟列表
-const scrollViewRef = ref();
 // 要渲染的数据列表
 const list: Ref = ref([]);
 // 偏移位置
@@ -62,42 +62,45 @@ list.value = originalData.value.slice(
   0,
   Math.ceil(boxHeight.value / itemHeight.value)
 );
+// 元素平移位置
 const startOffset = ref(0);
 
 // 滚动
-const scroll = () => {
+const scroll = (v: { scrollTop: number }) => {
+  console.log("滚动触发");
   // 获取滚动条距离顶部的距离
-  const scrollTop = scrollViewRef.value.scrollTop;
+  const scrollTop = v.scrollTop;
   // console.log(scrollTop);
   // 计算当前滚动条距离顶部的项的索引，向下取整
   const start = Math.floor(scrollTop / itemHeight.value);
   // console.log(start, "start");
-  // 计算当前滚动条距离底部的项的索引，向上取整  多取一条数据，防止底部出现空白
+  // 计算当前滚动条距离底部的项的索引，向上取整 多取一条数据，防止底部出现空白
   const end = start + Math.ceil(boxHeight.value / itemHeight.value) + 1;
   // console.log(end, "end");
-  // 列表滚动到当前滚动条的位置    开始位置 * 项高
+  // 列表平移到当前滚动条的位置    开始位置 * 项高
   startOffset.value = start * itemHeight.value;
   // 截取数据源
   list.value = originalData.value.slice(start, end);
 };
 // 滚动条防抖
-const onScroll = debounce(scroll, 30);
+const handleScroll = debounce(scroll, 30);
 </script>
 <style lang="scss" scoped>
-.virtual-list {
+.virtual {
   width: 200px;
-}
-.scrollView {
-  background: #f00;
-  overflow-y: auto;
-  height: 100%;
-  width: 100%;
+  background: rgb(149, 250, 179);
   position: relative;
-
-  .list {
-    position: absolute;
-    top: 0;
-    left: 0;
+}
+.virList {
+  width: 100%;
+}
+.reList {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  .Vitem {
+    width: 100%;
   }
 }
 </style>

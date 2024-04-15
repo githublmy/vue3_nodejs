@@ -7,7 +7,7 @@
  * @return {*}
  */
 export function debounce(
-  func: { (): void; apply?: any },
+  func: { (...rest: any): void; apply?: any },
   waitTime = 400,
   immediate = false
 ) {

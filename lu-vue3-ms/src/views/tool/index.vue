@@ -27,8 +27,8 @@ const arr = Array(100000)
   .map((_item, i) => ({ id: i + 1, name: "数据项" + (i + 1) }));
 const propsObject = ref({
   // 组件参数
-  itemHeight: 40,
-  boxHeight: 500,
+  itemHeight: 30,
+  boxHeight: 300,
   originalData: arr,
 });
 // 异步组件
@@ -41,6 +41,9 @@ const CountAnimate = defineAsyncComponent(
 );
 const VirtualList = defineAsyncComponent(
   () => import("./components/VirtualList.vue")
+);
+const VirtualList2 = defineAsyncComponent(
+  () => import("./components/VirtualList2.vue")
 );
 const menus = [
   {
@@ -62,12 +65,16 @@ const menus = [
     title: "虚拟列表",
     id: "VirtualList",
     component: markRaw(VirtualList),
-  },
+  },{
+    title: "虚拟列表el滚动条",
+    id: "VirtualList2",
+    component: markRaw(VirtualList2),
+  }
 ];
 // 默认选择
-const defaultActive = ref(menus[3].id);
+const defaultActive = ref(menus[4].id);
 // 当前显示的组件
-const currentCom = ref(menus[3].component);
+const currentCom = ref(menus[4].component);
 const selectMenu = (v: string) => {
   defaultActive.value = v;
   const idx = menus.findIndex((item) => item.id === v);
