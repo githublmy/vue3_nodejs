@@ -90,7 +90,7 @@ router.beforeEach(async (to, _) => {
 });
 
 router.afterEach(() => {
-  NProgress.done(); //开启进度条
+  NProgress.done(); //关闭进度条
   return true;
 });
 
