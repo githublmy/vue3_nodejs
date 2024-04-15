@@ -121,9 +121,11 @@ export function handleRouter(routers: IRouteData[]) {
  */
 
 export function toTree({ arrList = [], id = 'id', pid = 'pid', order = 'sort' }) {
+  // 第一级数据
   let up: any = arrList
     .filter((x: any) => x[pid] === null)
     .sort((a: IRouteData, b: IRouteData) => a[order] - b[order])
+  
   let cp: IRouteData[] = arrList.filter((x: IRouteData) => x[pid])
   getData(up)
   function getData(arr = []) {
