@@ -177,7 +177,7 @@
             ></canvas>
           </el-col>
           <el-col :span="4">
-            <el-tag size="default">当前选中设备信息：</el-tag>
+            <el-tag size="default">当前选中：</el-tag>
             <el-form
               :model="currentObj"
               ref="form"
@@ -241,7 +241,6 @@
 <script>
 import ImgList from "./components/ImgList/index.vue";
 import {
-  getAlldevice,
   saveImagInfo,
   updateImagInfo,
   getImagInfoDetail,
@@ -312,9 +311,6 @@ export default {
       currentOperateType: 1, //1新增  2 修改
       currentType: "",
     };
-  },
-  created() {
-    this.getDevice();
   },
   mounted() {
     this.init();
@@ -443,12 +439,6 @@ export default {
       console.log(err);
       console.log(file);
       this.msgError("上传失败！");
-    },
-    // 获取设备列表
-    async getDevice() {
-      const res = await getAlldevice();
-      console.log(res);
-      this.options = res.payload;
     },
     // 恢复缩放平移位置
     resetAllZoom() {
