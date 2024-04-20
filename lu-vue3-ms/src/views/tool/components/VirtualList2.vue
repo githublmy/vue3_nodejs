@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { debounce } from "@/utils/tool";
+import { debounce2 } from "@/utils/tool";
 
 interface p {
   id: number;
@@ -83,7 +83,7 @@ const scroll = (v: { scrollTop: number }) => {
   list.value = originalData.value.slice(start, end);
 };
 // 滚动条防抖
-const handleScroll = debounce(scroll, 30);
+const handleScroll = debounce2(scroll, 30);
 </script>
 <style lang="scss" scoped>
 .virtual {
