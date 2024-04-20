@@ -101,7 +101,7 @@ export function throttle<T extends (...args: any[]) => any>(
   func: T,
   // 节流间隔时间（单位：毫秒）
   waitTime: number,
-  // 节流选项，默认开启leading和trailing
+  // 节流选项，默认开启leading 首次执行和trailing结束执行
   options: ThrottleOptions = { leading: true, trailing: true }
 ): ThrottleFunction<T> & { cancel: () => void } {
   // 用于保存定时器ID
