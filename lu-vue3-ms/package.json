@@ -16,7 +16,7 @@
     "@element-plus/icons-vue": "^2.3.1",
     "@kjgl77/datav-vue3": "^1.7.2",
     "@vueup/vue-quill": "^1.2.0",
-    "aieditor": "1.0.0-rc.7",
+    "aieditor": "^1.0.2",
     "axios": "^1.6.8",
     "echarts": "^5.5.0",
     "element-plus": "^2.6.3",
