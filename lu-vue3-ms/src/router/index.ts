@@ -23,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/login/index.vue"),
   },
   {
+    path: "/test1",
+    name: "test1",
+    component: () => import("@/views/test.vue"),
+  },
+  {
     path: "/bigScreen",
     name: "bigScreen",
     component: () => import("@/views/bigScreen/index.vue"),
@@ -59,7 +64,7 @@ router.beforeEach(async (to, _) => {
     if (to.path === "/login") {
       return "/";
     } else {
-      if (router.getRoutes().length <= 4) {
+      if (router.getRoutes().length <= 5) {
         await userStore.getInfo();
         const rtList = userStore.routes;
         // 首页重定向为第一个子路由
