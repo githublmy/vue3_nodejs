@@ -58,7 +58,7 @@
 <script>
 import { fabric } from "fabric";
 import VScaleScreen from "v-scale-screen";
-import { getImagInfoList, getImagInfoDetail } from "@/api/imgSetting/index";
+// import { getImagInfoList, getImagInfoDetail } from "@/api/imgSetting/index";
 import HomeImage from "./components/HomeImage/index.vue";
 export default {
   components: {
@@ -93,7 +93,7 @@ export default {
     };
   },
   created() {
-    this.getImgList();
+    // this.getImgList();
   },
   mounted() {
     this.init();

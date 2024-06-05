@@ -240,14 +240,14 @@
 
 <script>
 import ImgList from "./components/ImgList/index.vue";
-import {
-  saveImagInfo,
-  updateImagInfo,
-  getImagInfoDetail,
-} from "@/api/imgSetting/index";
+// import {
+//   saveImagInfo,
+//   updateImagInfo,
+//   getImagInfoDetail,
+// } from "@/api/imgSetting/index";
 import { fabric } from "fabric";
 import { getDevs } from "./test";
-import { useUserStore } from "@/store/modules/user.js";
+import { useUserStore } from "@/store/modules/user";
 export default {
   components: {
     ImgList,
@@ -288,7 +288,7 @@ export default {
         48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70,
       ],
       headers: {
-        token: useUserStore().token,
+        // token: useUserStore().token,
       },
       obj: {
         clientMdCode: "test",

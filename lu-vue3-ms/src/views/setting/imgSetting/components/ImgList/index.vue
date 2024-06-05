@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { getImagInfoList, deleteImagInfo } from "@/api/imgSetting/index";
+// import { getImagInfoList, deleteImagInfo } from "@/api/imgSetting/index";
 
 export default {
   data() {
@@ -54,7 +54,7 @@ export default {
     };
   },
   created() {
-    this.getList();
+    // this.getList();
   },
   methods: {
     editArea(row) {

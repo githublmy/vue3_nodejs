@@ -8,7 +8,7 @@
       <span
         class="sidebar-title"
         :style="{
-          transform: !isCollapse ? 'translateX(0)' : 'translateX(100px)'
+          transform: !isCollapse ? 'translateX(0)' : 'translateX(100px)',
         }"
         >{{ ProjectTitle }}</span
       >
@@ -31,14 +31,14 @@
 </template>
 
 <script setup lang="ts">
-import SiderItem from './SiderItem.vue'
-import { useSettingStore } from '@/store/modules/setting'
-import { useUserStore } from '@/store/modules/user'
-const { menuList } = useUserStore()
-const route = useRoute()
-const settingStore = useSettingStore()
-const isCollapse = computed(() => settingStore.isCollapse)
-const ProjectTitle = computed(() => import.meta.env.VITE_TITLE)
+import SiderItem from "./SiderItem.vue";
+import { useSettingStore } from "@/store/modules/setting";
+import { useUserStore } from "@/store/modules/user";
+const { menuList } = useUserStore();
+const route = useRoute();
+const settingStore = useSettingStore();
+const isCollapse = computed(() => settingStore.isCollapse);
+const ProjectTitle = computed(() => import.meta.env.VITE_TITLE);
 </script>
 <style lang="scss">
 // 折叠动画
@@ -54,6 +54,8 @@ const ProjectTitle = computed(() => import.meta.env.VITE_TITLE)
   }
 }
 .sidebar {
+  height: 100%;
+
   .logo {
     width: 100%;
     height: 40px;
@@ -79,18 +81,13 @@ const ProjectTitle = computed(() => import.meta.env.VITE_TITLE)
       font-size: 14px;
       font-weight: 700;
       line-height: 40px;
-      font-family:
-        Avenir,
-        Helvetica Neue,
-        Arial,
-        Helvetica,
-        sans-serif;
+      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
       vertical-align: middle;
       transition: all 0.3s;
     }
   }
   .scrollbar {
-    height: calc(100vh - 40px);
+    height: calc(100% - 40px);
   }
 }
 </style>

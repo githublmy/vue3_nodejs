@@ -22,28 +22,32 @@
   </el-config-provider>
 </template>
 <script lang="ts" setup>
-import { useSettingStore } from '@/store/modules/setting'
+import DevicePixelRatio from "@/utils/devicePixelRatio";
+import { useSettingStore } from "@/store/modules/setting";
 import time from "@/utils/buildTime.json";
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import en from 'element-plus/dist/locale/en.mjs'
+import zhCn from "element-plus/dist/locale/zh-cn.mjs";
+import en from "element-plus/dist/locale/en.mjs";
 
-const { locale } = storeToRefs(useSettingStore())
+const { locale } = storeToRefs(useSettingStore());
 const msgConfig = {
-  max: 3 //同时显示的最大的消息提示数量
-}
+  max: 3, //同时显示的最大的消息提示数量
+};
 const config = {
   zIndex: 3000,
-  size: 'default'
-}
+  size: "default",
+};
 const buttonConfig = {
-  autoInsertSpace: true //是否在按钮的中文自动添加空格
-}
+  autoInsertSpace: true, //是否在按钮的中文自动添加空格
+};
 
-const localeLanguage = computed(() => (locale.value === 'zh-cn' ? zhCn : en))
+const localeLanguage = computed(() => (locale.value === "zh-cn" ? zhCn : en));
 
-console.log(
-  `%c 前端打包时间 %c ${time.latestTime} `,
-  "background:#3eaf7c ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff",
-  "background:#007AFF ;padding: 1px; color: #fff; font-weight: bold;"
-);
+onMounted(() => {
+  // new DevicePixelRatio().init();
+}),
+  console.log(
+    `%c 前端打包时间 %c ${time.latestTime} `,
+    "background:#3eaf7c ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff",
+    "background:#007AFF ;padding: 1px; color: #fff; font-weight: bold;"
+  );
 </script>

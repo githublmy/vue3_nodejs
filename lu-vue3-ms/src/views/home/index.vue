@@ -14,19 +14,19 @@
   </div>
 </template>
 <script lang="ts" setup>
-import WebSocketWrapper from "@/utils/websocket";
-const client = new WebSocketWrapper("ws://localhost:3000", {
-  reconnectInterval: 1000,
-  // maxReconnectAttempts: 2,
-});
-client.addEventListener("open", (event, id) => {
-  console.log(`WebSocket连接 ${id} 已打开:`, event);
-});
-client.addEventListener("message", (e, id) => {
-  console.log(e, id);
-});
-const res = client.getStatus();
-console.log(res);
+// import WebSocketWrapper from "@/utils/websocket";
+// const client = new WebSocketWrapper("ws://localhost:3000", {
+//   reconnectInterval: 1000,
+//   // maxReconnectAttempts: 2,
+// });
+// client.addEventListener("open", (event, id) => {
+//   console.log(`WebSocket连接 ${id} 已打开:`, event);
+// });
+// client.addEventListener("message", (e, id) => {
+//   console.log(e, id);
+// });
+// const res = client.getStatus();
+// console.log(res);
 
 // client.close()
 // let isC = 1
