@@ -22,7 +22,7 @@
   </el-config-provider>
 </template>
 <script lang="ts" setup>
-import DevicePixelRatio from "@/utils/devicePixelRatio";
+// import DevicePixelRatio from "@/utils/devicePixelRatio";
 import { useSettingStore } from "@/store/modules/setting";
 import time from "@/utils/buildTime.json";
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
