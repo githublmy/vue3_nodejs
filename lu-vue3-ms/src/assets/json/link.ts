@@ -169,6 +169,13 @@ export default [
     description: "纯css加载动画",
   },
   {
+    title: "布局，css技巧",
+    keywords: "css 加载  布局， ",
+    url: "https://csscoco.com/",
+    icon: "svg/uiverse.svg",
+    description: "csscoco布局，css技巧",
+  },
+  {
     title: "driver.js",
     keywords: "网站引导页 driverjs ",
     url: "https://driverjs.com",
