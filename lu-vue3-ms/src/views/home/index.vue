@@ -15,7 +15,7 @@
       style="width: 500px"
       ref="uploadRef"
       v-model:file-list="fileList"
-      action="https://api.dev.shzjsmart.com:18443/file/api/upload"
+      action="/file/api/upload"
       multiple
       :data="data"
       :on-success="handleSuccess"
@@ -63,6 +63,8 @@ const handleError: UploadProps["onError"] = (err, uploadFile) => {
 };
 // 开始上传文件
 const uploadFiles = () => {
+  console.log(fileList.value, "所有文件");
+
   // 初始化 uploadStatus 数组，并确保 uid 存在
   uploadStatus.value = fileList.value.map((file) => {
     if (file.uid === undefined) {
@@ -70,19 +72,16 @@ const uploadFiles = () => {
     }
     return {
       uid: file.uid,
-      status: file.status || "uploading",
+      status: file.status || "ready",
     };
   });
-  console.log(uploadStatus.value);
+  console.log(uploadStatus.value, "上传");
 
   // 调用 el-upload 组件的提交方法
   uploadRef.value?.submit();
 };
 // 更新文件上传状态
-const updateFileStatus = (
-  uid: string | number,
-  status: "success" | "fail"
-) => {
+const updateFileStatus = (uid: string | number, status: "success" | "fail") => {
   const index = uploadStatus.value.findIndex((item) => item.uid === uid);
   if (index !== -1) {
     uploadStatus.value[index].status = status;
@@ -93,15 +92,19 @@ const updateFileStatus = (
 // 检查是否所有文件都已上传完毕
 const checkAllFilesUploaded = () => {
   const allUploaded = uploadStatus.value.every(
-    (file) => file.status !== "uploading"
+    (file) => file.status !== "ready"
   );
   console.log(fileList.value);
   console.log(uploadStatus.value, "文件状态");
 
   if (allUploaded) {
-    ElMessage.success("所有文件都已上传完成或失败。");
     // 在此处执行其他需要的操作
+    ElMessage.success("操作完成");
+    console.log(
+      "--------------所有文件都已上传完成或失败----------------------"
+    );
     console.log(fileList.value);
+    console.log("------------------------------------");
   }
 };
 
