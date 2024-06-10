@@ -6,7 +6,7 @@ export let ws_params = {
 const WS_URL =
   import.meta.env.VITE_APP_WEBSOCKET_URL + "/" + ws_params.back_url;
 // console.log(WS_URL);
-let websock = null;
+let websocket = null;
 //断线重连后，延迟5秒重新创建WebSocket连接  rec用来存储延迟请求的代码
 let rec;
 //连接标识 避免重复连接
@@ -49,7 +49,7 @@ let reConnect = () => {
 //设置关闭连接
 let closeWebSocket = () => {
   console.log("关闭websocket");
-  websock.close();
+  websocket.close();
 };
 //心跳设置
 const heartCheck = {
@@ -58,7 +58,7 @@ const heartCheck = {
 
   start: function () {
     this.timeoutObj = setTimeout(function () {
-      if (isConnect) websock.send(checkMsg);
+      if (isConnect) websocket.send(checkMsg);
     }, this.timeout);
   },
 
@@ -74,20 +74,20 @@ function initWebSocket() {
   const ws_u =
     import.meta.env.VITE_APP_WEBSOCKET_URL + "/" + ws_params.back_url;
   console.log(ws_u, "websocket地址");
-  websock = new WebSocket(ws_u);
-  websock.onmessage = function (e) {
-    websocketonmessage(e);
+  websocket = new WebSocket(ws_u);
+  websocket.onmessage = function (e) {
+    websocketOnmessage(e);
   };
-  websock.onclose = function () {
-    websocketclose();
+  websocket.onclose = function () {
+    websocketClose();
   };
-  websock.onopen = function () {
+  websocket.onopen = function () {
     // console.log(e, "连接成功666666666666666666");
     isConnect = true; //连接成功后修改标识
     websocketOpen();
   };
   // 连接发生错误的回调方法
-  websock.onerror = function (e) {
+  websocket.onerror = function (e) {
     console.log("WebSocket连接发生错误");
     isConnect = false; //连接断开修改标识
     websocketError();
@@ -97,13 +97,13 @@ function initWebSocket() {
 
 // 实际调用的方法
 function sendSock(agentData) {
-  if (websock.readyState === websock.OPEN) {
-    // console.log("直接发送数据", websock);
+  if (websocket.readyState === websocket.OPEN) {
+    // console.log("直接发送数据", websocket);
     // 若是ws开启状态
-    websocketsend(agentData);
-  } else if (websock.readyState === websock.CONNECTING) {
+    websocketSend(agentData);
+  } else if (websocket.readyState === websocket.CONNECTING) {
     // 若是 正在开启状态，则等待1s后重新调用
-    // console.log("等待100ms", websock);
+    // console.log("等待100ms", websocket);
     setTimeout(function () {
       sendSock(agentData);
     }, 100);
@@ -121,7 +121,7 @@ function getSock(callback) {
   globalCallback = callback;
 }
 // 数据接收
-function websocketonmessage(e) {
+function websocketOnmessage(e) {
   // console.log(e)
   let O_o = JSON.parse(e.data);
 
@@ -135,13 +135,13 @@ function websocketonmessage(e) {
 }
 
 // 数据发送
-function websocketsend(agentData) {
+function websocketSend(agentData) {
   // console.log(agentData, "发送");
-  websock.send(JSON.stringify(agentData));
+  websocket.send(JSON.stringify(agentData));
 }
 
 // 关闭
-function websocketclose() {
+function websocketClose() {
   isConnect = false; //断开后修改标识
   reConnect();
 }
