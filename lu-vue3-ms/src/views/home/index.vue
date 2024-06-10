@@ -2,7 +2,6 @@
   <div>
     首页
     <span>{{ $t("message.Hello") }}</span>
-
     <el-row class="mb-4">
       <el-button>Default</el-button>
       <el-button type="primary">Primary</el-button>
@@ -28,6 +27,14 @@
       </template>
       <el-button type="primary" @click="uploadFiles">手动上传</el-button>
     </el-upload>
+
+    <details open>
+      <summary class="custom-triangle">点我展开</summary>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat
+      necessitatibus in ipsam, consectetur commodi possimus fugit dicta
+      accusamus dolorem excepturi officia repellendus maxime ea atque animi
+      quisquam vitae fugiat. Ab.
+    </details>
   </div>
 </template>
 <script lang="ts" setup>
@@ -152,4 +159,35 @@ const checkAllFilesUploaded = () => {
 //   })
 // }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+details {
+  font: 16px "Open Sans", Calibri, sans-serif;
+  width: 620px;
+}
+
+details > summary {
+  padding: 2px 20px;
+  list-style: none;
+  position: relative;
+}
+
+details[open] > summary {
+  background-color: #ccf;
+  position: relative;
+}
+details[open] > summary::before {
+  content: ">";
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  transform: rotate(90deg);
+}
+
+.custom-triangle::before {
+  content: ">";
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  transition: 0.3s;
+}
+</style>
