@@ -5,7 +5,7 @@
       <RightToolBar
         v-model:showBorder="config.showBorder"
         v-model:showSearch="config.showSearch"
-        @queryTable="config.handleEvent"
+        @queryTable="config?.handleEvent"
       />
     </el-row>
     <el-table
