@@ -146,6 +146,10 @@ class WebSocketWrapper {
   public send(data: string, enqueueIfClosed: boolean = this.enqueueIfClosed) {
     if (this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(data);
+    } else if (this.ws.readyState === WebSocket.CONNECTING) {
+      setTimeout(() => {
+        this.ws.send(data);
+      }, 300);
     } else if (enqueueIfClosed) {
       this.sendQueue.push(data); // 如果连接未打开，将数据加入发送队列
     } else {
@@ -236,9 +240,9 @@ class WebSocketWrapper {
 
   /**
    * 获取 WebSocket 连接状态
-   * 
+   *
    *        0           1        2         3
-   * 
+   *
    *  ["CONNECTING", "OPEN", "CLOSING", "CLOSED"]
    * @returns {number} WebSocket 的 readyState 属性值
    */
