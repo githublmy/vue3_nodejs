@@ -209,3 +209,22 @@ export function animationForCount(
   };
   run();
 }
+
+
+// 数组转树形
+export function arrayToTree(arr: string | any[]) {
+  let map: any = {},
+    node,
+    roots = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    node = arr[i];
+    node.children = [];
+    map[node.classificationCode] = i;
+    if (node.parentCode !== null) {
+      arr[map[node.parentCode]].children.push(node);
+    } else {
+      roots.push(node);
+    }
+  }
+  return roots;
+}
