@@ -14,3 +14,5 @@ declare module "monaco-editor/esm/vs/platform/actions/common/actions";
 //   const component: DefineComponent<{}, {}, any>
 //   export default component
 // }
+
+declare module "vue-virtual-scroller";
