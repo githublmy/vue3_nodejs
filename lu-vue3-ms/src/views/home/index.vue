@@ -49,38 +49,50 @@
   </template>
 </RecycleScroller> -->
 
-    <el-select style="width: 240px;" 
-      v-model="selectedValue" :persistent="true"
-      filterable clearable      remote    
-      :remote-method="loadOptions"    :loading="loading" remote-show-suffix
-      placeholder="请选择"  @change="change"
+    <el-select
+      style="width: 240px"
+      v-model="selectedValue"
+      :persistent="true"
+      filterable
+      clearable
+      remote
+      :remote-method="loadOptions"
+      :loading="loading"
+      remote-show-suffix
+      placeholder="请选择"
+      @change="change"
     >
-    <RecycleScroller
-  :items="filterList"
-  :item-size="40"
-  page-mode   key-field="id"
-  :buffer="274" 
-  :prerender="20"
->
-  <template #default="{ item }">
-    <el-option :value="item.id" :label="item.name">{{ item.name }}</el-option>
-  </template>
-</RecycleScroller>
+      <RecycleScroller
+        :items="filterList"
+        :item-size="40"
+        page-mode
+        key-field="id"
+        :buffer="274"
+        :prerender="20"
+      >
+        <template #default="{ item }">
+          <el-option :value="item.id" :label="item.name">{{
+            item.name
+          }}</el-option>
+        </template>
+      </RecycleScroller>
     </el-select>
-
   </div>
 </template>
 <script lang="ts" setup>
 import type { UploadProps, UploadUserFile, UploadInstance } from "element-plus";
-import {RecycleScroller } from "vue-virtual-scroller";
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
-const selectedValue = ref(null);
-const options:Ref = ref([]);
+import { RecycleScroller } from "vue-virtual-scroller";
+import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
+const selectedValue = ref();
+const options: Ref = ref([]);
 
 const generateData = () => {
   const data = [];
   for (let i = 0; i < 50000; i++) {
-    data.push({ id: i + 1, name: `选项 ${i + 1}--测试护具湿哒哒电费水电费水电费收到` });
+    data.push({
+      id: i + 1,
+      name: `选项 ${i + 1}--测试护具湿哒哒电费水电费水电费收到`,
+    });
   }
   return data;
 };
@@ -88,12 +100,12 @@ const generateData = () => {
 const allOptions = generateData();
 const loading = ref(false);
 const change = (v: any) => {
-  console.log(v,"变了");
-  
+  console.log(v, "变了");
+
   if (!v) {
-    loadOptions("")
+    loadOptions("");
   }
-}
+};
 const loadOptions = (query: string) => {
   loading.value = true;
   console.log(query);
@@ -102,7 +114,7 @@ const loadOptions = (query: string) => {
   //   show.value = false
   // } else {
   //   show.value = true
-    
+
   // }
   setTimeout(() => {
     if (query) {
@@ -111,14 +123,13 @@ const loadOptions = (query: string) => {
       options.value = allOptions;
     }
     loading.value = false;
- 
   }, 50);
 };
 
 // 初次加载全部数据
 loadOptions("");
 
-const filterList = computed(()=>options.value)
+const filterList = computed(() => options.value);
 const fileList = ref<UploadUserFile[]>([]);
 // 文件状态类型定义
 interface FileStatus {
@@ -270,4 +281,5 @@ details[open] > summary::before {
   left: 6px;
   transition: 0.3s;
 }
-</style>: any: string | boolean
+</style>
+: any: string | boolean
