@@ -12,10 +12,18 @@
       :loading="loading"
       placeholder="Please enter a keyword"
     />
+    <el-switch v-model="value2" @change="change" />
   </div>
 </template>
 
 <script lang="ts" setup>
+const value2 = ref(false);
+const change = () => {
+  console.log(value2);
+};
+setTimeout(() => {
+  value2.value = true;
+}, 1000);
 const allList = new Array(50000).fill("").map((_, index) => ({
   value: `${index}`,
   label: `选项${index}---xunaxsdfsdfsdf第三方都是`,
