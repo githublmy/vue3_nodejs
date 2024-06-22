@@ -30,8 +30,6 @@
     "./src/**/*.ts",
     "./src/**/*.d.ts",
     "./src/**/*.vue",
-    "./auto-imports.d.ts",
-    "./components.d.ts",
     "env.d.ts"
   ],
 }

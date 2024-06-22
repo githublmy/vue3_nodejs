@@ -113,6 +113,8 @@ export default defineConfig(({ mode }) => {
           //   prefix: "Icon",
           // }),
         ],
+        // 将 d.ts 文件生成在 src 目录下
+        dts: "src/auto-imports.d.ts",
       }),
       Components({
         resolvers: [
@@ -122,6 +124,8 @@ export default defineConfig(({ mode }) => {
           // }),
           ElementPlusResolver(),
         ],
+        // 将 d.ts 文件生成在 src 目录下
+        dts: "src/components.d.ts",
       }),
       // Icons({
       //   autoInstall: true,
