@@ -233,25 +233,24 @@
           </el-col>
         </el-row>
       </div>
-      <ImgList v-else @getDetail="getImgDetail" />
+      <!-- <ImgList v-else @getDetail="getImgDetail" /> -->
     </transition>
   </div>
 </template>
 
 <script>
-import ImgList from "./components/ImgList/index.vue";
+// import ImgList from "./components/ImgList/index.vue";
 // import {
 //   saveImagInfo,
 //   updateImagInfo,
 //   getImagInfoDetail,
 // } from "@/api/imgSetting/index";
 import { fabric } from "fabric";
-import { getDevs } from "./test";
 import { useUserStore } from "@/store/modules/user";
 export default {
-  components: {
-    ImgList,
-  },
+  // components: {
+  //   ImgList,
+  // },
   data() {
     return {
       showImg: true,
@@ -306,7 +305,7 @@ export default {
       panning: false, //移动状态
       options: [],
       value: {},
-      list: getDevs(),
+      list: [],
       currentTextBox: null,
       currentOperateType: 1, //1新增  2 修改
       currentType: "",

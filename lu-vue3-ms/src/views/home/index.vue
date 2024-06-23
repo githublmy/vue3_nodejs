@@ -85,6 +85,7 @@ import { RecycleScroller } from "vue-virtual-scroller";
 import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
 const selectedValue = ref();
 const options: Ref = ref([]);
+console.log("清除了吗？首页");
 
 const generateData = () => {
   const data = [];

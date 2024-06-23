@@ -12,7 +12,7 @@ import { createHtmlPlugin } from "vite-plugin-html";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 // 打包压缩插件
 import VitePluginCompression from "vite-plugin-compression";
-
+import removeConsole from "vite-plugin-remove-console";
 // 打包分析
 import { visualizer } from "rollup-plugin-visualizer";
 import fs from "fs";
@@ -56,6 +56,18 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       vue(),
+      removeConsole({
+        external: ["App.vue", "src/views/home/index.vue"],
+        externalValue: [
+          "清除？App。vue",
+          " ",
+          "`%c 前端打包时间 %c ${time.latestTime} `",
+        ],
+        //       custom:[`console.log(`%c '前端打包时间' %c`,
+        //   "background:#3eaf7c ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff",
+        //   "background:#007AFF ;padding: 1px; color: #fff; font-weight: bold;"
+        // )`]
+      }),
       visualizer({
         // template: 'treemap', // sunburst | treemap | network | raw-data | list
         // open: true, //注意这里要设置为true，否则无效，自动打开

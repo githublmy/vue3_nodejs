@@ -17,6 +17,8 @@
 </template>
 
 <script lang="ts" setup>
+console.log("清除了吗？");
+
 const value2 = ref(false);
 const change = () => {
   console.log(value2);

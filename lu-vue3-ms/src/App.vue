@@ -32,7 +32,7 @@ const { locale } = storeToRefs(useSettingStore());
 const msgConfig = {
   max: 3, //同时显示的最大的消息提示数量
 };
-const config = {
+const config: any = {
   zIndex: 3000,
   size: "default",
 };
@@ -50,4 +50,7 @@ onMounted(() => {
     "background:#3eaf7c ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff",
     "background:#007AFF ;padding: 1px; color: #fff; font-weight: bold;"
   );
+const a = 99;
+
+console.log("清除？App。vue", a);
 </script>
