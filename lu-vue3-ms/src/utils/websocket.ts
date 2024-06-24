@@ -228,7 +228,10 @@ class WebSocketWrapper {
     this.isClosedManually = true; // 标记为手动关闭
     this.stopHeartbeat(); // 停止心跳机制
     this.ws.close(); // 关闭WebSocket连接
-    this.removeAllEventListeners(); // 移除所有事件监听器
+     // 延迟移除事件，防止还未触发close事件就关闭
+     setTimeout(() => {
+      this.removeAllEventListeners(); // 移除所有事件监听器
+    }, 10);
   }
 
   // 移除所有事件监听器
