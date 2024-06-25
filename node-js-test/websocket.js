@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 });
 
 // 载入 ws 库
-const WebSocketServer = require('ws')
+const WebSocketServer = require("ws")
 // 引入定时器
 const timers = require('timers');
 // 创建一个 websocket 服务

@@ -11,7 +11,7 @@ interface WebSocketWrapperOptions {
   reconnectInterval?: number;
   /**
    * 最大重连次数，-1 表示无限重连
-   * @default 10
+   * @default -1
    */
   maxReconnectAttempts?: number;
   /**
@@ -32,6 +32,10 @@ interface WebSocketWrapperOptions {
    * WebSocket 子协议，可以是字符串或字符串数组
    */
   protocols?: string | string[];
+  /**
+   * 开启心跳检测  默认false
+   */
+  startHeartCheck?: boolean;
 }
 
 /**
@@ -51,6 +55,7 @@ class WebSocketWrapper {
   private eventListeners: Map<string, WsEventListener[]>; // 事件监听器
   private sendQueue: string[]; // 发送队列
   private heartbeatTimer?: number; // 心跳包定时器
+  private startHeartCheck?: boolean; // 心跳包定时器
 
   /**
    * WebSocketWrapper 构造函数
@@ -66,11 +71,12 @@ class WebSocketWrapper {
       ? [options.protocols]
       : undefined; // 子协议数组或单个协议名，若未定义则不传递
     this.reconnectInterval = options.reconnectInterval ?? 5000; // 重连间隔时间
-    this.maxReconnectAttempts = options.maxReconnectAttempts ?? 10; // 最大重连次数，-1表示无限重连
+    this.maxReconnectAttempts = options.maxReconnectAttempts ?? -1; // 最大重连次数，-1表示无限重连
     this.heartbeatInterval = options.heartbeatInterval ?? 10000; // 心跳包间隔时间
     this.enqueueIfClosed = options.enqueueIfClosed ?? false; // 连接未打开时是否加入发送队列，默认值为 false
     this.reconnectAttempts = 0; // 当前重连尝试次数
     this.isClosedManually = false; // 是否手动关闭的标记
+    this.startHeartCheck = false; // 是否开启心跳检测
     this.eventListeners = new Map<string, WsEventListener[]>([
       ["open", []],
       ["close", []],
@@ -92,7 +98,9 @@ class WebSocketWrapper {
     this.ws.onclose = this.handleClose.bind(this);
     this.ws.onmessage = this.handleMessage.bind(this);
     this.ws.onerror = this.handleError.bind(this);
-    this.startHeartbeat(); // 启动心跳机制
+    if (this.startHeartCheck) {
+      this.startHeartbeat(); // 启动心跳机制
+    }
   }
 
   // 处理open事件
@@ -232,12 +240,25 @@ class WebSocketWrapper {
    */
   public close() {
     this.isClosedManually = true; // 标记为手动关闭
-    this.stopHeartbeat(); // 停止心跳机制
+    if (this.startHeartCheck) {
+      this.stopHeartbeat(); // 停止心跳机制
+    }
+
+    // 创建一个假的 CloseEvent 来手动触发 close 事件
+    const closeEvent = new CloseEvent("close", {
+      wasClean: true,
+      code: 1000,
+      reason: "Connection closed manually",
+    });
+    this.handleClose(closeEvent); // 手动触发 close 事件监听器
+
     this.ws.close(); // 关闭WebSocket连接
+    this.removeAllEventListeners(); // 移除所有事件监听器
+
     // 延迟移除事件，防止还未触发close事件就关闭
-    setTimeout(() => {
-      this.removeAllEventListeners(); // 移除所有事件监听器
-    }, 10);
+    // setTimeout(() => {
+    //   this.removeAllEventListeners(); // 移除所有事件监听器
+    // }, 10);
   }
 
   // 移除所有事件监听器
