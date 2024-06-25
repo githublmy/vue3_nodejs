@@ -1,5 +1,5 @@
 type WsEventListener = (event: Event, id: string) => void;
-
+type WsMessageEventListener = (event: MessageEvent, id: string) => void;
 /**
  * WebSocketWrapper 配置选项
  */
@@ -171,9 +171,12 @@ class WebSocketWrapper {
    * - message：接收到消息时触发
    * - error：发生错误时触发
    */
-  public addEventListener(event: string, callback: WsEventListener) {
+  public addEventListener(
+    event: string,
+    callback: WsEventListener | WsMessageEventListener
+  ) {
     if (this.eventListeners.has(event)) {
-      this.eventListeners.get(event)!.push(callback);
+      this.eventListeners.get(event)!.push(callback as WsEventListener);
     } else {
       console.error(`事件 ${event} 不支持.`);
     }
@@ -185,7 +188,10 @@ class WebSocketWrapper {
    * - message：接收到消息时触发
    * - error：发生错误时触发
    */
-  public removeEventListener(event: string, callback: WsEventListener) {
+  public removeEventListener(
+    event: string,
+    callback: WsEventListener | WsMessageEventListener
+  ) {
     if (this.eventListeners.has(event)) {
       const listeners = this.eventListeners.get(event)!;
       this.eventListeners.set(
@@ -228,8 +234,8 @@ class WebSocketWrapper {
     this.isClosedManually = true; // 标记为手动关闭
     this.stopHeartbeat(); // 停止心跳机制
     this.ws.close(); // 关闭WebSocket连接
-     // 延迟移除事件，防止还未触发close事件就关闭
-     setTimeout(() => {
+    // 延迟移除事件，防止还未触发close事件就关闭
+    setTimeout(() => {
       this.removeAllEventListeners(); // 移除所有事件监听器
     }, 10);
   }
@@ -243,9 +249,7 @@ class WebSocketWrapper {
 
   /**
    * 获取 WebSocket 连接状态
-   *
    *        0           1        2         3
-   *
    *  ["CONNECTING", "OPEN", "CLOSING", "CLOSED"]
    * @returns {number} WebSocket 的 readyState 属性值
    */

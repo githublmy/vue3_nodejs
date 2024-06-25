@@ -27,7 +27,13 @@ import { useSettingStore } from "@/store/modules/setting";
 import time from "@/utils/buildTime.json";
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 import en from "element-plus/dist/locale/en.mjs";
+import websocketData from "@/utils/websocket";
 
+const client = new websocketData("");
+client.addEventListener("open", () => {});
+client.addEventListener("message", (event: MessageEvent) => {
+  console.log(event.data);
+});
 const { locale } = storeToRefs(useSettingStore());
 const msgConfig = {
   max: 3, //同时显示的最大的消息提示数量
