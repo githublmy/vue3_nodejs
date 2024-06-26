@@ -4,7 +4,7 @@
     <span>{{ $t("message.Hello") }}</span>
     <el-row class="mb-4">
       <el-button>Default</el-button>
-      <el-button type="primary">Primary</el-button>
+      <el-button type="primary" @click="showData">Primary</el-button>
       <el-button type="success">Success</el-button>
       <el-button type="info">Info</el-button>
       <el-button type="warning">Warning</el-button>
@@ -84,7 +84,10 @@ import type { UploadProps, UploadUserFile, UploadInstance } from "element-plus";
 import { RecycleScroller } from "vue-virtual-scroller";
 import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
 import websocketData from "@/utils/websocket";
-
+import { showDialog } from "./showDialog.js";
+const showData = () => {
+  showDialog("测试弹窗");
+};
 const client = new websocketData("ws://localhost:9999");
 client.addEventListener("open", () => {
   console.log("连接成功");
