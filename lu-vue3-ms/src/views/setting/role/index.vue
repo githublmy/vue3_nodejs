@@ -1,83 +1,89 @@
 <template>
-  <div class="baseStyle">
-    {{ $t('message.Hello') }}
-    <ElTableCommon
-      :config="config"
-      :tableTitle="tableTitle"
-      :loading="loading"
-      :tableData="tableData"
-      :total="total"
-      v-model:page="data.formData.pageNum"
-      v-model:limit="data.formData.pageSize"
-      @pagination="getList"
-    >
-      <template #toolbar>
-        <el-button type="primary" icon="Plus" plain v-blur size="small" @click="">新增</el-button>
-      </template>
-    </ElTableCommon>
+  <div class="main">
+    <div v-for="(row, index0) in uiPeriodList" :key="index0">
+      <div class="period" :style="periodStyle">
+        {{ row.id }}++++++++++++++胜多负少打发斯蒂芬VS的
+      </div>
+    </div>
   </div>
+
+  <!-- <SearchBox :againFind="againFind" /> -->
 </template>
 
 <script lang="ts" setup>
-import { getDataList } from '@/api/home/index'
-const loading = ref(false)
-const total = ref(0)
+let isFirst = false,
+  uiPeriodList = [],
+  periodList = [];
+let headList = [];
+let periodStyle = {
+  "grid-template-columns": `52px repeat(${headList.length}, 1fr)`,
+  height: "2000px",
+};
 
-const tableData: Ref = ref([])
-const tableTitle = [
-  {
-    type: 'selection',
-    width: 55,
-    fixed: 'left'
-  },
-  {
-    prop: 'id',
-    label: 'ID'
-  },
-  {
-    prop: 'operator',
-    label: '姓名'
-  },
-  {
-    prop: 'status',
-    label: '状态'
-  },
-  {
-    prop: 'department_name',
-    label: '备注'
-  },
-  {
-    prop: 'operate_time',
-    label: '创建时间'
-  }
-]
-const data = reactive({
-  formData: {
-    pageNum: 1,
-    pageSize: 10,
-    searchKey: '',
-    status: ''
-  },
-  list: [
-    {
-      type: 'el-input',
-      prop: 'name',
-      label: '姓名'
-    }
-  ]
-})
-const getList = async () => {
-  loading.value = true
-  const res = await getDataList(data.formData)
-  loading.value = false
-  console.log(res, 'ces')
-  tableData.value = res.data.content
-  total.value = res.data.total
+for (let index = 0; index < 30000; index++) {
+  uiPeriodList.push({
+    id: index,
+    columnList: [],
+  });
 }
-const config = reactive({
-  showBorder: false,
-  showSearch: true,
-  handleEvent: getList
-})
-// getList();
+function update() {
+  let rowList = document.querySelectorAll(".period");
+  let config = {
+    root: document.querySelector(".main"),
+  };
+  let intersectionObserver = new IntersectionObserver((entries) => {
+    console.log(entries);
+
+    entries.forEach((row) => {
+      if (row.intersectionRatio <= 0) {
+        if (!isFirst) {
+          row.target.style.height = `${row.target.clientHeight}px`;
+        }
+      } else {
+        row.target.className = "period";
+        row.target.style.height = "";
+      }
+    });
+  }, config);
+  if (isFirst) {
+    rowList.forEach((row) => {
+      intersectionObserver.observe(row);
+    });
+    isFirst = false;
+  }
+}
+
+onMounted(() => {
+  update();
+});
 </script>
+
+<style lang="scss" scoped>
+.big-box {
+  padding: 30px 20px;
+  height: 870px;
+}
+.download-box {
+  width: 100%;
+  overflow: hidden;
+
+  .line-box {
+    height: 30px;
+  }
+
+  .txt {
+    background: #282c34;
+    color: #fff;
+    height: 810px;
+    overflow: auto;
+
+    .el-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      margin: auto;
+      font-size: 22px;
+    }
+  }
+}
+</style>
