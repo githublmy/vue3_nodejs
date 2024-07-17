@@ -1,15 +1,35 @@
 <template>
   <div class="editor">
+    <el-button type="primary" size="default" @click="gethtml"
+      >获取html</el-button
+    >
+    <!-- Create toolbar container -->
+    <div id="toolbar">
+      <!-- Add font size dropdown -->
+      <select class="ql-size">
+        <option value="small"></option>
+        <!-- Note a missing, thus falsy value, is used to reset to default -->
+        <option selected></option>
+        <option value="large"></option>
+        <option value="huge"></option>
+      </select>
+      <!-- Add a bold button -->
+      <button class="ql-bold"></button>
+      <!-- Add subscript and superscript buttons -->
+      <button class="ql-script" value="sub"></button>
+      <button class="ql-script" value="super"></button>
+    </div>
     <QuillEditor
+      ref="quillRef"
       v-model:content="content"
       theme="snow"
       :toolbar="toolbar"
       :options="options"
       contentType="html"
       @ready="onEditorReady($event)"
-    />
+    >
+    </QuillEditor>
   </div>
-  
 </template>
 
 <script lang="ts" setup>
@@ -20,9 +40,10 @@ import { ToolbarConfig } from "./config";
 // <div style="color: red; font-size: 30px; margin-top: 10px">
 //     <p style="text-align: center; font-size: 20px; color: blueviolet;">你啊水电费</p>
 //   </div>
+const quillRef = ref();
 const toolbar = ref("full");
-const content = ref(`dfssd`);
-onMounted(() => {});
+const content = ref(``);
+content.value = `<span>我是</span><p style="text-align: center; font-size: 20px; color: blueviolet;">你啊水电费</p>`;
 const onEditorReady = (e: Quill) => {
   console.log("editor ready!", e);
   for (let item of ToolbarConfig) {
@@ -31,6 +52,13 @@ const onEditorReady = (e: Quill) => {
     tip.setAttribute("title", item.title);
   }
 };
+
+const gethtml = () => {
+  console.log(content.value);
+  console.log(quillRef.value);
+  quillRef.value.setHTML(`<div>我是好人</div>`);
+};
+
 const options = ref({
   theme: "snow",
   // bounds: document.body,
