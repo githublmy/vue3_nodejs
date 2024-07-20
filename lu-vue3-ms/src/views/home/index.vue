@@ -8,7 +8,7 @@
       <el-button type="success">Success</el-button>
       <el-button type="info">Info</el-button>
       <el-button type="warning">Warning</el-button>
-      <el-button type="danger" @click="closeWs">Danger</el-button>
+      <!-- <el-button type="danger" @click="closeWs">Danger</el-button> -->
     </el-row>
     <el-upload
       style="width: 500px"
@@ -83,29 +83,29 @@
 import type { UploadProps, UploadUserFile, UploadInstance } from "element-plus";
 import { RecycleScroller } from "vue-virtual-scroller";
 import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
-import websocketData from "@/utils/websocket";
+// import websocketData from "@/utils/websocket";
 import { showDialog } from "./showDialog.js";
 const showData = () => {
   showDialog("测试弹窗");
 };
-const client = new websocketData("ws://localhost:9999");
-client.addEventListener("open", () => {
-  console.log("连接成功");
-  client.send("start");
-});
-client.addEventListener("message", (event: MessageEvent) => {
-  console.log(event);
-  console.log(event.data);
-});
-client.addEventListener("close", (e: Event) => {
-  console.log("连接关闭", e);
-});
+// const client = new websocketData("ws://localhost:9999");
+// client.addEventListener("open", () => {
+//   console.log("连接成功");
+//   client.send("start");
+// });
+// client.addEventListener("message", (event: MessageEvent) => {
+//   console.log(event);
+//   console.log(event.data);
+// });
+// client.addEventListener("close", (e: Event) => {
+//   console.log("连接关闭", e);
+// });
 const selectedValue = ref();
 const options: Ref = ref([]);
 console.log("清除了吗？首页");
-const closeWs = () => {
-  client.close();
-};
+// const closeWs = () => {
+//   client.close();
+// };
 const generateData = () => {
   const data = [];
   for (let i = 0; i < 50000; i++) {

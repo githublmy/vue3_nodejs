@@ -141,6 +141,16 @@ export const user = [
     sort: 6,
   },
   {
+    path: "/tinymce",
+    component: "/system/tinymce/index",
+    name: "tinymce",
+    title: "tinymce",
+    icon: "",
+    pid: 5,
+    id: 19,
+    sort: 8,
+  },
+  {
     path: "/test",
     component: "/system/test",
     name: "test",

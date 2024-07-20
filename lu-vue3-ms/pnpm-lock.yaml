@@ -11,6 +11,9 @@ dependencies:
   '@kjgl77/datav-vue3':
     specifier: ^1.7.3
     version: 1.7.3(vue@3.4.29)
+  '@tinymce/tinymce-vue':
+    specifier: ^5.1.1
+    version: 5.1.1(vue@3.4.29)
   '@vueup/vue-quill':
     specifier: ^1.2.0
     version: 1.2.0(vue@3.4.29)
@@ -44,6 +47,9 @@ dependencies:
   pinia-plugin-persistedstate:
     specifier: ^3.2.1
     version: 3.2.1(pinia@2.1.7)
+  tinymce:
+    specifier: ^7.2.1
+    version: 7.2.1
   tsparticles-slim:
     specifier: ^2.12.0
     version: 2.12.0
@@ -703,6 +709,15 @@ packages:
 
   /@sxzz/popperjs-es@2.11.7:
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
+    dev: false
+
+  /@tinymce/tinymce-vue@5.1.1(vue@3.4.29):
+    resolution: {integrity: sha512-iO57HOWesFOhsaqjA5Ea6sDvQBmJJH3/dq00Uvg7metlct2kLF+ctRgoDsetLt6gmeZ7COPftr814/XzqnJ/dg==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      tinymce: 6.8.4
+      vue: 3.4.29(typescript@5.3.3)
     dev: false
 
   /@tiptap/core@2.4.0(@tiptap/pm@2.4.0):
@@ -4818,6 +4833,14 @@ packages:
       commander: 2.20.3
       source-map-support: 0.5.21
     dev: true
+
+  /tinymce@6.8.4:
+    resolution: {integrity: sha512-okoJyxuPv1gzASxQDNgQbnUXOdAIyoOSXcXcZZu7tiW0PSKEdf3SdASxPBupRj+64/E3elHwVRnzSdo82Emqbg==}
+    dev: false
+
+  /tinymce@7.2.1:
+    resolution: {integrity: sha512-ADd1cvdIuq6NWyii0ZOZRuu+9sHIdQfcRNWBcBps2K8vy7OjlRkX6iw7zz1WlL9kY4z4L1DvIP+xOrVX/46aHA==}
+    dev: false
 
   /tippy.js@6.3.7:
     resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
