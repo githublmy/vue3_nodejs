@@ -6,44 +6,96 @@
       :init="tinymceConfig"
       @input="onEditorInput"
     ></Editor>
-    <div>
+    <!-- <div>
       <h3>Output HTML:</h3>
       <div v-html="content"></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script setup>
 import Editor from "@tinymce/tinymce-vue";
 import "tinymce/tinymce";
-// import "tinymce/themes/silver/theme";
-// import "tinymce/icons/default";
-// import "tinymce/plugins/link";
-// import "tinymce/plugins/image";
-// import "tinymce/plugins/code";
-// import "tinymce/plugins/lists";
+
 const content = ref("<div style='color: red'>Initial content</div>");
+const image_upload_handler = (blobInfo, progress) =>
+  new Promise((resolve, reject) => {
+    console.log(blobInfo.blob());
+    // console.log(progress);
+    let a = 0;
+    progress()
+    // setInterval(() => {
+    //   progress(a++);
+    // }, 100);
+    const formData = new FormData();
+    formData.append("file", blobInfo.blob(), blobInfo.filename());
+    formData.append("bucket", "test");
+    formData.append("project", "");
+    fetch("https://api.dev.shzjsmart.com:18443/file/api/upload", {
+      method: "post",
+      body: formData,
+    })
+      .then((resp) => resp.json())
+      .then((json) => {
+        console.log(json);
+        if (json.status === 404) {
+          reject({ message: "HTTP Error: " + json.status, remove: true });
+          return;
+        }
+        const obj = {
+          location: json.payload.url,
+        };
+        resolve(json.payload.url);
+      })
+      .catch((error) => {
+        console.dir(error.message, "错误");
+        const { message } = error;
+        let msg;
+        if (
+          message.indexOf(
+            "Cannot read properties of undefined (reading 'url')"
+          ) > -1
+        ) {
+          msg = "上传失败，接口404";
+        }
+        reject(msg || "上传失败，未知错误！");
+      });
+  });
 const tinymceConfig = {
   selector: "#basic-tinymce",
   license_key: "gpl",
   height: 400,
   width: "100%",
+  placeholder: "请输入内容",
   promotion: false, //菜单右上角的链接
   branding: false, //右下角tinymce商标
   language: "zh_CN",
-  // skin_url: "/skins/ui/tinymce-5", //手动引入
+  // true 默认（仅允许改变高度）, false（完全不让你动）, 'both'（宽高都能改变，注意引号）
+  resize: true,
   //sliding
   toolbar_mode: "wrap",
+  toolbar_sticky: true,
   // editimage_cors_hosts: ["picsum.photos"],
-  plugins:
-    "preview indent2em importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons accordion",
-  menubar: "file edit view insert format tools help",
-  toolbar:
-    "undo redo | styleselect formatselect fontselect fontsizeselect removeformat | blocks fontfamily fontsize | bold italic underline strikethrough subscript superscript hr blockquote | forecolor backcolor | align numlist bullist | link image media | table | lineheight indent2em outdent indent | charmap emoticons | accordion accordionremove | code codesample | fullscreen preview | save print | pagebreak anchor  | ltr rtl",
+  plugins: `preview indent2em importcss searchreplace autolink autosave save directionality
+     code visualblocks visualchars fullscreen image link media codesample table charmap
+     pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap
+     quickbars emoticons accordion`,
+  // menubar: "file edit view insert format tools help",
+  menubar: "file edit view insert format help",
+  toolbar: `undo redo | styleselect formatselect fontselect fontsizeselect removeformat |
+     blocks fontfamily fontsize | bold italic underline strikethrough subscript superscript hr blockquote |
+     forecolor backcolor | align numlist bullist | link image media | table | lineheight indent2em outdent indent |
+     charmap emoticons | accordion accordionremove | code codesample | fullscreen preview | save print |
+     pagebreak anchor  | ltr rtl | wordcount`,
   font_size_formats:
     "12px 14px 16px 18px 20px 21px 22px 24px 28px 36px 48px 56px 72px",
   font_family_formats:
     "默认字体=Helvetica,sans-serif;微软雅黑=Microsoft YaHei,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Impact=impact,chicago; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
+  // style_formats: [
+  //   { title: "首行缩进", block: "p", styles: { "text-indent": "2em" } },
+  // ],
+  // style_formats_merge: true,
+  // style_formats_autohide: true,
   importcss_append: true, //显示额外功能
   // quickbars_image_toolbar: 'alignleft aligncenter alignright | rotateleft rotateright | imageoptions',
   quickbars_selection_toolbar:
@@ -216,6 +268,54 @@ const tinymceConfig = {
       console.log(editor.getContent());
       content.value = editor.getContent();
     });
+  },
+
+  // images_upload_url: "https://api.dev.shzjsmart.com:18443/file/api/upload",
+  // 图片处理方法
+  images_file_types: "jpg,svg,webp",
+  images_reuse_filename: true,
+  images_upload_handler: image_upload_handler,
+
+  // 文件上传
+  file_picker_callback: (callback, value, meta) => {
+    // Provide file and text for the link dialog
+    console.log(value, meta);
+
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+
+    input.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        const id = "blobid" + new Date().getTime();
+        const blobCache = tinymce.activeEditor.editorUpload.blobCache;
+        const base64 = reader.result.split(",")[1];
+        const blobInfo = blobCache.create(id, file, base64);
+        blobCache.add(blobInfo);
+
+        callback(blobInfo.blobUri(), { title: file.name, alt: file.name });
+      });
+      reader.readAsDataURL(file);
+    });
+
+    input.click();
+
+    // if (meta.filetype == "file") {
+    //   callback("mypage.html", { text: "My text" });
+    // }
+
+    // // Provide image and alt text for the image dialog
+    // if (meta.filetype == "image") {
+    //   callback("myimage.jpg", { alt: "My alt text" });
+    // }
+
+    // // Provide alternative source and posted for the media dialog
+    // if (meta.filetype == "media") {
+    //   callback("movie.mp4", { source2: "alt.ogg", poster: "image.jpg" });
+    // }
   },
 };
 
