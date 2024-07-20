@@ -23,10 +23,7 @@ const image_upload_handler = (blobInfo, progress) =>
     console.log(blobInfo.blob());
     // console.log(progress);
     let a = 0;
-    progress()
-    // setInterval(() => {
-    //   progress(a++);
-    // }, 100);
+    progress();
     const formData = new FormData();
     formData.append("file", blobInfo.blob(), blobInfo.filename());
     formData.append("bucket", "test");
@@ -273,21 +270,22 @@ const tinymceConfig = {
   // images_upload_url: "https://api.dev.shzjsmart.com:18443/file/api/upload",
   // 图片处理方法
   images_file_types: "jpg,svg,webp",
-  images_reuse_filename: true,
+  images_reuse_filename: true, //固定名称
+  image_title: true, //显示标题
   images_upload_handler: image_upload_handler,
 
   // 文件上传
   file_picker_callback: (callback, value, meta) => {
     // Provide file and text for the link dialog
-    console.log(value, meta);
-
+    console.log(value);
+    console.log(meta);
     const input = document.createElement("input");
     input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
+    input.setAttribute("accept", "video/*");
 
     input.addEventListener("change", (e) => {
       const file = e.target.files[0];
-
+      console.log(file);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         const id = "blobid" + new Date().getTime();
