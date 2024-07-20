@@ -1,29 +1,14 @@
 <template>
-  <div>
-    <Editor
-      v-model="content"
-      api-key="aawnz0o8kigy7ia1ztfgziay1bsnneafniczu0c571v20cmz"
-      :init="tinymceConfig"
-      @input="onEditorInput"
-    ></Editor>
-    <div>
-      <h3>Output HTML:</h3>
-      <div v-html="content"></div>
-    </div>
-  </div>
+  <!-- <Editor
+    api-key="aawnz0o8kigy7ia1ztfgziay1bsnneafniczu0c571v20cmz"
+    :init="tinymceInit"
+  /> -->
+  <div id="basic-tinymce">大发发</div>
 </template>
-
 <script setup>
-import Editor from "@tinymce/tinymce-vue";
-import "tinymce/tinymce";
-// import "tinymce/themes/silver/theme";
-// import "tinymce/icons/default";
-// import "tinymce/plugins/link";
-// import "tinymce/plugins/image";
-// import "tinymce/plugins/code";
-// import "tinymce/plugins/lists";
-const content = ref("<div style='color: red'>Initial content</div>");
-const tinymceConfig = {
+// import Editor from "@tinymce/tinymce-vue";
+import tinymce from "tinymce";
+const initParams = {
   selector: "#basic-tinymce",
   license_key: "gpl",
   height: 400,
@@ -40,8 +25,7 @@ const tinymceConfig = {
   menubar: "file edit view insert format tools help",
   toolbar:
     "undo redo | styleselect formatselect fontselect fontsizeselect removeformat | blocks fontfamily fontsize | bold italic underline strikethrough subscript superscript hr blockquote | forecolor backcolor | align numlist bullist | link image media | table | lineheight indent2em outdent indent | charmap emoticons | accordion accordionremove | code codesample | fullscreen preview | save print | pagebreak anchor  | ltr rtl",
-  font_size_formats:
-    "12px 14px 16px 18px 20px 21px 22px 24px 28px 36px 48px 56px 72px",
+  font_size_formats: "12px 14px 16px 18px 24px 36px 48px 56px 72px",
   font_family_formats:
     "默认字体=Helvetica,sans-serif;微软雅黑=Microsoft YaHei,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Impact=impact,chicago; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
   importcss_append: true, //显示额外功能
@@ -213,19 +197,14 @@ const tinymceConfig = {
     });
     editor.on("Change KeyUp", () => {
       // 当编辑器内容改变时，更新 content
+      // this.content = editor.getContent();
       console.log(editor.getContent());
-      content.value = editor.getContent();
     });
   },
 };
-
-function onEditorInput(content) {
-  // 处理编辑器输入事件，更新 content
-  console.log(content);
-  content.value = content;
-}
+onMounted(() => {
+  tinymce.init(initParams);
+});
 </script>
 
-<style>
-/* 可选的样式 */
-</style>
+<style scoped></style>
