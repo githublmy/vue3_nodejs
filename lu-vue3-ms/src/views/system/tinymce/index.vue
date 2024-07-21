@@ -22,13 +22,11 @@ const image_upload_handler = (blobInfo, progress) =>
   new Promise((resolve, reject) => {
     console.log(blobInfo.blob());
     // console.log(progress);
-    let a = 0;
-    progress();
     const formData = new FormData();
     formData.append("file", blobInfo.blob(), blobInfo.filename());
-    formData.append("bucket", "test");
-    formData.append("project", "");
-    fetch("https://api.dev.shzjsmart.com:18443/file/api/upload", {
+    // formData.append("bucket", "test");
+    // formData.append("project", "");
+    fetch("http://localhost:3000/files/upload", {
       method: "post",
       body: formData,
     })
@@ -40,21 +38,21 @@ const image_upload_handler = (blobInfo, progress) =>
           return;
         }
         const obj = {
-          location: json.payload.url,
+          location: json.url,
         };
-        resolve(json.payload.url);
+        resolve(json.url);
       })
       .catch((error) => {
-        console.dir(error.message, "错误");
-        const { message } = error;
-        let msg;
-        if (
-          message.indexOf(
-            "Cannot read properties of undefined (reading 'url')"
-          ) > -1
-        ) {
-          msg = "上传失败，接口404";
-        }
+        console.dir(error, "错误");
+        // const { message } = error;
+        let msg = "";
+        // if (
+        //   message.indexOf(
+        //     "Cannot read properties of undefined (reading 'url')"
+        //   ) > -1
+        // ) {
+        //   msg = "上传失败，接口404";
+        // }
         reject(msg || "上传失败，未知错误！");
       });
   });
@@ -94,7 +92,7 @@ const tinymceConfig = {
   // style_formats_merge: true,
   // style_formats_autohide: true,
   importcss_append: true, //显示额外功能
-  // quickbars_image_toolbar: 'alignleft aligncenter alignright | rotateleft rotateright | imageoptions',
+  quickbars_image_toolbar: "alignleft aligncenter alignright | imageoptions",
   quickbars_selection_toolbar:
     "fontsize forecolor backcolor | bold italic underline | quicklink h2 h3",
   // quickbars_insert_toolbar: "quickimage quicktable | hr pagebreak",
@@ -269,52 +267,52 @@ const tinymceConfig = {
 
   // images_upload_url: "https://api.dev.shzjsmart.com:18443/file/api/upload",
   // 图片处理方法
-  images_file_types: "jpg,svg,webp",
+  // images_file_types: ".jpg,.svg,.webp",
   images_reuse_filename: true, //固定名称
   image_title: true, //显示标题
   images_upload_handler: image_upload_handler,
 
-  // 文件上传
-  file_picker_callback: (callback, value, meta) => {
-    // Provide file and text for the link dialog
-    console.log(value);
-    console.log(meta);
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "video/*");
+  // // 文件上传
+  // file_picker_callback: (callback, value, meta) => {
+  //   // Provide file and text for the link dialog
+  //   console.log(value);
+  //   console.log(meta);
+  //   const input = document.createElement("input");
+  //   input.setAttribute("type", "file");
+  //   input.setAttribute("accept", "image/*");
 
-    input.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      console.log(file);
-      const reader = new FileReader();
-      reader.addEventListener("load", () => {
-        const id = "blobid" + new Date().getTime();
-        const blobCache = tinymce.activeEditor.editorUpload.blobCache;
-        const base64 = reader.result.split(",")[1];
-        const blobInfo = blobCache.create(id, file, base64);
-        blobCache.add(blobInfo);
+  //   input.addEventListener("change", (e) => {
+  //     const file = e.target.files[0];
+  //     console.log(file);
+  //     const reader = new FileReader();
+  //     reader.addEventListener("load", () => {
+  //       const id = "blobid" + new Date().getTime();
+  //       const blobCache = tinymce.activeEditor.editorUpload.blobCache;
+  //       const base64 = reader.result.split(",")[1];
+  //       const blobInfo = blobCache.create(id, file, base64);
+  //       blobCache.add(blobInfo);
 
-        callback(blobInfo.blobUri(), { title: file.name, alt: file.name });
-      });
-      reader.readAsDataURL(file);
-    });
+  //       callback(blobInfo.blobUri(), { title: file.name, alt: file.name });
+  //     });
+  //     reader.readAsDataURL(file);
+  //   });
 
-    input.click();
+  //   input.click();
 
-    // if (meta.filetype == "file") {
-    //   callback("mypage.html", { text: "My text" });
-    // }
+  //   // if (meta.filetype == "file") {
+  //   //   callback("mypage.html", { text: "My text" });
+  //   // }
 
-    // // Provide image and alt text for the image dialog
-    // if (meta.filetype == "image") {
-    //   callback("myimage.jpg", { alt: "My alt text" });
-    // }
+  //   // // Provide image and alt text for the image dialog
+  //   // if (meta.filetype == "image") {
+  //   //   callback("myimage.jpg", { alt: "My alt text" });
+  //   // }
 
-    // // Provide alternative source and posted for the media dialog
-    // if (meta.filetype == "media") {
-    //   callback("movie.mp4", { source2: "alt.ogg", poster: "image.jpg" });
-    // }
-  },
+  //   // // Provide alternative source and posted for the media dialog
+  //   // if (meta.filetype == "media") {
+  //   //   callback("movie.mp4", { source2: "alt.ogg", poster: "image.jpg" });
+  //   // }
+  // },
 };
 
 function onEditorInput(content) {

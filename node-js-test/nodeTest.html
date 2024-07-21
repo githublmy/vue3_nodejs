@@ -24,8 +24,8 @@
         bt.onclick = function () {
           // 发起一个post请求
           axios({
-            method: "post",
-            url: `${url}/users/insert`,
+            method: "get",
+            url: `${url}/users/query`,
             data: { data: obj },
           })
             .then((result) => {

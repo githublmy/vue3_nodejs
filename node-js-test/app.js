@@ -19,7 +19,7 @@ var filesRouter = require('./routes/file')
 var app = express();
 
 // 引用静态资源
-app.use(express.static('public'))
+app.use(express.static('uploads'))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -28,7 +28,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 // 使用express-fileupload中间件
 app.use(fileUpload());
 // 定义中间件，处理POST提交的数据
