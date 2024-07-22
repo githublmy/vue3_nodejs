@@ -67,6 +67,8 @@ const tinymceConfig = {
   language: "zh_CN",
   // true 默认（仅允许改变高度）, false（完全不让你动）, 'both'（宽高都能改变，注意引号）
   resize: true,
+  skin_url: "/skins/ui/tinymce-5", //手动引入
+
   //sliding
   toolbar_mode: "wrap",
   toolbar_sticky: true,
