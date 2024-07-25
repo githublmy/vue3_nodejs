@@ -1,21 +1,31 @@
 <template>
   <div>
+    <el-button type="primary" size="default" @click="openDialog"
+      >打开弹窗</el-button
+    >
+
     <Editor
       v-model="content"
       api-key="aawnz0o8kigy7ia1ztfgziay1bsnneafniczu0c571v20cmz"
       :init="tinymceConfig"
-      @input="onEditorInput"
     ></Editor>
     <!-- <div>
       <h3>Output HTML:</h3>
       <div v-html="content"></div>
     </div> -->
+    <Test ref="testRef" />
   </div>
 </template>
 
 <script setup>
+import Test from "./components/test.vue";
 import Editor from "@tinymce/tinymce-vue";
 import "tinymce/tinymce";
+const testRef = ref();
+const openDialog = () => {
+  console.log("打开弹窗");
+  testRef.value.open();
+};
 
 const content = ref("<div style='color: red'>Initial content</div>");
 const image_upload_handler = (blobInfo, progress) =>
@@ -71,11 +81,11 @@ const tinymceConfig = {
 
   //sliding
   toolbar_mode: "wrap",
-  toolbar_sticky: true,
+  toolbar_sticky: false, //粘性菜单
   // editimage_cors_hosts: ["picsum.photos"],
   plugins: `preview indent2em importcss searchreplace autolink autosave save directionality
      code visualblocks visualchars fullscreen image link media codesample table charmap
-     pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap
+     pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help 
      quickbars emoticons accordion`,
   // menubar: "file edit view insert format tools help",
   menubar: "file edit view insert format help",
@@ -268,60 +278,45 @@ const tinymceConfig = {
   },
 
   // images_upload_url: "https://api.dev.shzjsmart.com:18443/file/api/upload",
+  // images_upload_url: "http://localhost:3000/files/upload",
   // 图片处理方法
   // images_file_types: ".jpg,.svg,.webp",
   images_reuse_filename: true, //固定名称
   image_title: true, //显示标题
   images_upload_handler: image_upload_handler,
+  file_picker_types: "media",
+  automatic_uploads: true,
+  file_picker_callback: function (callback, value, meta) {
+    if (meta.filetype === "media") {
+      var input = document.createElement("input");
+      input.setAttribute("type", "file");
+      input.setAttribute("accept", "video/*"); // 仅接受视频文件
 
-  // // 文件上传
-  // file_picker_callback: (callback, value, meta) => {
-  //   // Provide file and text for the link dialog
-  //   console.log(value);
-  //   console.log(meta);
-  //   const input = document.createElement("input");
-  //   input.setAttribute("type", "file");
-  //   input.setAttribute("accept", "image/*");
+      input.onchange = function () {
+        var file = this.files[0];
+        console.log(file);
+        if (file) {
+          const formData = new FormData();
+          // console.log(blobInfo.filename());
+          formData.append("file", file);
+          fetch("http://localhost:3000/files/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log(result);
+              callback(result.url, { title: file.name });
+            }).catch((err) => {
+              console.log(err);
+            });
+        }
+      };
 
-  //   input.addEventListener("change", (e) => {
-  //     const file = e.target.files[0];
-  //     console.log(file);
-  //     const reader = new FileReader();
-  //     reader.addEventListener("load", () => {
-  //       const id = "blobid" + new Date().getTime();
-  //       const blobCache = tinymce.activeEditor.editorUpload.blobCache;
-  //       const base64 = reader.result.split(",")[1];
-  //       const blobInfo = blobCache.create(id, file, base64);
-  //       blobCache.add(blobInfo);
-
-  //       callback(blobInfo.blobUri(), { title: file.name, alt: file.name });
-  //     });
-  //     reader.readAsDataURL(file);
-  //   });
-
-  //   input.click();
-
-  //   // if (meta.filetype == "file") {
-  //   //   callback("mypage.html", { text: "My text" });
-  //   // }
-
-  //   // // Provide image and alt text for the image dialog
-  //   // if (meta.filetype == "image") {
-  //   //   callback("myimage.jpg", { alt: "My alt text" });
-  //   // }
-
-  //   // // Provide alternative source and posted for the media dialog
-  //   // if (meta.filetype == "media") {
-  //   //   callback("movie.mp4", { source2: "alt.ogg", poster: "image.jpg" });
-  //   // }
-  // },
+      input.click();
+    }
+  },
 };
-
-function onEditorInput(content) {
-  // 处理编辑器输入事件，更新 content
-  console.log(content);
-  content.value = content;
-}
 </script>
 
 <style>
