@@ -6,6 +6,7 @@
     <el-button type="primary" size="default" @click="getIniteData"
       >获取实例</el-button
     >
+    <el-button type="primary" size="default" @click="open">打开弹窗</el-button>
     <Editor
       ref="editorRef"
       v-model="content"
@@ -13,6 +14,7 @@
       api-key="aawnz0o8kigy7ia1ztfgziay1bsnneafniczu0c571v20cmz"
       :init="tinymceConfig"
     ></Editor>
+    <Test ref="testRef" />
   </div>
 </template>
 
@@ -20,12 +22,15 @@
 import { uploadFiles } from "@/api/index";
 import Editor from "@tinymce/tinymce-vue";
 import "tinymce/tinymce";
+import Test from "./components/test.vue";
 const editorRef = ref();
-
+const testRef = ref();
 const getData = () => {
   console.log("获取数据", content.value);
 };
-
+const open = () => {
+  testRef.value.open();
+};
 const getIniteData = () => {
   console.log("获取实例", editorRef.value.getEditor().get());
 };
