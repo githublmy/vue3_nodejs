@@ -28014,7 +28014,8 @@
           Tooltipping.config({
             ...providersBackstage.tooltips.getConfig({
               tooltipText: providersBackstage.translate([
-                'Select the {0} element',
+                // 'Select the {0} element', //原文
+                '选择 {0} 元素',
                 element.nodeName.toLowerCase()
               ]),
               onShow: (comp, tooltip) => {

@@ -45,12 +45,12 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       host: "0.0.0.0",
       proxy: {
-        "/file": {
-          target: "https://api.dev.shzjsmart.com:18443",
+        "/files/upload": {
+          target: "http://localhost:3000",
           // ws:true,//websockets
           changeOrigin: true, //允许跨域
           // 重写路由
-          // rewrite: (path) => path.replace(new RegExp(`^/api`), '/api')
+          // rewrite: (path) => path.replace(new RegExp(`/files`), '/files')
         },
       },
     },

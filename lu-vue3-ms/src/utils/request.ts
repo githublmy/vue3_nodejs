@@ -2,10 +2,11 @@
  * @Description: 请求封装
  */
 import axios from 'axios'
-import baseURL from './config'
+// import baseURL from './config'
 
 const instance = axios.create({
-  baseURL: baseURL,
+  // baseURL: baseURL,
+  baseURL: "/",
   timeout: 1000 * 1000
 })
 

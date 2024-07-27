@@ -1,33 +1,36 @@
 <template>
-  <div>
-    <el-button type="primary" size="default" @click="openDialog"
-      >打开弹窗</el-button
+  <div class="baseStyle">
+    <el-button type="primary" size="default" @click="getData"
+      >获取数据</el-button
     >
-
+    <el-button type="primary" size="default" @click="getIniteData"
+      >获取实例</el-button
+    >
     <Editor
+      ref="editorRef"
       v-model="content"
+      :disabled="false"
       api-key="aawnz0o8kigy7ia1ztfgziay1bsnneafniczu0c571v20cmz"
       :init="tinymceConfig"
     ></Editor>
-    <!-- <div>
-      <h3>Output HTML:</h3>
-      <div v-html="content"></div>
-    </div> -->
-    <Test ref="testRef" />
   </div>
 </template>
 
 <script setup>
-import Test from "./components/test.vue";
+import { uploadFiles } from "@/api/index";
 import Editor from "@tinymce/tinymce-vue";
 import "tinymce/tinymce";
-const testRef = ref();
-const openDialog = () => {
-  console.log("打开弹窗");
-  testRef.value.open();
+const editorRef = ref();
+
+const getData = () => {
+  console.log("获取数据", content.value);
 };
 
-const content = ref("<div style='color: red'>Initial content</div>");
+const getIniteData = () => {
+  console.log("获取实例", editorRef.value.getEditor().get());
+};
+const content = ref("");
+
 const image_upload_handler = (blobInfo, progress) =>
   new Promise((resolve, reject) => {
     console.log(blobInfo.blob());
@@ -66,226 +69,106 @@ const image_upload_handler = (blobInfo, progress) =>
         reject(msg || "上传失败，未知错误！");
       });
   });
+
 const tinymceConfig = {
   selector: "#basic-tinymce",
   license_key: "gpl",
-  height: 400,
+  height: 500,
   width: "100%",
   placeholder: "请输入内容",
   promotion: false, //菜单右上角的链接
   branding: false, //右下角tinymce商标
   language: "zh_CN",
-  // true 默认（仅允许改变高度）, false（完全不让你动）, 'both'（宽高都能改变，注意引号）
-  resize: true,
+  // // true 默认（仅允许改变高度）, false（完全不让你动）, 'both'（宽高都能改变，注意引号）
+  // resize: true,
   skin_url: "/skins/ui/tinymce-5", //手动引入
-
-  //sliding
+  // 附件大小
+  attachment_max_size: 100 * 1024 * 1024 * 1024,
+  //图标路径
+  attachment_assets_path: "/plugins/attachment/icons",
+  // 自定义css
+  content_css: "/skins/custom/content.css",
+  // customUploadFunction: async (file, progressCallback, successCallback) => {
+  //   const formData = new FormData();
+  //   formData.append("file", file);
+  //   try {
+  //     const res = await uploadFiles(formData, (e) => {
+  //       console.log(e);
+  //       const progress = (((e.loaded / e.total) * 100) | 0) + "%";
+  //       progressCallback(progress);
+  //     });
+  //     successCallback(res.url);
+  //   } catch (error) {}
+  // },
+  attachment_upload_handler: async function (
+    file,
+    successCallback,
+    failureCallback,
+    progressCallback
+  ) {
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      const res = await uploadFiles(formData, (e) => {
+        console.log(e);
+        const progress = (((e.loaded / e.total) * 100) | 0) + "%";
+        progressCallback(progress);
+      });
+      successCallback(res.url);
+    } catch (error) {
+      failureCallback(`上传失败:${error}`);
+    }
+  },
+  // //sliding
   toolbar_mode: "wrap",
-  toolbar_sticky: false, //粘性菜单
-  // editimage_cors_hosts: ["picsum.photos"],
+  // toolbar_sticky: false, //粘性菜单, 当设置为true，页面多个富文本，并且有滚动条的时候会只显示一个工具栏
+  // // editimage_cors_hosts: ["picsum.photos"],
   plugins: `preview indent2em importcss searchreplace autolink autosave save directionality
      code visualblocks visualchars fullscreen image link media codesample table charmap
-     pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help 
-     quickbars emoticons accordion`,
-  // menubar: "file edit view insert format tools help",
-  menubar: "file edit view insert format help",
+     pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help
+     quickbars emoticons accordion attachment`,
+  menubar: "file edit view insert format tools table help",
   toolbar: `undo redo | styleselect formatselect fontselect fontsizeselect removeformat |
      blocks fontfamily fontsize | bold italic underline strikethrough subscript superscript hr blockquote |
      forecolor backcolor | align numlist bullist | link image media | table | lineheight indent2em outdent indent |
      charmap emoticons | accordion accordionremove | code codesample | fullscreen preview | save print |
-     pagebreak anchor  | ltr rtl | wordcount`,
+     pagebreak anchor | ltr rtl | wordcount attachment`,
+  line_height_formats: "1 1.1 1.2 1.3 1.4 1.5 2 3 4 5 6", //行高列表
+  font_size_input_default_unit: "px", //默认字体单位
   font_size_formats:
-    "12px 14px 16px 18px 20px 21px 22px 24px 28px 36px 48px 56px 72px",
+    "12px 14px 16px 18px 20px 21px 22px 24px 26px 28px 30px 32px 34px 36px 48px 56px 72px",
   font_family_formats:
     "默认字体=Helvetica,sans-serif;微软雅黑=Microsoft YaHei,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Impact=impact,chicago; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
-  // style_formats: [
-  //   { title: "首行缩进", block: "p", styles: { "text-indent": "2em" } },
-  // ],
-  // style_formats_merge: true,
-  // style_formats_autohide: true,
   importcss_append: true, //显示额外功能
   quickbars_image_toolbar: "alignleft aligncenter alignright | imageoptions",
   quickbars_selection_toolbar:
-    "fontsize forecolor backcolor | bold italic underline | quicklink h2 h3",
-  // quickbars_insert_toolbar: "quickimage quicktable | hr pagebreak",
+    "fontsize forecolor backcolor | align bold italic underline | quicklink h2 h3",
+  // // quickbars_insert_toolbar: "quickimage quicktable | hr pagebreak",
   quickbars_insert_toolbar: false, //快速插入工具栏
-  noneditable_class: "mceNonEditable",
-  // contextmenu: "link image table",
+  // noneditable_class: "mceNonEditable", //不可编辑的class类
+  // // contextmenu: "link image table",
   content_style:
-    "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-  setup: (editor) => {
-    editor.on("init", () => {
-      // 当编辑器初始化时，将其内容设置为当前的 content
-      editor.setContent(`<h3 style="margin: 0px; padding: 0px; font-size: 14px; font-weight: normal; color: rgb(51, 51, 51); font-family: Tahoma, Arial, 微软雅黑, sans-serif; line-height: 26px;">
-        <strong><span
-                style="color: rgb(51, 102, 51); font-family: 微软雅黑; font-size: 22px; line-height: 22px; white-space: pre-wrap;">Ⅰ</span></strong><strong
-            style="color: rgb(51, 102, 51); font-family: 微软雅黑; font-size: 22px; line-height: 22px; white-space: pre-wrap;">芯片特点——NFC标签</strong><br><strong><u>—————————<strong>—————</strong>———————————————————————————————————</u></strong><strong
-            style="color: rgb(51, 102, 51);"><u>———</u></strong><strong
-            style="color: rgb(51, 102, 51);"><u>—</u></strong><strong
-            style="color: rgb(51, 102, 51);"><u>——</u></strong><strong
-            style="color: rgb(51, 102, 51);"><u>—</u></strong><strong style="color: rgb(51, 102, 51);"><u>—</u></strong>
-    </h3>
-    <h3 style="margin: 0px; padding: 0px; font-size: 14px; font-weight: normal; color: rgb(51, 51, 51); font-family: Tahoma, Arial, 微软雅黑, sans-serif; line-height: 26px;">
-        <span style="font-size: 16px;">●非接触式的能源和数据传输</span><br><span
-            style="font-size: 16px;">●工作效率位13.56MHz</span><br><span style="font-size: 16px;">●</span><span
-            style="font-size: 16px;">数据传输速率为106kbit/s</span><br><span style="font-size: 16px;">●</span><span
-            style="font-size: 16px;">数据完整性为16位CRC，奇偶校验，位编码，位计数</span><br><span
-            style="font-size: 16px;">●</span><span
-            style="font-size: 16px;">工作距离可达100毫米（取决于各种参数，如场强和天线几何形状）</span><br><span
-            style="font-size: 16px;">●</span><span
-            style="font-size: 16px;">7字节序列号（根据ISO/IEC14443-3协议）</span><br><span
-            style="font-size: 16px;">●</span><span
-            style="font-size: 16px;">用于自动序列化NDEF消息的UID ASCⅡ镜像&nbsp;</span><br><span
-            style="font-size: 16px;">●</span><span style="font-size: 16px;">在读命令时触发自动NFC计数器</span><br><span
-            style="font-size: 16px;">●</span><span style="font-size: 16px;">快速读取功能允许使用一个FAST-READ命令扫描完整的NDEF消息，从而减少高吞吐量生产环境的开销</span>
-    </h3>
-    <br>
-    <p><span style="color: rgb(51, 102, 51);"><span
-            style="font-family: 微软雅黑; font-size: 22px; line-height: 22px; white-space: pre-wrap;"><strong>Ⅱ 技术参数</strong></span></span><strong
-            style="color: rgb(51, 102, 51); font-family: 微软雅黑; font-size: 22px; line-height: 22px; white-space: pre-wrap;">——NFC标签</strong>
-    </p >
-    <h3 style="margin: 0px; padding: 0px; font-size: 14px; font-weight: normal; color: rgb(51, 51, 51); font-family: Tahoma, Arial, 微软雅黑, sans-serif; line-height: 26px;">
-        <strong><u>—————————<strong>—————</strong>———————————————————————————————————</u></strong><strong
-            style="color: rgb(51, 102, 51);"><u>———</u></strong><strong
-            style="color: rgb(51, 102, 51);"><u>—</u></strong><strong
-            style="color: rgb(51, 102, 51);"><u>——</u></strong><strong
-            style="color: rgb(51, 102, 51);"><u>—</u></strong><strong style="color: rgb(51, 102, 51);"><u>—</u></strong>
-    </h3>
-    <p>
-        <p><strong><strong style="font-size: 18px;">名称：</strong><span
-                style="font-size:16px;">NFC标签&nbsp; 直径25mm</span></strong></p >
-    </p >
-    <span style="font-size: 10px;"><span style="font-size: 16px;">可选芯片：NTAG213</span></span>
-    <br><span style="font-size: 16px;">天线尺寸：Φ25mm</span>
-    <br><span style="font-size: 16px;">标签尺寸：</span><span style="font-size: 16px;">Φ25mm</span>
-    <br><span style="font-size: 16px;">通讯协议：ISO14443A<br>
-            工作频率：13.56MHz</span>
-    <br><span style="font-size: 16px;">存储容量：144byte</span>
-    <br><span style="font-size: 16px;">读写次数：≥10万次</span>
-    <br><span style="font-size: 16px;">数据保存：</span><span style="font-size: 16px;">≥10年</span>
-    <br><span style="font-size: 16px;">可选面料：无</span>
-    <br style="font-size: 16px;"><span style="font-size: 16px;">工作温度：-10℃-65℃</span>
-    <br>
-    <br>
-    <p>
-        <p><strong><span style="color: rgb(51, 102, 51);"><span
-                style="font-family: 微软雅黑; font-size: 22px; line-height: 22px; white-space: pre-wrap;">Ⅲ 产品展示</span></span></strong><strong
-                style="color: rgb(51, 102, 51); font-family: 微软雅黑; font-size: 22px; line-height: 22px; white-space: pre-wrap;">——NFC标签</strong>
-        </p >
-        <h3 style="margin: 0px; padding: 0px; font-size: 14px; font-weight: normal; color: rgb(51, 51, 51); font-family: Tahoma, Arial, 微软雅黑, sans-serif; line-height: 26px;">
-            <strong><u>—————————<strong>—————</strong>———————————————————————————————————</u></strong><strong
-                style="color: rgb(51, 102, 51);"><u>———</u></strong><strong
-                style="color: rgb(51, 102, 51);"><u>—</u></strong><strong
-                style="color: rgb(51, 102, 51);"><u>——</u></strong><strong
-                style="color: rgb(51, 102, 51);"><u>—</u></strong><strong
-                style="color: rgb(51, 102, 51);"><u>—</u></strong></h3>
-        <p>
-            <p><span style="color: rgb(51, 102, 51);"><strong><span
-                    style="font-size: 20px;">剖析展示</span></strong></span></p >
-        </p >
-        <p>
-            < img alt="NFC标签  直径25mm产品剖析展示一" src="/uploads/allimg/180702/1-1PF2153111601.jpg"
-                 style="width: 700px; height: 500px;">
-            <br>
-            &nbsp;
-        </p >
-        <p>
-            < img alt="NFC标签  直径25mm产品剖析展示二" src="/uploads/allimg/180702/1-1PF2153123448.jpg"
-                 style="width: 700px; height: 500px;">
-        </p >
-        <p>
-            &nbsp;
-        </p >
-        <p>
-            < img alt="NFC标签  直径25mm产品剖析展示三" src="/uploads/allimg/180702/1-1PF2153132L9.jpg"
-                 style="width: 700px; height: 500px;">
-        </p >
-        <p><br><strong style="text-align: center; color: rgb(51, 102, 51);"><span
-                style="font-size: 20px;">实拍展示</span></strong></p >
-    </p >
-    <p>
-        < img alt="NFC标签  直径25mm产品实拍展示一" src="/uploads/allimg/180629/1-1P6291452595Z.jpg"
-             style="width: 700px; height: 500px;">
-        <br>
-        &nbsp;
-    </p >
-    <p>
-        < img alt="NFC标签  直径25mm产品实拍展示二" src="/uploads/allimg/180629/1-1P62914530U21.jpg"
-             style="width: 700px; height: 500px;">
-    </p >
-    <p style="text-align: center;">
-        &nbsp;
-    </p >
-    <p>
-        < img alt="NFC标签  直径25mm产品实拍展示三" src="/uploads/allimg/180702/1-1PF2153156238.jpg"
-             style="width: 700px; height: 500px;">
-    </p >
-    <p style="text-align: center;">
-        &nbsp;
-    </p >
-    <p>
-        < img alt="NFC标签  直径25mm产品实拍展示四" src="/uploads/allimg/180702/1-1PF2153213450.jpg"
-             style="width: 700px; height: 500px;">
-        <br>
-        <h3 style="margin: 0px; padding: 0px; font-size: 14px; font-weight: normal; color: rgb(51, 51, 51); font-family: Tahoma, Arial, 微软雅黑, sans-serif; line-height: 26px;">
-            &nbsp;</h3>
-    </p >
-    <p>
-        <strong><span
-                style="color: rgb(51, 102, 51); font-family: 微软雅黑; font-size: 22px; line-height: 22px; white-space: pre-wrap;">Ⅳ生产工艺</span></strong>
-        <br>
-        <h3 style="margin: 0px; padding: 0px; font-size: 14px; font-weight: normal; color: rgb(51, 51, 51); font-family: Tahoma, Arial, 微软雅黑, sans-serif; line-height: 26px;">
-            <strong><u>—————————<strong>—————</strong>———————————————————————————————————</u></strong><strong
-                style="color: rgb(51, 102, 51);"><u>———</u></strong><strong
-                style="color: rgb(51, 102, 51);"><u>—</u></strong><strong
-                style="color: rgb(51, 102, 51);"><u>——</u></strong><strong
-                style="color: rgb(51, 102, 51);"><u>—</u></strong><strong
-                style="color: rgb(51, 102, 51);"><u>—</u></strong></h3>
-    </p >
-    <p>
-        < img alt="NFC标签  直径25mm产品生产工艺之倒封装" src="/uploads/allimg/180529/1-1P52Z93029D9.jpg"
-             style="width: 700px; height: 466px;">
-    </p >
-    <p>
-        &nbsp;
-    </p >
-    <p>
-        < img alt="NFC标签  直径25mm产品生产工艺之分条" src="/uploads/allimg/180529/1-1P52Z9305YV.jpg"
-             style="width: 700px; height: 466px;">
-    </p >
-    <p>
-        &nbsp;
-    </p >
-    <p>
-        <img alt="NFC标签  直径25mm产品生产工艺之复合" src="/uploads/allimg/180529/1-1P52Z93124237.jpg"
-             style="width: 700px; height: 465px;">
-        <br>
-        &nbsp;
-    </p >
-    <p>
-        < img alt="NFC标签  直径25mm产品生产工艺之模切" src="/uploads/allimg/180529/1-1P52Z93152c8.jpg"
-             style="width: 700px; height: 466px;">
-    </p >
-    <p>
-        &nbsp;
-    </p >`);
-    });
-    editor.on("Change KeyUp", () => {
-      // 当编辑器内容改变时，更新 content
-      console.log(editor.getContent());
-      content.value = editor.getContent();
-    });
-  },
+    "body { font-family:Helvetica,Arial,sans-serif; font-size:14px } img {max-width:100%;} video {max-width:100%;} ",
+  // // setup: (editor) => {
+  // //   editor.on("init", () => {
+  // //     // 当编辑器初始化时，将其内容设置为当前的 content
+  // //     editor.setContent(``);
+  // //   });
+  // //   editor.on("Change KeyUp", () => {
+  // //     // 当编辑器内容改变时，更新 content
+  // //     console.log(editor.getContent());
+  // //     content.value = editor.getContent();
+  // //   });
+  // // },
 
-  // images_upload_url: "https://api.dev.shzjsmart.com:18443/file/api/upload",
-  // images_upload_url: "http://localhost:3000/files/upload",
-  // 图片处理方法
-  // images_file_types: ".jpg,.svg,.webp",
+  // // images_upload_url: "http://localhost:3000/files/upload",
+  // // 图片处理方法
   images_reuse_filename: true, //固定名称
   image_title: true, //显示标题
   images_upload_handler: image_upload_handler,
-  file_picker_types: "media",
-  automatic_uploads: true,
+  file_picker_types: "media image",
+  // // automatic_uploads: true,//自动上传，默认true
+  // media_dimensions: true, //显示视频宽高控件
   file_picker_callback: function (callback, value, meta) {
     if (meta.filetype === "media") {
       var input = document.createElement("input");
@@ -307,14 +190,51 @@ const tinymceConfig = {
             .then((result) => {
               console.log(result);
               callback(result.url, { title: file.name });
-            }).catch((err) => {
+            })
+            .catch((err) => {
               console.log(err);
             });
         }
       };
-
       input.click();
     }
+
+    if (meta.filetype === "image") {
+      var input = document.createElement("input");
+      input.setAttribute("type", "file");
+      input.setAttribute("accept", "image/*"); // 仅接受视频文件
+
+      input.onchange = function () {
+        var file = this.files[0];
+        console.log(file);
+        if (file) {
+          const formData = new FormData();
+          // console.log(blobInfo.filename());
+          formData.append("file", file);
+          fetch("http://localhost:3000/files/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log(result);
+              callback(result.url, { title: file.name });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      };
+      input.click();
+    }
+  },
+  // // // 自定义返回视频标签数据
+  video_template_callback: (data) => {
+    console.log(data, "数据");
+    return `<video width="${data.width}" controls="controls" poster="${data.poster}">
+    <source src="${data.source}" type="video/mp4" />
+    您的浏览器不支持 HTML5 视频标签。
+  </video>`;
   },
 };
 </script>

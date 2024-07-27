@@ -50,13 +50,4 @@ tinymce.PluginManager.add('indent2em', function(editor, url) {
     });
 
     editor.addCommand('indent2em', doAct  );
-
-    return {
-        getMetadata: function () {
-            return  {
-                name: pluginName,
-                url: "http://tinymce.ax-z.cn/more-plugins/indent2em.php",
-            };
-        }
-    };
 });
