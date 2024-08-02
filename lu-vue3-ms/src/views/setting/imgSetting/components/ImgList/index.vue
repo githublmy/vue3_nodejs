@@ -1,5 +1,11 @@
 <template>
   <div>
+    sdfsd
+  </div>
+</template>
+
+<!--<template>
+  <div>
     <el-page-header @back="goBack" content="列表"> </el-page-header>
     <el-row class="mb8">
       <RightToolbar @queryTable="getList" />
@@ -27,13 +33,13 @@
         </template>
       </el-table-column>
     </el-table>
-    <!-- <Pagination
+    <!~~ <Pagination
       v-show="total > 0"
       :total="total"
       :page.sync="searchForm.pageNum"
       :limit.sync="searchForm.pageSize"
       @pagination="getList"
-    /> -->
+    /> ~~>
   </div>
 </template>
 
@@ -85,3 +91,4 @@ export default {
   },
 };
 </script>
+-->

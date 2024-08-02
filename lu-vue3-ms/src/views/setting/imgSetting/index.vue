@@ -1,4 +1,11 @@
 <template>
+  <div>
+    tex
+  </div>
+</template>
+
+
+<!--<template>
   <div class="baseStyle imgSetting">
     <transition name="el-fade-in-linear" mode="out-in">
       <div v-if="showImg">
@@ -14,7 +21,7 @@
             >
           </el-col>
           <el-col :span="1.5">
-            <!-- 上传组件 -->
+            <!~~ 上传组件 ~~>
             <el-upload
               ref="uploadRef"
               :action="imgAction"
@@ -65,7 +72,7 @@
               filterable
               @change="addRect"
             >
-              <!-- addMarker -->
+              <!~~ addMarker ~~>
               <el-option
                 v-for="(item, index) in list"
                 :key="index"
@@ -123,11 +130,11 @@
             </el-select>
           </el-col>
         </el-row>
-        <!-- <el-button type="primary" size="mini" @click="load">加载</el-button> -->
-        <!-- <el-button type="primary" size="mini" @click="addImage"
+        <!~~ <el-button type="primary" size="mini" @click="load">加载</el-button> ~~>
+        <!~~ <el-button type="primary" size="mini" @click="addImage"
           >添加图片</el-button
-        > -->
-        <!-- <el-upload
+        > ~~>
+        <!~~ <el-upload
           ref="uploadRef"
           :action="imgAction"
           :multiple="false"
@@ -143,8 +150,8 @@
           <el-button type="primary" v-blur icon="el-icon-plus" size="mini"
             >添加图片</el-button
           >
-        </el-upload> -->
-        <!-- <div class="data_list">
+        </el-upload> ~~>
+        <!~~ <div class="data_list">
           <div
             class="data_item rect"
             draggable
@@ -162,11 +169,11 @@
           <div class="data_item img" draggable @abort="onDragstart('img')">
             img
           </div>
-        </div> -->
-        <!-- 
+        </div> ~~>
+        <!~~ 
     <el-button v-blur @click="saveToJson" size="mini" type="success"
       >保存</el-button
-    > -->
+    > ~~>
         <el-row>
           <el-col :span="20">
             <canvas
@@ -233,7 +240,7 @@
           </el-col>
         </el-row>
       </div>
-      <!-- <ImgList v-else @getDetail="getImgDetail" /> -->
+      <!~~ <ImgList v-else @getDetail="getImgDetail" /> ~~>
     </transition>
   </div>
 </template>
@@ -1017,3 +1024,4 @@ export default {
   },
 };
 </script>
+-->
