@@ -1,0 +1,1 @@
+import{_ as o}from"../js/main.CTPREjN3.js";import{r,e as t,b as n}from"./vendor-CKOI4o9H.js";const c={};function s(_,a){const e=r("router-view");return t(),n(e)}const m=o(c,[["render",s]]);export{m as default};

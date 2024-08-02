@@ -1,0 +1,1 @@
+import e from"./AiEditorCom-BX23mPSH.js";import{a as t,e as o,h as a,f as s}from"./vendor-CKOI4o9H.js";import{_ as r}from"../js/main.CTPREjN3.js";const _={class:"baseStyle aiEdit"},c=t({__name:"index",setup(n){return(i,d)=>(o(),a("div",_,[s(e)]))}}),l=r(c,[["__scopeId","data-v-ff2888e9"]]);export{l as default};

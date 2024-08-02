@@ -1,0 +1,1 @@
+import{_ as e}from"../js/main.CTPREjN3.js";import{e as r,h as t}from"./vendor-CKOI4o9H.js";const c={};function n(o,s){return r(),t("div",null," tex34343434 ")}const f=e(c,[["render",n]]);export{f as default};
