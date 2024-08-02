@@ -11,18 +11,18 @@ import { createHtmlPlugin } from "vite-plugin-html";
 // svg插件
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 // 打包压缩插件
-import VitePluginCompression from "vite-plugin-compression";
+// import VitePluginCompression from "vite-plugin-compression";
 import removeConsole from "vite-plugin-remove-console";
 // 打包分析
 import { visualizer } from "rollup-plugin-visualizer";
-import fs from "fs";
-import { dayjs } from "element-plus";
-const version = {
-  latestTime: dayjs().format("YYYY-MM-DD HH:mm:ss"),
-};
-fs.writeFile("./src/utils/buildTime.json", JSON.stringify(version), (err) => {
-  console.log("打包时间更新成功");
-});
+// import fs from "fs";
+// import { dayjs } from "element-plus";
+// const version = {
+//   latestTime: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+// };
+// fs.writeFile("./src/utils/buildTime.json", JSON.stringify(version), (err) => {
+//   console.log("打包时间更新成功");
+// });
 export default defineConfig(({ mode }) => {
   // console.log(loadEnv(mode, process.cwd()));
   const env = loadEnv(mode, process.cwd());
@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
   };
 
   return {
-    base: "/",
+    base: "/vue3_nodejs/lu-vue3-ms/dist/",
     resolve: {
       // 路径别名
       alias: {
@@ -152,7 +152,7 @@ export default defineConfig(({ mode }) => {
       //     drop_debugger: true
       //   }
       // },
-      // outDir: "dist", //打包的文件夹名称 默认 dist
+      outDir: "../dist", //打包的文件夹名称 默认 dist
       // assetsDir: "assets", //静态资源打包文件夹名称
       target: ["es2020", "edge88", "firefox78", "chrome87", "safari14"], //打包目标兼容浏览器
       chunkSizeWarningLimit: 500, //打包文件多大警告  默认500kb
