@@ -1,6 +1,5 @@
 <template>
   <div class="baseStyle">
-
     <el-button type="primary" size="default" @click="getIniteData"
       >获取实例</el-button
     >
