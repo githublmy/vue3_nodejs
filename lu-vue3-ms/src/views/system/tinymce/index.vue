@@ -76,13 +76,18 @@ const tinymceConfig = {
   language: "zh_CN",
   // // true 默认（仅允许改变高度）, false（完全不让你动）, 'both'（宽高都能改变，注意引号）
   // resize: true,
-  skin_url: "/skins/ui/tinymce-5", //手动引入
+  skin_url: import.meta.env.DEV
+    ? "/skins/ui/tinymce-5"
+    : "/vue3_nodejs/dist/skins/ui/tinymce-5", //手动引入
   // 附件大小
   attachment_max_size: 100 * 1024 * 1024 * 1024,
   //图标路径
   attachment_assets_path: "/plugins/attachment/icons",
   // 自定义css
-  content_css: "/skins/custom/content.css",
+  content_css: import.meta.env.DEV
+    ? "/skins/custom/content.css"
+    : "/vue3_nodejs/dist/skins/custom/content.css",
+  // content_css:
   // customUploadFunction: async (file, progressCallback, successCallback) => {
   //   const formData = new FormData();
   //   formData.append("file", file);
