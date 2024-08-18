@@ -41,6 +41,16 @@ export const user = [
     sort: 13,
   },
   {
+    path: "/system/vxeTable",
+    component: "/system/vxeTable/index",
+    name: "vxeTable",
+    title: "vxeTable",
+    icon: "",
+    pid: 5,
+    id: 56,
+    sort: 14,
+  },
+  {
     path: "/setting",
     component: "/setting/index",
     name: "setting",

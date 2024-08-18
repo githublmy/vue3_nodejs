@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    CustomTree: typeof import('./components/CustomTree.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -47,6 +48,7 @@ declare module 'vue' {
     ElTableCommon: typeof import('./components/ElTableCommon/index.vue')['default']
     ElText: typeof import('element-plus/es')['ElText']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ElTree: typeof import('element-plus/es')['ElTree']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     FileUpload: typeof import('./components/FileUpload/index.vue')['default']
     Index2: typeof import('./components/ElTableCommon/index2.vue')['default']

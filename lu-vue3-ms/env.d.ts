@@ -16,3 +16,4 @@ declare module "monaco-editor/esm/vs/platform/actions/common/actions";
 // }
 
 declare module "vue-virtual-scroller";
+declare module "vxe-pc-ui";

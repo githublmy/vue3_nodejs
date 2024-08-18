@@ -18,13 +18,14 @@
         <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
       </el-form-item>
     </el-form>
+
+    <CustomTree />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-
+import CustomTree from "./CustomTree.vue";
 interface RuleForm {
   name: string;
   region: string;

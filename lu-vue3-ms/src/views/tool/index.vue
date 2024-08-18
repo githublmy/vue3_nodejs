@@ -45,6 +45,7 @@ const VirtualList = defineAsyncComponent(
 const VirtualList2 = defineAsyncComponent(
   () => import("./components/VirtualList2.vue")
 );
+
 const menus = [
   {
     title: "图片转base64",
@@ -65,11 +66,12 @@ const menus = [
     title: "虚拟列表",
     id: "VirtualList",
     component: markRaw(VirtualList),
-  },{
+  },
+  {
     title: "虚拟列表el滚动条",
     id: "VirtualList2",
     component: markRaw(VirtualList2),
-  }
+  },
 ];
 // 默认选择
 const defaultActive = ref(menus[4].id);
