@@ -49,6 +49,7 @@ declare module 'vue' {
     ElText: typeof import('element-plus/es')['ElText']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
+    ElTreeV2: typeof import('element-plus/es')['ElTreeV2']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     FileUpload: typeof import('./components/FileUpload/index.vue')['default']
     Index2: typeof import('./components/ElTableCommon/index2.vue')['default']

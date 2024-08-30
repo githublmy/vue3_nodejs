@@ -10,7 +10,6 @@
       <h3>{{ title }}</h3>
       <ElFormCommon @keydown.enter="loginSystem" ref="loginForm" :data="data">
         <el-button
-          v-blur
           style="width: 100%"
           :loading="loginLoading"
           type="primary"

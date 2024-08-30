@@ -1,59 +1,56 @@
 <template>
-  <div>
-    <el-select-v2
-      v-model="value"
-      style="width: 240px"
-      filterable
-      remote
-      :remote-method="remoteMethod"
-      clearable
-      :options="options"
-      :props="props"
-      :loading="loading"
-      placeholder="Please enter a keyword"
-    />
-    <el-switch v-model="value2" @change="change" />
-  </div>
+  <el-tree-v2
+    ref="treeRef"
+    highlight-current
+    style="max-width: 600px"
+    :data="data"
+    :props="props"
+    :height="500"
+    current-node-key="node-7-1-1"
+    :expand-on-click-node="false"
+    @node-click="nodeClick"
+  ></el-tree-v2>
 </template>
-
 <script lang="ts" setup>
-console.log("清除了吗？");
-
-const value2 = ref(false);
-const change = () => {
-  console.log(value2);
-};
-setTimeout(() => {
-  value2.value = true;
-}, 1000);
-const allList = new Array(50000).fill("").map((_, index) => ({
-  value: `${index}`,
-  label: `选项${index}---xunaxsdfsdfsdf第三方都是`,
-}));
-const props = {
-  label: "label",
-  value: "value",
-};
-interface ListItem {
-  value: string;
+interface Tree {
+  id: string;
   label: string;
+  children?: Tree[];
 }
-const value = ref([]);
-const options = ref<ListItem[]>([]);
-const loading = ref(false);
-
-const remoteMethod = (query: string) => {
-  if (query !== "") {
-    loading.value = true;
-    setTimeout(() => {
-      loading.value = false;
-      options.value = allList.filter((item) => {
-        return item.label.toLowerCase().includes(query.toLowerCase());
-      });
-    }, 200);
-  } else {
-    options.value = allList.slice(0, 10000);
-  }
+const treeRef = ref();
+const nodeClick = () => {};
+const getKey = (prefix: string, id: number) => {
+  return `${prefix}-${id}`;
 };
+
+const createData = (
+  maxDeep: number,
+  maxChildren: number,
+  minNodesNumber: number,
+  deep = 1,
+  key = "node"
+): Tree[] => {
+  let id = 0;
+  return Array.from({ length: minNodesNumber })
+    .fill(deep)
+    .map(() => {
+      const childrenNumber =
+        deep === maxDeep ? 0 : Math.round(Math.random() * maxChildren);
+      const nodeKey = getKey(key, ++id);
+      return {
+        id: nodeKey,
+        label: nodeKey,
+        children: childrenNumber
+          ? createData(maxDeep, maxChildren, childrenNumber, deep + 1, nodeKey)
+          : undefined,
+      };
+    });
+};
+
+const props = {
+  value: "id",
+  label: "label",
+  children: "children",
+};
+const data = createData(4, 30, 40);
 </script>
-<style lang="scss" scoped></style>

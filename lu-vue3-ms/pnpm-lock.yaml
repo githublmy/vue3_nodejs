@@ -30,8 +30,8 @@ importers:
         specifier: ^5.5.0
         version: 5.5.0
       element-plus:
-        specifier: ^2.7.5
-        version: 2.7.5(vue@3.4.29(typescript@5.3.3))
+        specifier: ^2.8.1
+        version: 2.8.1(vue@3.4.29(typescript@5.3.3))
       fabric:
         specifier: ^5.3.0
         version: 5.3.0
@@ -173,7 +173,7 @@ packages:
     engines: {node: '>=10'}
 
   '@element-plus/icons-vue@2.3.1':
-    resolution: {integrity: sha512-XxVUZv48RZAd87ucGS48jPf6pKu0yV5UCg9f4FFwtrYxXOwWuVJo6wOvSLKEoMQKjv8GsX/mhP6UsC1lRwbUWg==}
+    resolution: {integrity: sha512-XxVUZv48RZAd87ucGS48jPf6pKu0yV5UCg9f4FFwtrYxXOwWuVJo6wOvSLKEoMQKjv8GsX/mhP6UsC1lRwbUWg==, tarball: https://registry.npmmirror.com/@element-plus/icons-vue/-/icons-vue-2.3.1.tgz}
     peerDependencies:
       vue: ^3.2.0
 
@@ -1341,8 +1341,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  element-plus@2.7.5:
-    resolution: {integrity: sha512-e4oqhfRGBpdblgsjEBK+tA2+fg1H1KZ2Qinty1SaJl0X49FrMLK0lpXQNheWyBqI4V/pyjVOF9sRjz2hfyoctw==}
+  element-plus@2.8.1:
+    resolution: {integrity: sha512-p11/6w/O0+hGvPhiN3jrcgh+XG+eg5jZlLdQVYvcPHZYhhCh3J3YeZWW1JO/REPES1vevkboT6VAi+9wHA8Dsg==, tarball: https://registry.npmmirror.com/element-plus/-/element-plus-2.8.1.tgz}
     peerDependencies:
       vue: ^3.2.0
 
@@ -4404,7 +4404,7 @@ snapshots:
     dependencies:
       jake: 10.9.1
 
-  element-plus@2.7.5(vue@3.4.29(typescript@5.3.3)):
+  element-plus@2.8.1(vue@3.4.29(typescript@5.3.3)):
     dependencies:
       '@ctrl/tinycolor': 3.6.1
       '@element-plus/icons-vue': 2.3.1(vue@3.4.29(typescript@5.3.3))

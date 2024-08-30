@@ -20,7 +20,7 @@
     "aieditor": "^1.0.10",
     "axios": "^1.7.2",
     "echarts": "^5.5.0",
-    "element-plus": "^2.7.5",
+    "element-plus": "^2.8.1",
     "fabric": "^5.3.0",
     "jsencrypt": "^3.3.2",
     "monaco-editor": "^0.45.0",
