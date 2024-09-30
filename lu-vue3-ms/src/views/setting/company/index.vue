@@ -18,11 +18,12 @@ interface Tree {
   children?: Tree[];
 }
 const treeRef = ref();
-const nodeClick = () => {};
+const nodeClick = () => {
+  treeRef.value;
+};
 const getKey = (prefix: string, id: number) => {
   return `${prefix}-${id}`;
 };
-
 const createData = (
   maxDeep: number,
   maxChildren: number,

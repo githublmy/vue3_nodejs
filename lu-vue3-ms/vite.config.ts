@@ -56,7 +56,6 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-   
       vue(),
       removeConsole({
         external: ["App.vue", "src/views/home/index.vue"],
@@ -128,7 +127,8 @@ export default defineConfig(({ mode }) => {
           // }),
         ],
         // 将 d.ts 文件生成在 src 目录下
-        dts: "src/auto-imports.d.ts",
+        // dts: "src/auto-imports.d.ts",
+        dts: true,
       }),
       Components({
         resolvers: [
@@ -139,7 +139,8 @@ export default defineConfig(({ mode }) => {
           ElementPlusResolver(),
         ],
         // 将 d.ts 文件生成在 src 目录下
-        dts: "src/components.d.ts",
+        // dts: "src/components.d.ts",
+        dts: true,
       }),
       // Icons({
       //   autoInstall: true,

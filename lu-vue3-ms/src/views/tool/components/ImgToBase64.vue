@@ -16,7 +16,7 @@
           <div class="el-upload__tip">最多可添加1张图片</div>
         </template>
       </el-upload>
-    </el-col>
+    </el-col> 
     <el-col :span="16">
       <el-scrollbar height="calc(100vh - 80px)">
         <div

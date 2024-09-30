@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 // 加密解密
 declare module "jsencrypt/bin/jsencrypt.min";
+declare module "element-plus/global.d.ts";
 
 // 所有语言包类型
 declare module "*.mjs";
