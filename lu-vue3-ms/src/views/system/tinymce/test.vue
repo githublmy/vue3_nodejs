@@ -15,7 +15,7 @@ const initParams = {
   width: "100%",
   promotion: false, //菜单右上角的链接
   branding: false, //右下角tinymce商标
-  language: "zh_CN",
+  // language: "zh_CN",
   // skin_url: "/skins/ui/tinymce-5", //手动引入
   //sliding
   toolbar_mode: "wrap",

@@ -10,7 +10,6 @@
       api-key="aawnz0o8kigy7ia1ztfgziay1bsnneafniczu0c571v20cmz"
       :init="tinymceConfig"
     ></Editor>
-    <Test ref="testRef" />
   </div>
 </template>
 
@@ -19,7 +18,6 @@ import { uploadFiles } from "@/api/index";
 import Editor from "@tinymce/tinymce-vue";
 import "tinymce/tinymce";
 const editorRef = ref();
-const testRef = ref();
 
 const getIniteData = () => {
   console.log("获取实例", editorRef.value.getEditor().get());
@@ -83,10 +81,10 @@ const tinymceConfig = {
   attachment_max_size: 100 * 1024 * 1024 * 1024,
   //图标路径
   attachment_assets_path: "/plugins/attachment/icons",
-  // 自定义css
-  content_css: import.meta.env.DEV
-    ? "/skins/custom/content.css"
-    : "/vue3_nodejs/dist/skins/custom/content.css",
+  // // 自定义css
+  // content_css: import.meta.env.DEV
+  //   ? "/skins/custom/content.css"
+  //   : "/vue3_nodejs/dist/skins/custom/content.css",
   // content_css:
   // customUploadFunction: async (file, progressCallback, successCallback) => {
   //   const formData = new FormData();
@@ -143,10 +141,16 @@ const tinymceConfig = {
   quickbars_image_toolbar: "alignleft aligncenter alignright | imageoptions",
   quickbars_selection_toolbar:
     "fontsize forecolor backcolor | align bold italic underline | quicklink h2 h3",
-  // // quickbars_insert_toolbar: "quickimage quicktable | hr pagebreak",
-  quickbars_insert_toolbar: false, //快速插入工具栏
+  quickbars_insert_toolbar: "quickimage quicktable | hr pagebreak",
+  // quickbars_insert_toolbar: false, //快速插入工具栏
   // noneditable_class: "mceNonEditable", //不可编辑的class类
-  // // contextmenu: "link image table",
+  contextmenu: "link image table",
+  forced_root_block: "div", //替换默认p标签为div
+  //扩展有效的标签元素
+  // extended_valid_elements:
+  //   "svg[viewBox|xmlns|class],circle[cx|cy|r|fill],line[x1|x2|y1|y2|stroke],rect[x|y|width|height|fill|rx|ry],text[x|y|fill|font-size|font-family],path[d|fill|stroke],polyline[points|class|fill|stroke],polygon[points|class|fill|stroke],image[src|alt|width|height|style|align|border]",
+  // 启用的有效元素标签属性  *代表所有属性  svg[*]
+  valid_elements: "*[*]",
   content_style:
     "body { font-family:Helvetica,Arial,sans-serif; font-size:14px } img {max-width:100%;} video {max-width:100%;} ",
   // // setup: (editor) => {
@@ -166,6 +170,24 @@ const tinymceConfig = {
   images_reuse_filename: true, //固定名称
   image_title: true, //显示标题
   images_upload_handler: image_upload_handler,
+  image_caption: true,//显示标题
+  image_advtab: true, //显示高级选项
+  image_class_list: [
+    { title: 'None', value: '' },
+    { title: 'Some class', value: 'class-name' }
+  ], //图片样式
+  image_list: [
+    {
+      title: "My image 1",
+      value:
+        "https://img0.baidu.com/it/u=1058961982,3919091402&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1728925200&t=7e84a65b6cd576fb75aca9bd0adbd3e5",
+    },
+    {
+      title: "My image 2",
+      value:
+        "https://img1.baidu.com/it/u=2931243091,718249849&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1728925200&t=133f0c01211db6780bc26711e99cd231",
+    },
+  ],
   file_picker_types: "media image",
   // // automatic_uploads: true,//自动上传，默认true
   // media_dimensions: true, //显示视频宽高控件
@@ -238,7 +260,3 @@ const tinymceConfig = {
   },
 };
 </script>
-
-<style>
-/* 可选的样式 */
-</style>
