@@ -138,6 +138,20 @@ const tinymceConfig = {
   font_family_formats:
     "默认字体=Helvetica,sans-serif;微软雅黑=Microsoft YaHei,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Impact=impact,chicago; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
   importcss_append: true, //显示额外功能
+  // 表格类名
+  table_class_list: [
+    { title: 'None', value: '' },
+    { title: 'No Borders', value: 'table_no_borders' },
+    { title: 'Red borders', value: 'table_red_borders' },
+    { title: 'Blue borders', value: 'table_blue_borders' },
+    { title: 'Green borders', value: 'table_green_borders' }
+  ],
+  // 表格宽度快捷
+  table_border_widths: [
+    { title: 'small', value: '1px' },
+    { title: 'medium', value: '3px' },
+    { title: 'large', value: '5px' },
+  ],
   quickbars_image_toolbar: "alignleft aligncenter alignright | imageoptions",
   quickbars_selection_toolbar:
     "fontsize forecolor backcolor | align bold italic underline | quicklink h2 h3",
@@ -151,6 +165,7 @@ const tinymceConfig = {
   //   "svg[viewBox|xmlns|class],circle[cx|cy|r|fill],line[x1|x2|y1|y2|stroke],rect[x|y|width|height|fill|rx|ry],text[x|y|fill|font-size|font-family],path[d|fill|stroke],polyline[points|class|fill|stroke],polygon[points|class|fill|stroke],image[src|alt|width|height|style|align|border]",
   // 启用的有效元素标签属性  *代表所有属性  svg[*]
   valid_elements: "*[*]",
+  codesample_global_prismjs: true, //是否全局使用prismjs   默认false
   content_style:
     "body { font-family:Helvetica,Arial,sans-serif; font-size:14px } img {max-width:100%;} video {max-width:100%;} ",
   // // setup: (editor) => {
@@ -169,12 +184,14 @@ const tinymceConfig = {
   // // 图片处理方法
   images_reuse_filename: true, //固定名称
   image_title: true, //显示标题
+  image_uploadtab: true, //是否显示上传功能
   images_upload_handler: image_upload_handler,
-  image_caption: true,//显示标题
+  image_caption: true, //显示标题
   image_advtab: true, //显示高级选项
+  // images_file_types: 'jpeg,jpg,jpe,jfi,jif,jfif,png,gif,bmp,webp', //允许上传的图片类型
   image_class_list: [
-    { title: 'None', value: '' },
-    { title: 'Some class', value: 'class-name' }
+    { title: "None", value: "" },
+    { title: "自定义类名", value: "class-name" },
   ], //图片样式
   image_list: [
     {
