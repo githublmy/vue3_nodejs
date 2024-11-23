@@ -17,6 +17,7 @@
 import { uploadFiles } from "@/api/index";
 import Editor from "@tinymce/tinymce-vue";
 import "tinymce/tinymce";
+import codeMirrorEditor from "./CodeMirrorEditor.vue";
 const editorRef = ref();
 
 const getIniteData = () => {
@@ -124,13 +125,13 @@ const tinymceConfig = {
   plugins: `preview indent2em importcss searchreplace autolink autosave save directionality
      code visualblocks visualchars fullscreen image link media codesample table charmap
      pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help
-     quickbars emoticons accordion attachment`,
+     quickbars emoticons accordion attachment codemirror`,
   menubar: "file edit view insert format tools table help",
-  toolbar: `undo redo | styleselect formatselect fontselect fontsizeselect removeformat |
+  toolbar: `undo redo | code codesample | styleselect formatselect fontselect fontsizeselect removeformat |
      blocks fontfamily fontsize | bold italic underline strikethrough subscript superscript hr blockquote |
      forecolor backcolor | align numlist bullist | link image media | table | lineheight indent2em outdent indent |
-     charmap emoticons | accordion accordionremove | code codesample | fullscreen preview | save print |
-     pagebreak anchor | ltr rtl | wordcount attachment`,
+     charmap emoticons | accordion accordionremove | fullscreen preview | save print |
+     pagebreak anchor | ltr rtl | wordcount attachment codemirror quickimage`,
   line_height_formats: "1 1.1 1.2 1.3 1.4 1.5 2 3 4 5 6", //行高列表
   font_size_input_default_unit: "px", //默认字体单位
   font_size_formats:
@@ -140,17 +141,17 @@ const tinymceConfig = {
   importcss_append: true, //显示额外功能
   // 表格类名
   table_class_list: [
-    { title: 'None', value: '' },
-    { title: 'No Borders', value: 'table_no_borders' },
-    { title: 'Red borders', value: 'table_red_borders' },
-    { title: 'Blue borders', value: 'table_blue_borders' },
-    { title: 'Green borders', value: 'table_green_borders' }
+    { title: "None", value: "" },
+    { title: "No Borders", value: "table_no_borders" },
+    { title: "Red borders", value: "table_red_borders" },
+    { title: "Blue borders", value: "table_blue_borders" },
+    { title: "Green borders", value: "table_green_borders" },
   ],
   // 表格宽度快捷
   table_border_widths: [
-    { title: 'small', value: '1px' },
-    { title: 'medium', value: '3px' },
-    { title: 'large', value: '5px' },
+    { title: "small", value: "1px" },
+    { title: "medium", value: "3px" },
+    { title: "large", value: "5px" },
   ],
   quickbars_image_toolbar: "alignleft aligncenter alignright | imageoptions",
   quickbars_selection_toolbar:
@@ -159,7 +160,7 @@ const tinymceConfig = {
   // quickbars_insert_toolbar: false, //快速插入工具栏
   // noneditable_class: "mceNonEditable", //不可编辑的class类
   contextmenu: "link image table",
-  forced_root_block: "div", //替换默认p标签为div
+  forced_root_block: "p", //替换默认p标签为div
   //扩展有效的标签元素
   // extended_valid_elements:
   //   "svg[viewBox|xmlns|class],circle[cx|cy|r|fill],line[x1|x2|y1|y2|stroke],rect[x|y|width|height|fill|rx|ry],text[x|y|fill|font-size|font-family],path[d|fill|stroke],polyline[points|class|fill|stroke],polygon[points|class|fill|stroke],image[src|alt|width|height|style|align|border]",
@@ -275,5 +276,6 @@ const tinymceConfig = {
     您的浏览器不支持 HTML5 视频标签。
   </video>`;
   },
+  setup: (editor) => {},
 };
 </script>

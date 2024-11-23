@@ -19,6 +19,7 @@
     "@vueup/vue-quill": "^1.2.0",
     "aieditor": "^1.1.7",
     "axios": "^1.7.7",
+    "codemirror": "^6.0.1",
     "echarts": "^5.5.1",
     "element-plus": "^2.8.5",
     "fabric": "^5.4.0",
